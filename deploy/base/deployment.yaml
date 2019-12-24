@@ -28,14 +28,14 @@ spec:
               - grep
               - -q
               - UP
-              - HEALTH_STATUS
+              - /usr/src/app/HEALTH_STATUS
         readinessProbe:
           exec:
             command:
               - grep
               - -q
               - UP
-              - HEALTH_STATUS
+              - /usr/src/app/HEALTH_STATUS
           initialDelaySeconds: 5
           periodSeconds: 5
         ports:
