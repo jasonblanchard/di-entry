@@ -24,8 +24,12 @@ RUN npm run build
 
 FROM base AS release
 
+RUN mkdir $APP_HOME
+RUN chown docker:docker $APP_HOME
+
 USER docker
 WORKDIR $APP_HOME
+
 COPY --from=build --chown=docker:docker $PROD_DEPS/node_modules $APP_HOME/node_modules/
 COPY --from=build --chown=docker:docker $APP_HOME/build $APP_HOME/build
 COPY --from=build --chown=docker:docker $APP_HOME/package.json $APP_HOME/package.json
