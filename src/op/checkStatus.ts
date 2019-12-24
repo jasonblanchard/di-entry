@@ -22,8 +22,8 @@ export default async function checkStatus({ nc }: CheckStatusInput) {
 
   return new Promise((resolve, reject) => {
     fs.writeFile('HEALTH_STATUS', status, (error) => {
-      if (error) reject();
-      resolve();
+      if (error) reject(status);
+      resolve(status);
     });
   });
 }

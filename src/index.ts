@@ -28,7 +28,10 @@ async function bootstrap() {
   });
 
   setInterval(() => {
-    checkStatus({ nc });
+    checkStatus({ nc })
+      .catch(status => {
+        console.log(status);
+      });
   }, 5000);
 
   nc.subscribe('get.entry', async (error, message) => {
