@@ -21,8 +21,11 @@ export default async function checkStatus({ nc }: CheckStatusInput) {
   const status = Object.keys(services).every(key => services[key] === true) ? Status.UP : Status.DOWN;
 
   return new Promise((resolve, reject) => {
-    fs.writeFile('HEALTH_STATUS', status, (error) => {
-      if (error) reject(status);
+    fs.writeFile(`${__dirname}/../../HEALTH_STATUS`, status, (error) => {
+      if (error) {
+        console.log(error);
+        reject(status);
+      }
       resolve(status);
     });
   });

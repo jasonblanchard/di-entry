@@ -25,4 +25,4 @@ deploy:
 	kustomize edit set image ${LATEST_TAG}
 
 clean_k8s:
-	kustomize delete -k ./overlays/development
+	kubectl delete -k ./deploy/overlays/development
