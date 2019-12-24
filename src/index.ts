@@ -3,6 +3,7 @@ import { connect, Payload, Msg, Client} from 'ts-nats';
 
 import createEntry from './op/createEntry';
 import getEntry from './op/getEntry';
+import checkStatus from './op/checkStatus';
 
 require('dotenv').config();
 
@@ -25,6 +26,10 @@ async function bootstrap() {
     servers: natsHosts,
     payload: Payload.BINARY
   });
+
+  setInterval(() => {
+    checkStatus({ nc });
+  }, 5000);
 
   nc.subscribe('get.entry', async (error, message) => {
     logMessage(message.subject);
