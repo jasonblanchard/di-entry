@@ -4,6 +4,8 @@ import { connect, Payload, Msg, Client} from 'ts-nats';
 import createEntry from './op/createEntry';
 import getEntry from './op/getEntry';
 
+require('dotenv').config();
+
 function handleError(nc: Client, message: Msg, error: Error, response: any) {
   console.log(error);
 
@@ -16,9 +18,11 @@ function logMessage(topic: string, message?: Msg) {
   console.log(`${new Date().toISOString()} received ${topic}`, message);
 }
 
+const natsHosts = [<string>process.env.NATS_HOST];
+
 async function bootstrap() {
   let nc = await connect({
-    servers: ['nats://localhost:4222'],
+    servers: natsHosts,
     payload: Payload.BINARY
   });
 
@@ -95,4 +99,9 @@ async function bootstrap() {
   });
 }
 
-bootstrap().then(() => console.log('Entry service Bootstrapped 🚀'));
+bootstrap()
+  .then(() => console.log('Entry service Bootstrapped 🚀'))
+  .catch(error => {
+    console.log(error)
+    process.exit(1);
+  });

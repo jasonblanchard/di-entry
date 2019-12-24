@@ -16,6 +16,7 @@
     "typescript": "^3.7.3"
   },
   "dependencies": {
+    "dotenv": "^8.2.0",
     "protobufjs": "^6.8.8",
     "ts-nats": "^1.2.4"
   }

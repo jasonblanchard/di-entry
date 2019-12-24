@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: di-entry
+  name: di-entry
+  namespace: di
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: di-entry
+  template:
+    metadata:
+      labels:
+        app: di-entry
+    spec:
+      serviceAccountName: di-entry
+      containers:
+      - image: jasonblanchard/di-entry
+        name: di-entry
+        envFrom:
+          - configMapRef:
+              name: di-entry-config
+        # livenessProbe:
+        #   httpGet:
+        #     path: /health
+        #     port: 4000
+        ports:
+          - containerPort: 4000
+
