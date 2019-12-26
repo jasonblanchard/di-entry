@@ -176,6 +176,8 @@ $root.messages = (function() {
                     default:
                         return "code: enum value expected";
                     case 0:
+                    case 1:
+                    case 2:
                         break;
                     }
                 if (message.message != null && message.hasOwnProperty("message"))
@@ -200,6 +202,14 @@ $root.messages = (function() {
                 case "UNKNOWN":
                 case 0:
                     message.code = 0;
+                    break;
+                case "NOT_FOUND":
+                case 1:
+                    message.code = 1;
+                    break;
+                case "VALIDATION_FAILED":
+                case 2:
+                    message.code = 2;
                     break;
                 }
                 if (object.message != null)
@@ -247,14 +257,228 @@ $root.messages = (function() {
              * @name messages.entry.Error.Code
              * @enum {string}
              * @property {number} UNKNOWN=0 UNKNOWN value
+             * @property {number} NOT_FOUND=1 NOT_FOUND value
+             * @property {number} VALIDATION_FAILED=2 VALIDATION_FAILED value
              */
             Error.Code = (function() {
                 var valuesById = {}, values = Object.create(valuesById);
                 values[valuesById[0] = "UNKNOWN"] = 0;
+                values[valuesById[1] = "NOT_FOUND"] = 1;
+                values[valuesById[2] = "VALIDATION_FAILED"] = 2;
                 return values;
             })();
 
             return Error;
+        })();
+
+        entry.RequestContext = (function() {
+
+            /**
+             * Properties of a RequestContext.
+             * @memberof messages.entry
+             * @interface IRequestContext
+             * @property {string|null} [userId] RequestContext userId
+             * @property {string|null} [traceId] RequestContext traceId
+             */
+
+            /**
+             * Constructs a new RequestContext.
+             * @memberof messages.entry
+             * @classdesc Represents a RequestContext.
+             * @implements IRequestContext
+             * @constructor
+             * @param {messages.entry.IRequestContext=} [properties] Properties to set
+             */
+            function RequestContext(properties) {
+                if (properties)
+                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+
+            /**
+             * RequestContext userId.
+             * @member {string} userId
+             * @memberof messages.entry.RequestContext
+             * @instance
+             */
+            RequestContext.prototype.userId = "";
+
+            /**
+             * RequestContext traceId.
+             * @member {string} traceId
+             * @memberof messages.entry.RequestContext
+             * @instance
+             */
+            RequestContext.prototype.traceId = "";
+
+            /**
+             * Creates a new RequestContext instance using the specified properties.
+             * @function create
+             * @memberof messages.entry.RequestContext
+             * @static
+             * @param {messages.entry.IRequestContext=} [properties] Properties to set
+             * @returns {messages.entry.RequestContext} RequestContext instance
+             */
+            RequestContext.create = function create(properties) {
+                return new RequestContext(properties);
+            };
+
+            /**
+             * Encodes the specified RequestContext message. Does not implicitly {@link messages.entry.RequestContext.verify|verify} messages.
+             * @function encode
+             * @memberof messages.entry.RequestContext
+             * @static
+             * @param {messages.entry.IRequestContext} message RequestContext message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            RequestContext.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.userId != null && message.hasOwnProperty("userId"))
+                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.userId);
+                if (message.traceId != null && message.hasOwnProperty("traceId"))
+                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.traceId);
+                return writer;
+            };
+
+            /**
+             * Encodes the specified RequestContext message, length delimited. Does not implicitly {@link messages.entry.RequestContext.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof messages.entry.RequestContext
+             * @static
+             * @param {messages.entry.IRequestContext} message RequestContext message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            RequestContext.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
+             * Decodes a RequestContext message from the specified reader or buffer.
+             * @function decode
+             * @memberof messages.entry.RequestContext
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {messages.entry.RequestContext} RequestContext
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            RequestContext.decode = function decode(reader, length) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.messages.entry.RequestContext();
+                while (reader.pos < end) {
+                    var tag = reader.uint32();
+                    switch (tag >>> 3) {
+                    case 1:
+                        message.userId = reader.string();
+                        break;
+                    case 2:
+                        message.traceId = reader.string();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+
+            /**
+             * Decodes a RequestContext message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof messages.entry.RequestContext
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {messages.entry.RequestContext} RequestContext
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            RequestContext.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a RequestContext message.
+             * @function verify
+             * @memberof messages.entry.RequestContext
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            RequestContext.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.userId != null && message.hasOwnProperty("userId"))
+                    if (!$util.isString(message.userId))
+                        return "userId: string expected";
+                if (message.traceId != null && message.hasOwnProperty("traceId"))
+                    if (!$util.isString(message.traceId))
+                        return "traceId: string expected";
+                return null;
+            };
+
+            /**
+             * Creates a RequestContext message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof messages.entry.RequestContext
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {messages.entry.RequestContext} RequestContext
+             */
+            RequestContext.fromObject = function fromObject(object) {
+                if (object instanceof $root.messages.entry.RequestContext)
+                    return object;
+                var message = new $root.messages.entry.RequestContext();
+                if (object.userId != null)
+                    message.userId = String(object.userId);
+                if (object.traceId != null)
+                    message.traceId = String(object.traceId);
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a RequestContext message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof messages.entry.RequestContext
+             * @static
+             * @param {messages.entry.RequestContext} message RequestContext
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            RequestContext.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                var object = {};
+                if (options.defaults) {
+                    object.userId = "";
+                    object.traceId = "";
+                }
+                if (message.userId != null && message.hasOwnProperty("userId"))
+                    object.userId = message.userId;
+                if (message.traceId != null && message.hasOwnProperty("traceId"))
+                    object.traceId = message.traceId;
+                return object;
+            };
+
+            /**
+             * Converts this RequestContext to JSON.
+             * @function toJSON
+             * @memberof messages.entry.RequestContext
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            RequestContext.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            return RequestContext;
         })();
 
         entry.GetEntryRequest = (function() {
@@ -266,6 +490,8 @@ $root.messages = (function() {
              * @property {string|null} [id] GetEntryRequest id
              * @property {string|null} [creatorId] GetEntryRequest creatorId
              * @property {string|null} [traceId] GetEntryRequest traceId
+             * @property {messages.entry.IRequestContext|null} [context] GetEntryRequest context
+             * @property {messages.entry.GetEntryRequest.IPayload|null} [payload] GetEntryRequest payload
              */
 
             /**
@@ -308,6 +534,22 @@ $root.messages = (function() {
             GetEntryRequest.prototype.traceId = "";
 
             /**
+             * GetEntryRequest context.
+             * @member {messages.entry.IRequestContext|null|undefined} context
+             * @memberof messages.entry.GetEntryRequest
+             * @instance
+             */
+            GetEntryRequest.prototype.context = null;
+
+            /**
+             * GetEntryRequest payload.
+             * @member {messages.entry.GetEntryRequest.IPayload|null|undefined} payload
+             * @memberof messages.entry.GetEntryRequest
+             * @instance
+             */
+            GetEntryRequest.prototype.payload = null;
+
+            /**
              * Creates a new GetEntryRequest instance using the specified properties.
              * @function create
              * @memberof messages.entry.GetEntryRequest
@@ -337,6 +579,10 @@ $root.messages = (function() {
                     writer.uint32(/* id 2, wireType 2 =*/18).string(message.creatorId);
                 if (message.traceId != null && message.hasOwnProperty("traceId"))
                     writer.uint32(/* id 3, wireType 2 =*/26).string(message.traceId);
+                if (message.context != null && message.hasOwnProperty("context"))
+                    $root.messages.entry.RequestContext.encode(message.context, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                if (message.payload != null && message.hasOwnProperty("payload"))
+                    $root.messages.entry.GetEntryRequest.Payload.encode(message.payload, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                 return writer;
             };
 
@@ -379,6 +625,12 @@ $root.messages = (function() {
                         break;
                     case 3:
                         message.traceId = reader.string();
+                        break;
+                    case 4:
+                        message.context = $root.messages.entry.RequestContext.decode(reader, reader.uint32());
+                        break;
+                    case 5:
+                        message.payload = $root.messages.entry.GetEntryRequest.Payload.decode(reader, reader.uint32());
                         break;
                     default:
                         reader.skipType(tag & 7);
@@ -424,6 +676,16 @@ $root.messages = (function() {
                 if (message.traceId != null && message.hasOwnProperty("traceId"))
                     if (!$util.isString(message.traceId))
                         return "traceId: string expected";
+                if (message.context != null && message.hasOwnProperty("context")) {
+                    var error = $root.messages.entry.RequestContext.verify(message.context);
+                    if (error)
+                        return "context." + error;
+                }
+                if (message.payload != null && message.hasOwnProperty("payload")) {
+                    var error = $root.messages.entry.GetEntryRequest.Payload.verify(message.payload);
+                    if (error)
+                        return "payload." + error;
+                }
                 return null;
             };
 
@@ -445,6 +707,16 @@ $root.messages = (function() {
                     message.creatorId = String(object.creatorId);
                 if (object.traceId != null)
                     message.traceId = String(object.traceId);
+                if (object.context != null) {
+                    if (typeof object.context !== "object")
+                        throw TypeError(".messages.entry.GetEntryRequest.context: object expected");
+                    message.context = $root.messages.entry.RequestContext.fromObject(object.context);
+                }
+                if (object.payload != null) {
+                    if (typeof object.payload !== "object")
+                        throw TypeError(".messages.entry.GetEntryRequest.payload: object expected");
+                    message.payload = $root.messages.entry.GetEntryRequest.Payload.fromObject(object.payload);
+                }
                 return message;
             };
 
@@ -465,6 +737,8 @@ $root.messages = (function() {
                     object.id = "";
                     object.creatorId = "";
                     object.traceId = "";
+                    object.context = null;
+                    object.payload = null;
                 }
                 if (message.id != null && message.hasOwnProperty("id"))
                     object.id = message.id;
@@ -472,6 +746,10 @@ $root.messages = (function() {
                     object.creatorId = message.creatorId;
                 if (message.traceId != null && message.hasOwnProperty("traceId"))
                     object.traceId = message.traceId;
+                if (message.context != null && message.hasOwnProperty("context"))
+                    object.context = $root.messages.entry.RequestContext.toObject(message.context, options);
+                if (message.payload != null && message.hasOwnProperty("payload"))
+                    object.payload = $root.messages.entry.GetEntryRequest.Payload.toObject(message.payload, options);
                 return object;
             };
 
@@ -485,6 +763,193 @@ $root.messages = (function() {
             GetEntryRequest.prototype.toJSON = function toJSON() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
+
+            GetEntryRequest.Payload = (function() {
+
+                /**
+                 * Properties of a Payload.
+                 * @memberof messages.entry.GetEntryRequest
+                 * @interface IPayload
+                 * @property {string|null} [id] Payload id
+                 */
+
+                /**
+                 * Constructs a new Payload.
+                 * @memberof messages.entry.GetEntryRequest
+                 * @classdesc Represents a Payload.
+                 * @implements IPayload
+                 * @constructor
+                 * @param {messages.entry.GetEntryRequest.IPayload=} [properties] Properties to set
+                 */
+                function Payload(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+
+                /**
+                 * Payload id.
+                 * @member {string} id
+                 * @memberof messages.entry.GetEntryRequest.Payload
+                 * @instance
+                 */
+                Payload.prototype.id = "";
+
+                /**
+                 * Creates a new Payload instance using the specified properties.
+                 * @function create
+                 * @memberof messages.entry.GetEntryRequest.Payload
+                 * @static
+                 * @param {messages.entry.GetEntryRequest.IPayload=} [properties] Properties to set
+                 * @returns {messages.entry.GetEntryRequest.Payload} Payload instance
+                 */
+                Payload.create = function create(properties) {
+                    return new Payload(properties);
+                };
+
+                /**
+                 * Encodes the specified Payload message. Does not implicitly {@link messages.entry.GetEntryRequest.Payload.verify|verify} messages.
+                 * @function encode
+                 * @memberof messages.entry.GetEntryRequest.Payload
+                 * @static
+                 * @param {messages.entry.GetEntryRequest.IPayload} message Payload message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Payload.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.id != null && message.hasOwnProperty("id"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.id);
+                    return writer;
+                };
+
+                /**
+                 * Encodes the specified Payload message, length delimited. Does not implicitly {@link messages.entry.GetEntryRequest.Payload.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof messages.entry.GetEntryRequest.Payload
+                 * @static
+                 * @param {messages.entry.GetEntryRequest.IPayload} message Payload message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Payload.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+
+                /**
+                 * Decodes a Payload message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof messages.entry.GetEntryRequest.Payload
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {messages.entry.GetEntryRequest.Payload} Payload
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Payload.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.messages.entry.GetEntryRequest.Payload();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.id = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+
+                /**
+                 * Decodes a Payload message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof messages.entry.GetEntryRequest.Payload
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {messages.entry.GetEntryRequest.Payload} Payload
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Payload.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+
+                /**
+                 * Verifies a Payload message.
+                 * @function verify
+                 * @memberof messages.entry.GetEntryRequest.Payload
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Payload.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.id != null && message.hasOwnProperty("id"))
+                        if (!$util.isString(message.id))
+                            return "id: string expected";
+                    return null;
+                };
+
+                /**
+                 * Creates a Payload message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof messages.entry.GetEntryRequest.Payload
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {messages.entry.GetEntryRequest.Payload} Payload
+                 */
+                Payload.fromObject = function fromObject(object) {
+                    if (object instanceof $root.messages.entry.GetEntryRequest.Payload)
+                        return object;
+                    var message = new $root.messages.entry.GetEntryRequest.Payload();
+                    if (object.id != null)
+                        message.id = String(object.id);
+                    return message;
+                };
+
+                /**
+                 * Creates a plain object from a Payload message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof messages.entry.GetEntryRequest.Payload
+                 * @static
+                 * @param {messages.entry.GetEntryRequest.Payload} message Payload
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Payload.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults)
+                        object.id = "";
+                    if (message.id != null && message.hasOwnProperty("id"))
+                        object.id = message.id;
+                    return object;
+                };
+
+                /**
+                 * Converts this Payload to JSON.
+                 * @function toJSON
+                 * @memberof messages.entry.GetEntryRequest.Payload
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Payload.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+
+                return Payload;
+            })();
 
             return GetEntryRequest;
         })();
@@ -972,6 +1437,8 @@ $root.messages = (function() {
              * @property {string|null} [text] CreateEntryRequest text
              * @property {string|null} [creatorId] CreateEntryRequest creatorId
              * @property {string|null} [traceId] CreateEntryRequest traceId
+             * @property {messages.entry.IRequestContext|null} [context] CreateEntryRequest context
+             * @property {messages.entry.CreateEntryRequest.IPayload|null} [payload] CreateEntryRequest payload
              */
 
             /**
@@ -1014,6 +1481,22 @@ $root.messages = (function() {
             CreateEntryRequest.prototype.traceId = "";
 
             /**
+             * CreateEntryRequest context.
+             * @member {messages.entry.IRequestContext|null|undefined} context
+             * @memberof messages.entry.CreateEntryRequest
+             * @instance
+             */
+            CreateEntryRequest.prototype.context = null;
+
+            /**
+             * CreateEntryRequest payload.
+             * @member {messages.entry.CreateEntryRequest.IPayload|null|undefined} payload
+             * @memberof messages.entry.CreateEntryRequest
+             * @instance
+             */
+            CreateEntryRequest.prototype.payload = null;
+
+            /**
              * Creates a new CreateEntryRequest instance using the specified properties.
              * @function create
              * @memberof messages.entry.CreateEntryRequest
@@ -1043,6 +1526,10 @@ $root.messages = (function() {
                     writer.uint32(/* id 2, wireType 2 =*/18).string(message.creatorId);
                 if (message.traceId != null && message.hasOwnProperty("traceId"))
                     writer.uint32(/* id 3, wireType 2 =*/26).string(message.traceId);
+                if (message.context != null && message.hasOwnProperty("context"))
+                    $root.messages.entry.RequestContext.encode(message.context, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                if (message.payload != null && message.hasOwnProperty("payload"))
+                    $root.messages.entry.CreateEntryRequest.Payload.encode(message.payload, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                 return writer;
             };
 
@@ -1085,6 +1572,12 @@ $root.messages = (function() {
                         break;
                     case 3:
                         message.traceId = reader.string();
+                        break;
+                    case 4:
+                        message.context = $root.messages.entry.RequestContext.decode(reader, reader.uint32());
+                        break;
+                    case 5:
+                        message.payload = $root.messages.entry.CreateEntryRequest.Payload.decode(reader, reader.uint32());
                         break;
                     default:
                         reader.skipType(tag & 7);
@@ -1130,6 +1623,16 @@ $root.messages = (function() {
                 if (message.traceId != null && message.hasOwnProperty("traceId"))
                     if (!$util.isString(message.traceId))
                         return "traceId: string expected";
+                if (message.context != null && message.hasOwnProperty("context")) {
+                    var error = $root.messages.entry.RequestContext.verify(message.context);
+                    if (error)
+                        return "context." + error;
+                }
+                if (message.payload != null && message.hasOwnProperty("payload")) {
+                    var error = $root.messages.entry.CreateEntryRequest.Payload.verify(message.payload);
+                    if (error)
+                        return "payload." + error;
+                }
                 return null;
             };
 
@@ -1151,6 +1654,16 @@ $root.messages = (function() {
                     message.creatorId = String(object.creatorId);
                 if (object.traceId != null)
                     message.traceId = String(object.traceId);
+                if (object.context != null) {
+                    if (typeof object.context !== "object")
+                        throw TypeError(".messages.entry.CreateEntryRequest.context: object expected");
+                    message.context = $root.messages.entry.RequestContext.fromObject(object.context);
+                }
+                if (object.payload != null) {
+                    if (typeof object.payload !== "object")
+                        throw TypeError(".messages.entry.CreateEntryRequest.payload: object expected");
+                    message.payload = $root.messages.entry.CreateEntryRequest.Payload.fromObject(object.payload);
+                }
                 return message;
             };
 
@@ -1171,6 +1684,8 @@ $root.messages = (function() {
                     object.text = "";
                     object.creatorId = "";
                     object.traceId = "";
+                    object.context = null;
+                    object.payload = null;
                 }
                 if (message.text != null && message.hasOwnProperty("text"))
                     object.text = message.text;
@@ -1178,6 +1693,10 @@ $root.messages = (function() {
                     object.creatorId = message.creatorId;
                 if (message.traceId != null && message.hasOwnProperty("traceId"))
                     object.traceId = message.traceId;
+                if (message.context != null && message.hasOwnProperty("context"))
+                    object.context = $root.messages.entry.RequestContext.toObject(message.context, options);
+                if (message.payload != null && message.hasOwnProperty("payload"))
+                    object.payload = $root.messages.entry.CreateEntryRequest.Payload.toObject(message.payload, options);
                 return object;
             };
 
@@ -1191,6 +1710,193 @@ $root.messages = (function() {
             CreateEntryRequest.prototype.toJSON = function toJSON() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
+
+            CreateEntryRequest.Payload = (function() {
+
+                /**
+                 * Properties of a Payload.
+                 * @memberof messages.entry.CreateEntryRequest
+                 * @interface IPayload
+                 * @property {string|null} [text] Payload text
+                 */
+
+                /**
+                 * Constructs a new Payload.
+                 * @memberof messages.entry.CreateEntryRequest
+                 * @classdesc Represents a Payload.
+                 * @implements IPayload
+                 * @constructor
+                 * @param {messages.entry.CreateEntryRequest.IPayload=} [properties] Properties to set
+                 */
+                function Payload(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+
+                /**
+                 * Payload text.
+                 * @member {string} text
+                 * @memberof messages.entry.CreateEntryRequest.Payload
+                 * @instance
+                 */
+                Payload.prototype.text = "";
+
+                /**
+                 * Creates a new Payload instance using the specified properties.
+                 * @function create
+                 * @memberof messages.entry.CreateEntryRequest.Payload
+                 * @static
+                 * @param {messages.entry.CreateEntryRequest.IPayload=} [properties] Properties to set
+                 * @returns {messages.entry.CreateEntryRequest.Payload} Payload instance
+                 */
+                Payload.create = function create(properties) {
+                    return new Payload(properties);
+                };
+
+                /**
+                 * Encodes the specified Payload message. Does not implicitly {@link messages.entry.CreateEntryRequest.Payload.verify|verify} messages.
+                 * @function encode
+                 * @memberof messages.entry.CreateEntryRequest.Payload
+                 * @static
+                 * @param {messages.entry.CreateEntryRequest.IPayload} message Payload message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Payload.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.text != null && message.hasOwnProperty("text"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.text);
+                    return writer;
+                };
+
+                /**
+                 * Encodes the specified Payload message, length delimited. Does not implicitly {@link messages.entry.CreateEntryRequest.Payload.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof messages.entry.CreateEntryRequest.Payload
+                 * @static
+                 * @param {messages.entry.CreateEntryRequest.IPayload} message Payload message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Payload.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+
+                /**
+                 * Decodes a Payload message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof messages.entry.CreateEntryRequest.Payload
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {messages.entry.CreateEntryRequest.Payload} Payload
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Payload.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.messages.entry.CreateEntryRequest.Payload();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.text = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+
+                /**
+                 * Decodes a Payload message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof messages.entry.CreateEntryRequest.Payload
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {messages.entry.CreateEntryRequest.Payload} Payload
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Payload.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+
+                /**
+                 * Verifies a Payload message.
+                 * @function verify
+                 * @memberof messages.entry.CreateEntryRequest.Payload
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Payload.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.text != null && message.hasOwnProperty("text"))
+                        if (!$util.isString(message.text))
+                            return "text: string expected";
+                    return null;
+                };
+
+                /**
+                 * Creates a Payload message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof messages.entry.CreateEntryRequest.Payload
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {messages.entry.CreateEntryRequest.Payload} Payload
+                 */
+                Payload.fromObject = function fromObject(object) {
+                    if (object instanceof $root.messages.entry.CreateEntryRequest.Payload)
+                        return object;
+                    var message = new $root.messages.entry.CreateEntryRequest.Payload();
+                    if (object.text != null)
+                        message.text = String(object.text);
+                    return message;
+                };
+
+                /**
+                 * Creates a plain object from a Payload message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof messages.entry.CreateEntryRequest.Payload
+                 * @static
+                 * @param {messages.entry.CreateEntryRequest.Payload} message Payload
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Payload.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults)
+                        object.text = "";
+                    if (message.text != null && message.hasOwnProperty("text"))
+                        object.text = message.text;
+                    return object;
+                };
+
+                /**
+                 * Converts this Payload to JSON.
+                 * @function toJSON
+                 * @memberof messages.entry.CreateEntryRequest.Payload
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Payload.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+
+                return Payload;
+            })();
 
             return CreateEntryRequest;
         })();

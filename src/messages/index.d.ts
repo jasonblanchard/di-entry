@@ -105,8 +105,106 @@ export namespace messages {
 
             /** Code enum. */
             enum Code {
-                UNKNOWN = 0
+                UNKNOWN = 0,
+                NOT_FOUND = 1,
+                VALIDATION_FAILED = 2
             }
+        }
+
+        /** Properties of a RequestContext. */
+        interface IRequestContext {
+
+            /** RequestContext userId */
+            userId?: (string|null);
+
+            /** RequestContext traceId */
+            traceId?: (string|null);
+        }
+
+        /** Represents a RequestContext. */
+        class RequestContext implements IRequestContext {
+
+            /**
+             * Constructs a new RequestContext.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: messages.entry.IRequestContext);
+
+            /** RequestContext userId. */
+            public userId: string;
+
+            /** RequestContext traceId. */
+            public traceId: string;
+
+            /**
+             * Creates a new RequestContext instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns RequestContext instance
+             */
+            public static create(properties?: messages.entry.IRequestContext): messages.entry.RequestContext;
+
+            /**
+             * Encodes the specified RequestContext message. Does not implicitly {@link messages.entry.RequestContext.verify|verify} messages.
+             * @param message RequestContext message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: messages.entry.IRequestContext, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified RequestContext message, length delimited. Does not implicitly {@link messages.entry.RequestContext.verify|verify} messages.
+             * @param message RequestContext message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: messages.entry.IRequestContext, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a RequestContext message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns RequestContext
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): messages.entry.RequestContext;
+
+            /**
+             * Decodes a RequestContext message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns RequestContext
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): messages.entry.RequestContext;
+
+            /**
+             * Verifies a RequestContext message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a RequestContext message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns RequestContext
+             */
+            public static fromObject(object: { [k: string]: any }): messages.entry.RequestContext;
+
+            /**
+             * Creates a plain object from a RequestContext message. Also converts values to other types if specified.
+             * @param message RequestContext
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: messages.entry.RequestContext, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this RequestContext to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
         }
 
         /** Properties of a GetEntryRequest. */
@@ -120,6 +218,12 @@ export namespace messages {
 
             /** GetEntryRequest traceId */
             traceId?: (string|null);
+
+            /** GetEntryRequest context */
+            context?: (messages.entry.IRequestContext|null);
+
+            /** GetEntryRequest payload */
+            payload?: (messages.entry.GetEntryRequest.IPayload|null);
         }
 
         /** Represents a GetEntryRequest. */
@@ -139,6 +243,12 @@ export namespace messages {
 
             /** GetEntryRequest traceId. */
             public traceId: string;
+
+            /** GetEntryRequest context. */
+            public context?: (messages.entry.IRequestContext|null);
+
+            /** GetEntryRequest payload. */
+            public payload?: (messages.entry.GetEntryRequest.IPayload|null);
 
             /**
              * Creates a new GetEntryRequest instance using the specified properties.
@@ -209,6 +319,99 @@ export namespace messages {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+        }
+
+        namespace GetEntryRequest {
+
+            /** Properties of a Payload. */
+            interface IPayload {
+
+                /** Payload id */
+                id?: (string|null);
+            }
+
+            /** Represents a Payload. */
+            class Payload implements IPayload {
+
+                /**
+                 * Constructs a new Payload.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: messages.entry.GetEntryRequest.IPayload);
+
+                /** Payload id. */
+                public id: string;
+
+                /**
+                 * Creates a new Payload instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns Payload instance
+                 */
+                public static create(properties?: messages.entry.GetEntryRequest.IPayload): messages.entry.GetEntryRequest.Payload;
+
+                /**
+                 * Encodes the specified Payload message. Does not implicitly {@link messages.entry.GetEntryRequest.Payload.verify|verify} messages.
+                 * @param message Payload message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: messages.entry.GetEntryRequest.IPayload, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified Payload message, length delimited. Does not implicitly {@link messages.entry.GetEntryRequest.Payload.verify|verify} messages.
+                 * @param message Payload message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: messages.entry.GetEntryRequest.IPayload, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a Payload message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns Payload
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): messages.entry.GetEntryRequest.Payload;
+
+                /**
+                 * Decodes a Payload message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns Payload
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): messages.entry.GetEntryRequest.Payload;
+
+                /**
+                 * Verifies a Payload message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a Payload message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns Payload
+                 */
+                public static fromObject(object: { [k: string]: any }): messages.entry.GetEntryRequest.Payload;
+
+                /**
+                 * Creates a plain object from a Payload message. Also converts values to other types if specified.
+                 * @param message Payload
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: messages.entry.GetEntryRequest.Payload, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this Payload to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
         }
 
         /** Properties of a GetEntryResponse. */
@@ -429,6 +632,12 @@ export namespace messages {
 
             /** CreateEntryRequest traceId */
             traceId?: (string|null);
+
+            /** CreateEntryRequest context */
+            context?: (messages.entry.IRequestContext|null);
+
+            /** CreateEntryRequest payload */
+            payload?: (messages.entry.CreateEntryRequest.IPayload|null);
         }
 
         /** Represents a CreateEntryRequest. */
@@ -448,6 +657,12 @@ export namespace messages {
 
             /** CreateEntryRequest traceId. */
             public traceId: string;
+
+            /** CreateEntryRequest context. */
+            public context?: (messages.entry.IRequestContext|null);
+
+            /** CreateEntryRequest payload. */
+            public payload?: (messages.entry.CreateEntryRequest.IPayload|null);
 
             /**
              * Creates a new CreateEntryRequest instance using the specified properties.
@@ -518,6 +733,99 @@ export namespace messages {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+        }
+
+        namespace CreateEntryRequest {
+
+            /** Properties of a Payload. */
+            interface IPayload {
+
+                /** Payload text */
+                text?: (string|null);
+            }
+
+            /** Represents a Payload. */
+            class Payload implements IPayload {
+
+                /**
+                 * Constructs a new Payload.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: messages.entry.CreateEntryRequest.IPayload);
+
+                /** Payload text. */
+                public text: string;
+
+                /**
+                 * Creates a new Payload instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns Payload instance
+                 */
+                public static create(properties?: messages.entry.CreateEntryRequest.IPayload): messages.entry.CreateEntryRequest.Payload;
+
+                /**
+                 * Encodes the specified Payload message. Does not implicitly {@link messages.entry.CreateEntryRequest.Payload.verify|verify} messages.
+                 * @param message Payload message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: messages.entry.CreateEntryRequest.IPayload, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified Payload message, length delimited. Does not implicitly {@link messages.entry.CreateEntryRequest.Payload.verify|verify} messages.
+                 * @param message Payload message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: messages.entry.CreateEntryRequest.IPayload, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a Payload message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns Payload
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): messages.entry.CreateEntryRequest.Payload;
+
+                /**
+                 * Decodes a Payload message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns Payload
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): messages.entry.CreateEntryRequest.Payload;
+
+                /**
+                 * Verifies a Payload message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a Payload message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns Payload
+                 */
+                public static fromObject(object: { [k: string]: any }): messages.entry.CreateEntryRequest.Payload;
+
+                /**
+                 * Creates a plain object from a Payload message. Also converts values to other types if specified.
+                 * @param message Payload
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: messages.entry.CreateEntryRequest.Payload, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this Payload to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
         }
 
         /** Properties of a CreateEntryResponse. */

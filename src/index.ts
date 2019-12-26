@@ -39,6 +39,8 @@ async function bootstrap() {
       });
   }, 5000);
 
+  // TODO: Consider dispatching 'store.entry.get' from this and do that logic in that handler instead of here directly.
+  // This would expose a domain event AND a store building block.
   nc.subscribe('get.entry', async (error, message) => {
     logMessage(message.subject);
     if (error) {
@@ -51,15 +53,38 @@ async function bootstrap() {
       return handleError(nc, message, error, response);
     }
 
-    const { id, creatorId, traceId } = messages.entry.GetEntryRequest.decode(message.data);
+    const { payload, context } = messages.entry.GetEntryRequest.decode(message.data);
+    const id = payload?.id;
+    const creatorId = context?.userId;
+
+    if (!id || !creatorId) {
+      const response = messages.entry.CreateEntryResponse.encode({
+        error: {
+          code: messages.entry.Error.Code.VALIDATION_FAILED,
+          message: 'oops',
+        }
+      }).finish();
+      return handleError(nc, message, new Error(), response);
+    }
 
     try {
       const entry = await getEntry(db, { id, creatorId });
 
       if (message.reply) {
+        if (!entry) {
+          const response = messages.entry.CreateEntryResponse.encode({
+            error: {
+              code: messages.entry.Error.Code.NOT_FOUND,
+              message: 'oops',
+            },
+            traceId: context?.traceId
+          }).finish();
+          return handleError(nc, message, new Error(), response);
+        }
+
         const response = messages.entry.GetEntryResponse.encode({
           payload: entry,
-          traceId
+          traceId: context?.traceId
         }).finish();
         nc.publish(message.reply, response);
       }
@@ -69,9 +94,9 @@ async function bootstrap() {
           code: messages.entry.Error.Code.UNKNOWN,
           message: 'oops',
         },
-        traceId
+        traceId: context?.traceId
       }).finish();
-      handleError(nc, message, error, response);
+      return handleError(nc, message, error, response);
     }
   });
 
@@ -87,7 +112,19 @@ async function bootstrap() {
       return handleError(nc, message, error, response);
     }
 
-    const { text, creatorId, traceId } = messages.entry.CreateEntryRequest.decode(message.data);
+    const { payload, context } = messages.entry.CreateEntryRequest.decode(message.data);
+    const text = payload?.text;
+    const creatorId = context?.userId;
+
+    if (!text || !creatorId) {
+      const response = messages.entry.CreateEntryResponse.encode({
+        error: {
+          code: messages.entry.Error.Code.VALIDATION_FAILED,
+          message: 'oops'
+        }
+      }).finish();
+      return handleError(nc, message, new Error(), response);
+    }
 
     try {
       const { id } = await createEntry(db, { text, creatorId });
@@ -95,7 +132,7 @@ async function bootstrap() {
       if (message.reply) {
         const response = messages.entry.CreateEntryResponse.encode({
           payload: { id },
-          traceId
+          traceId: context?.traceId
         }).finish();
         nc.publish(message.reply, response);
       }
@@ -105,7 +142,7 @@ async function bootstrap() {
           code: messages.entry.Error.Code.UNKNOWN,
           message: 'oops'
         },
-        traceId
+        traceId: context?.traceId
       }).finish();
       handleError(nc, message, error, response);
     }

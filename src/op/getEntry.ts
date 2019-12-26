@@ -5,10 +5,13 @@ interface GetEntryInput {
   creatorId: string;
 }
 
-// TODO: Rename function and event to "getEntryByUser" or something more specific?
 export default async function getEntry(db: DbConnection, { id, creatorId }: GetEntryInput) {
   const result = await db.query("SELECT id, text, creator_id FROM entries WHERE id = $1 AND creator_id = $2", [id, creatorId]);
   const entity = result.rows[0];
+
+  if (!entity) {
+    return null;
+  }
 
   return {
     id: String(entity.id),
