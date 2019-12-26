@@ -8,7 +8,8 @@
     "build": "tsc",
     "watch": "nodemon build/index.js",
     "start": "node build/index.js",
-    "migrate": "db-migrate"
+    "db:migrate": "db-migrate --config 'config/db/database.json'",
+    "db": "db-migrate --config 'config/db/no-db-name.json'"
   },
   "author": "",
   "license": "ISC",

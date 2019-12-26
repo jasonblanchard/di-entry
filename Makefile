@@ -26,3 +26,10 @@ deploy:
 
 clean_k8s:
 	kubectl delete -k ./deploy/overlays/development
+
+init_db:
+	npm run db -- db:create di
+	npm run db:migrate -- up
+
+drop_db:
+	npm run db -- db:drop di

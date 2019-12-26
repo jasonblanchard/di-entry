@@ -3,7 +3,6 @@
     "driver": "pg",
     "user": "di",
     "password": "di",
-    "host": "localhost",
-    "database": "di"
+    "host": "localhost"
   }
 }
