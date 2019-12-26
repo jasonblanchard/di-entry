@@ -323,6 +323,9 @@ export namespace messages {
 
                 /** Payload text */
                 text?: (string|null);
+
+                /** Payload creatorId */
+                creatorId?: (string|null);
             }
 
             /** Represents a Payload. */
@@ -339,6 +342,9 @@ export namespace messages {
 
                 /** Payload text. */
                 public text: string;
+
+                /** Payload creatorId. */
+                public creatorId: string;
 
                 /**
                  * Creates a new Payload instance using the specified properties.

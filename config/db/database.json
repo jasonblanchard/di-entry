@@ -1,0 +1,9 @@
+{
+  "dev": {
+    "driver": "pg",
+    "user": "di",
+    "password": "di",
+    "host": "localhost",
+    "database": "di_dev"
+  }
+}

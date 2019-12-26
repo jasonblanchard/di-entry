@@ -736,6 +736,7 @@ $root.messages = (function() {
                  * @interface IPayload
                  * @property {string|null} [id] Payload id
                  * @property {string|null} [text] Payload text
+                 * @property {string|null} [creatorId] Payload creatorId
                  */
 
                 /**
@@ -770,6 +771,14 @@ $root.messages = (function() {
                 Payload.prototype.text = "";
 
                 /**
+                 * Payload creatorId.
+                 * @member {string} creatorId
+                 * @memberof messages.entry.GetEntryResponse.Payload
+                 * @instance
+                 */
+                Payload.prototype.creatorId = "";
+
+                /**
                  * Creates a new Payload instance using the specified properties.
                  * @function create
                  * @memberof messages.entry.GetEntryResponse.Payload
@@ -797,6 +806,8 @@ $root.messages = (function() {
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.id);
                     if (message.text != null && message.hasOwnProperty("text"))
                         writer.uint32(/* id 2, wireType 2 =*/18).string(message.text);
+                    if (message.creatorId != null && message.hasOwnProperty("creatorId"))
+                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.creatorId);
                     return writer;
                 };
 
@@ -836,6 +847,9 @@ $root.messages = (function() {
                             break;
                         case 2:
                             message.text = reader.string();
+                            break;
+                        case 3:
+                            message.creatorId = reader.string();
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -878,6 +892,9 @@ $root.messages = (function() {
                     if (message.text != null && message.hasOwnProperty("text"))
                         if (!$util.isString(message.text))
                             return "text: string expected";
+                    if (message.creatorId != null && message.hasOwnProperty("creatorId"))
+                        if (!$util.isString(message.creatorId))
+                            return "creatorId: string expected";
                     return null;
                 };
 
@@ -897,6 +914,8 @@ $root.messages = (function() {
                         message.id = String(object.id);
                     if (object.text != null)
                         message.text = String(object.text);
+                    if (object.creatorId != null)
+                        message.creatorId = String(object.creatorId);
                     return message;
                 };
 
@@ -916,11 +935,14 @@ $root.messages = (function() {
                     if (options.defaults) {
                         object.id = "";
                         object.text = "";
+                        object.creatorId = "";
                     }
                     if (message.id != null && message.hasOwnProperty("id"))
                         object.id = message.id;
                     if (message.text != null && message.hasOwnProperty("text"))
                         object.text = message.text;
+                    if (message.creatorId != null && message.hasOwnProperty("creatorId"))
+                        object.creatorId = message.creatorId;
                     return object;
                 };
 

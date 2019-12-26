@@ -4,19 +4,27 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "build": "tsc",
     "watch": "nodemon build/index.js",
-    "start": "node build/index.js"
+    "start": "node build/index.js",
+    "migrate": "db-migrate"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/jest": "^24.0.24",
+    "@types/pg": "^7.14.0",
+    "db-migrate": "^0.11.6",
+    "db-migrate-pg": "^1.0.0",
+    "jest": "^24.9.0",
     "nodemon": "^2.0.2",
+    "ts-jest": "^24.2.0",
     "typescript": "^3.7.3"
   },
   "dependencies": {
     "dotenv": "^8.2.0",
+    "pg": "^7.15.1",
     "protobufjs": "^6.8.8",
     "ts-nats": "^1.2.4"
   }

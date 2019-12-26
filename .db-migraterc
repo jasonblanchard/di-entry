@@ -1,0 +1,4 @@
+{
+  "configFile": "config/db/database.json",
+  "migrations-dir": "config/db/migrations"
+}

@@ -4,8 +4,11 @@ import { connect, Payload, Msg, Client} from 'ts-nats';
 import createEntry from './op/createEntry';
 import getEntry from './op/getEntry';
 import checkStatus from './op/checkStatus';
+import bootstrapDatabase from './db/bootstrapDatabase';
 
 require('dotenv').config();
+
+const dbConnectionString = `postgresql://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_DATABASE}`;
 
 function handleError(nc: Client, message: Msg, error: Error, response: any) {
   console.log(error);
@@ -22,10 +25,12 @@ function logMessage(topic: string, message?: Msg) {
 const natsHosts = [<string>process.env.NATS_HOST];
 
 async function bootstrap() {
-  let nc = await connect({
+  const nc = await connect({
     servers: natsHosts,
     payload: Payload.BINARY
   });
+
+  const db = await bootstrapDatabase({ connectionString: dbConnectionString });
 
   setInterval(() => {
     checkStatus({ nc })
@@ -46,10 +51,10 @@ async function bootstrap() {
       return handleError(nc, message, error, response);
     }
 
-    const { id, traceId } = messages.entry.GetEntryRequest.decode(message.data);
+    const { id, creatorId, traceId } = messages.entry.GetEntryRequest.decode(message.data);
 
     try {
-      const entry = await getEntry(id);
+      const entry = await getEntry(db, { id, creatorId });
 
       if (message.reply) {
         const response = messages.entry.GetEntryResponse.encode({
@@ -85,7 +90,7 @@ async function bootstrap() {
     const { text, creatorId, traceId } = messages.entry.CreateEntryRequest.decode(message.data);
 
     try {
-      const { id } = await createEntry({ text, creatorId });
+      const { id } = await createEntry(db, { text, creatorId });
 
       if (message.reply) {
         const response = messages.entry.CreateEntryResponse.encode({
