@@ -9,6 +9,7 @@
     "watch": "nodemon build/index.js",
     "start": "node build/index.js",
     "db:migrate": "db-migrate --config 'config/db/database.json'",
+    "db:migrate:up": "db-migrate --config 'config/db/database.json' up",
     "db": "db-migrate --config 'config/db/no-db-name.json'"
   },
   "author": "",
