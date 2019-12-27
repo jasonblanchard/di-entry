@@ -1,9 +1,17 @@
 {
   "dev": {
     "driver": "pg",
-    "user": "di",
-    "password": "di",
-    "host": "localhost",
-    "database": "di"
+    "user": {
+      "ENV": "DB_USER"
+    },
+    "password": {
+      "ENV": "DB_PASSWORD"
+    },
+    "host": {
+      "ENV": "DB_HOST"
+    },
+    "database": {
+      "ENV": "di_entry"
+    }
   }
 }

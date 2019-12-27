@@ -17,6 +17,7 @@ WORKDIR $APP_HOME
 RUN npm ci
 
 COPY --chown=docker:docker src $APP_HOME/src/
+COPY --chown=docker:docker config $APP_HOME/config/
 COPY --chown=docker:docker tsconfig.json $APP_HOME/
 
 WORKDIR $APP_HOME
@@ -32,6 +33,7 @@ WORKDIR $APP_HOME
 
 COPY --from=build --chown=docker:docker $PROD_DEPS/node_modules $APP_HOME/node_modules/
 COPY --from=build --chown=docker:docker $APP_HOME/build $APP_HOME/build
+COPY --from=build --chown=docker:docker $APP_HOME/config $APP_HOME/config
 COPY --from=build --chown=docker:docker $APP_HOME/package.json $APP_HOME/package.json
 
 CMD ["npm", "start", "--production"]

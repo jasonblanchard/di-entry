@@ -16,14 +16,14 @@
   "devDependencies": {
     "@types/jest": "^24.0.24",
     "@types/pg": "^7.14.0",
-    "db-migrate": "^0.11.6",
-    "db-migrate-pg": "^1.0.0",
     "jest": "^24.9.0",
     "nodemon": "^2.0.2",
     "ts-jest": "^24.2.0",
     "typescript": "^3.7.3"
   },
   "dependencies": {
+    "db-migrate": "^0.11.6",
+    "db-migrate-pg": "^1.0.0",
     "dotenv": "^8.2.0",
     "pg": "^7.15.1",
     "protobufjs": "^6.8.8",
