@@ -839,9 +839,6 @@ export namespace messages {
 
             /** CreateEntryResponse traceId */
             traceId?: (string|null);
-
-            /** CreateEntryResponse pageInfo */
-            pageInfo?: (messages.entry.CreateEntryResponse.IPageInfo|null);
         }
 
         /** Represents a CreateEntryResponse. */
@@ -861,9 +858,6 @@ export namespace messages {
 
             /** CreateEntryResponse traceId. */
             public traceId: string;
-
-            /** CreateEntryResponse pageInfo. */
-            public pageInfo?: (messages.entry.CreateEntryResponse.IPageInfo|null);
 
             /**
              * Creates a new CreateEntryResponse instance using the specified properties.
@@ -1027,114 +1021,6 @@ export namespace messages {
                  */
                 public toJSON(): { [k: string]: any };
             }
-
-            /** Properties of a PageInfo. */
-            interface IPageInfo {
-
-                /** PageInfo totalCount */
-                totalCount?: (number|null);
-
-                /** PageInfo hasNextPage */
-                hasNextPage?: (boolean|null);
-
-                /** PageInfo startCursor */
-                startCursor?: (string|null);
-
-                /** PageInfo endCursor */
-                endCursor?: (string|null);
-            }
-
-            /** Represents a PageInfo. */
-            class PageInfo implements IPageInfo {
-
-                /**
-                 * Constructs a new PageInfo.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: messages.entry.CreateEntryResponse.IPageInfo);
-
-                /** PageInfo totalCount. */
-                public totalCount: number;
-
-                /** PageInfo hasNextPage. */
-                public hasNextPage: boolean;
-
-                /** PageInfo startCursor. */
-                public startCursor: string;
-
-                /** PageInfo endCursor. */
-                public endCursor: string;
-
-                /**
-                 * Creates a new PageInfo instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns PageInfo instance
-                 */
-                public static create(properties?: messages.entry.CreateEntryResponse.IPageInfo): messages.entry.CreateEntryResponse.PageInfo;
-
-                /**
-                 * Encodes the specified PageInfo message. Does not implicitly {@link messages.entry.CreateEntryResponse.PageInfo.verify|verify} messages.
-                 * @param message PageInfo message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: messages.entry.CreateEntryResponse.IPageInfo, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified PageInfo message, length delimited. Does not implicitly {@link messages.entry.CreateEntryResponse.PageInfo.verify|verify} messages.
-                 * @param message PageInfo message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: messages.entry.CreateEntryResponse.IPageInfo, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a PageInfo message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns PageInfo
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): messages.entry.CreateEntryResponse.PageInfo;
-
-                /**
-                 * Decodes a PageInfo message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns PageInfo
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): messages.entry.CreateEntryResponse.PageInfo;
-
-                /**
-                 * Verifies a PageInfo message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a PageInfo message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns PageInfo
-                 */
-                public static fromObject(object: { [k: string]: any }): messages.entry.CreateEntryResponse.PageInfo;
-
-                /**
-                 * Creates a plain object from a PageInfo message. Also converts values to other types if specified.
-                 * @param message PageInfo
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: messages.entry.CreateEntryResponse.PageInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this PageInfo to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-            }
         }
 
         /** Properties of a GetEntriesRequest. */
@@ -1237,6 +1123,12 @@ export namespace messages {
 
             /** Properties of a Payload. */
             interface IPayload {
+
+                /** Payload first */
+                first?: (number|null);
+
+                /** Payload after */
+                after?: (string|null);
             }
 
             /** Represents a Payload. */
@@ -1247,6 +1139,12 @@ export namespace messages {
                  * @param [properties] Properties to set
                  */
                 constructor(properties?: messages.entry.GetEntriesRequest.IPayload);
+
+                /** Payload first. */
+                public first: number;
+
+                /** Payload after. */
+                public after: string;
 
                 /**
                  * Creates a new Payload instance using the specified properties.
@@ -1331,6 +1229,9 @@ export namespace messages {
 
             /** GetEntriesResponse traceId */
             traceId?: (string|null);
+
+            /** GetEntriesResponse pageInfo */
+            pageInfo?: (messages.entry.GetEntriesResponse.IPageInfo|null);
         }
 
         /** Represents a GetEntriesResponse. */
@@ -1350,6 +1251,9 @@ export namespace messages {
 
             /** GetEntriesResponse traceId. */
             public traceId: string;
+
+            /** GetEntriesResponse pageInfo. */
+            public pageInfo?: (messages.entry.GetEntriesResponse.IPageInfo|null);
 
             /**
              * Creates a new GetEntriesResponse instance using the specified properties.
@@ -1423,6 +1327,114 @@ export namespace messages {
         }
 
         namespace GetEntriesResponse {
+
+            /** Properties of a PageInfo. */
+            interface IPageInfo {
+
+                /** PageInfo totalCount */
+                totalCount?: (number|null);
+
+                /** PageInfo hasNextPage */
+                hasNextPage?: (boolean|null);
+
+                /** PageInfo startCursor */
+                startCursor?: (string|null);
+
+                /** PageInfo endCursor */
+                endCursor?: (string|null);
+            }
+
+            /** Represents a PageInfo. */
+            class PageInfo implements IPageInfo {
+
+                /**
+                 * Constructs a new PageInfo.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: messages.entry.GetEntriesResponse.IPageInfo);
+
+                /** PageInfo totalCount. */
+                public totalCount: number;
+
+                /** PageInfo hasNextPage. */
+                public hasNextPage: boolean;
+
+                /** PageInfo startCursor. */
+                public startCursor: string;
+
+                /** PageInfo endCursor. */
+                public endCursor: string;
+
+                /**
+                 * Creates a new PageInfo instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns PageInfo instance
+                 */
+                public static create(properties?: messages.entry.GetEntriesResponse.IPageInfo): messages.entry.GetEntriesResponse.PageInfo;
+
+                /**
+                 * Encodes the specified PageInfo message. Does not implicitly {@link messages.entry.GetEntriesResponse.PageInfo.verify|verify} messages.
+                 * @param message PageInfo message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: messages.entry.GetEntriesResponse.IPageInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified PageInfo message, length delimited. Does not implicitly {@link messages.entry.GetEntriesResponse.PageInfo.verify|verify} messages.
+                 * @param message PageInfo message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: messages.entry.GetEntriesResponse.IPageInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a PageInfo message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns PageInfo
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): messages.entry.GetEntriesResponse.PageInfo;
+
+                /**
+                 * Decodes a PageInfo message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns PageInfo
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): messages.entry.GetEntriesResponse.PageInfo;
+
+                /**
+                 * Verifies a PageInfo message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a PageInfo message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns PageInfo
+                 */
+                public static fromObject(object: { [k: string]: any }): messages.entry.GetEntriesResponse.PageInfo;
+
+                /**
+                 * Creates a plain object from a PageInfo message. Also converts values to other types if specified.
+                 * @param message PageInfo
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: messages.entry.GetEntriesResponse.PageInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this PageInfo to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
 
             /** Properties of an Entity. */
             interface IEntity {

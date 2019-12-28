@@ -86,9 +86,15 @@ describe('get.entries', () => {
       }
     }).finish();
     const message = await nc.request('list.entry', TIMEOUT, request);
-    const { payload: entries, error } = messages.entry.GetEntriesResponse.decode(message.data);
+    const { payload: entries, pageInfo, error } = messages.entry.GetEntriesResponse.decode(message.data);
     expect(error).toEqual(null);
     expect(entries.length > 2).toEqual(true); // TODO: This is kind of dumb. Make a better assertion, here.
+    expect(pageInfo).toEqual({
+      totalCount: expect.any(Number),
+      hasNextPage: expect.any(Boolean),
+      startCursor: expect.any(String),
+      endCursor: expect.any(String)
+    });
 
     nc.close();
   });

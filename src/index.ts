@@ -5,6 +5,7 @@ import createEntry from './op/createEntry';
 import getEntry from './op/getEntry';
 import getEntries from './op/getEntries';
 import checkStatus from './op/checkStatus';
+import getEntryPageInfo from './op/getEntryPageInfo';
 import bootstrapDatabase from './db/bootstrapDatabase';
 
 require('dotenv').config();
@@ -160,8 +161,10 @@ async function bootstrap() {
       return handleError(nc, message, error, response);
     }
 
-    const { context } = messages.entry.GetEntriesRequest.decode(message.data);
+    const { context, payload } = messages.entry.GetEntriesRequest.decode(message.data);
     const creatorId = context?.userId;
+    const first = payload?.first;
+    const after = payload?.after;
 
     if (!creatorId) {
       const response = messages.entry.GetEntriesResponse.encode({
@@ -180,7 +183,7 @@ async function bootstrap() {
        creatorId: string;
       }
 
-      const entries: Entry[] | null = await getEntries(db, { creatorId });
+      const entries: Entry[] | null = await getEntries(db, { creatorId, first, after });
 
       if (!entries) {
         const response = messages.entry.GetEntriesResponse.encode({
@@ -193,10 +196,13 @@ async function bootstrap() {
         return handleError(nc, message, new Error(String(messages.entry.Error.Code.NOT_FOUND)), response);
       }
 
+      const pageInfo = await getEntryPageInfo(db, { creatorId, first, after });
+
       if (message.reply) {
         const response = messages.entry.GetEntriesResponse.encode({
           payload: entries,
-          traceId: context?.traceId
+          pageInfo: pageInfo,
+          traceId: context?.traceId,
         }).finish();
         nc.publish(message.reply, response);
       }

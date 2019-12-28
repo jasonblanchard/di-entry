@@ -6,7 +6,7 @@ resources:
 - deployment.yaml
 images:
 - name: jasonblanchard/di-entry
-  newTag: latest
+  newTag: 9e7b5ca4bd3f7e6a1494715beea81966e33e0e42
 configMapGenerator:
 - literals:
   - NATS_HOST=nats://nats:4222

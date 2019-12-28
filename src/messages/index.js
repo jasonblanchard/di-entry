@@ -1910,7 +1910,6 @@ $root.messages = (function() {
              * @property {messages.entry.CreateEntryResponse.IPayload|null} [payload] CreateEntryResponse payload
              * @property {messages.entry.IError|null} [error] CreateEntryResponse error
              * @property {string|null} [traceId] CreateEntryResponse traceId
-             * @property {messages.entry.CreateEntryResponse.IPageInfo|null} [pageInfo] CreateEntryResponse pageInfo
              */
 
             /**
@@ -1953,14 +1952,6 @@ $root.messages = (function() {
             CreateEntryResponse.prototype.traceId = "";
 
             /**
-             * CreateEntryResponse pageInfo.
-             * @member {messages.entry.CreateEntryResponse.IPageInfo|null|undefined} pageInfo
-             * @memberof messages.entry.CreateEntryResponse
-             * @instance
-             */
-            CreateEntryResponse.prototype.pageInfo = null;
-
-            /**
              * Creates a new CreateEntryResponse instance using the specified properties.
              * @function create
              * @memberof messages.entry.CreateEntryResponse
@@ -1990,8 +1981,6 @@ $root.messages = (function() {
                     $root.messages.entry.Error.encode(message.error, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                 if (message.traceId != null && message.hasOwnProperty("traceId"))
                     writer.uint32(/* id 3, wireType 2 =*/26).string(message.traceId);
-                if (message.pageInfo != null && message.hasOwnProperty("pageInfo"))
-                    $root.messages.entry.CreateEntryResponse.PageInfo.encode(message.pageInfo, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                 return writer;
             };
 
@@ -2034,9 +2023,6 @@ $root.messages = (function() {
                         break;
                     case 3:
                         message.traceId = reader.string();
-                        break;
-                    case 4:
-                        message.pageInfo = $root.messages.entry.CreateEntryResponse.PageInfo.decode(reader, reader.uint32());
                         break;
                     default:
                         reader.skipType(tag & 7);
@@ -2086,11 +2072,6 @@ $root.messages = (function() {
                 if (message.traceId != null && message.hasOwnProperty("traceId"))
                     if (!$util.isString(message.traceId))
                         return "traceId: string expected";
-                if (message.pageInfo != null && message.hasOwnProperty("pageInfo")) {
-                    var error = $root.messages.entry.CreateEntryResponse.PageInfo.verify(message.pageInfo);
-                    if (error)
-                        return "pageInfo." + error;
-                }
                 return null;
             };
 
@@ -2118,11 +2099,6 @@ $root.messages = (function() {
                 }
                 if (object.traceId != null)
                     message.traceId = String(object.traceId);
-                if (object.pageInfo != null) {
-                    if (typeof object.pageInfo !== "object")
-                        throw TypeError(".messages.entry.CreateEntryResponse.pageInfo: object expected");
-                    message.pageInfo = $root.messages.entry.CreateEntryResponse.PageInfo.fromObject(object.pageInfo);
-                }
                 return message;
             };
 
@@ -2143,7 +2119,6 @@ $root.messages = (function() {
                     object.payload = null;
                     object.error = null;
                     object.traceId = "";
-                    object.pageInfo = null;
                 }
                 if (message.payload != null && message.hasOwnProperty("payload"))
                     object.payload = $root.messages.entry.CreateEntryResponse.Payload.toObject(message.payload, options);
@@ -2151,8 +2126,6 @@ $root.messages = (function() {
                     object.error = $root.messages.entry.Error.toObject(message.error, options);
                 if (message.traceId != null && message.hasOwnProperty("traceId"))
                     object.traceId = message.traceId;
-                if (message.pageInfo != null && message.hasOwnProperty("pageInfo"))
-                    object.pageInfo = $root.messages.entry.CreateEntryResponse.PageInfo.toObject(message.pageInfo, options);
                 return object;
             };
 
@@ -2352,260 +2325,6 @@ $root.messages = (function() {
                 };
 
                 return Payload;
-            })();
-
-            CreateEntryResponse.PageInfo = (function() {
-
-                /**
-                 * Properties of a PageInfo.
-                 * @memberof messages.entry.CreateEntryResponse
-                 * @interface IPageInfo
-                 * @property {number|null} [totalCount] PageInfo totalCount
-                 * @property {boolean|null} [hasNextPage] PageInfo hasNextPage
-                 * @property {string|null} [startCursor] PageInfo startCursor
-                 * @property {string|null} [endCursor] PageInfo endCursor
-                 */
-
-                /**
-                 * Constructs a new PageInfo.
-                 * @memberof messages.entry.CreateEntryResponse
-                 * @classdesc Represents a PageInfo.
-                 * @implements IPageInfo
-                 * @constructor
-                 * @param {messages.entry.CreateEntryResponse.IPageInfo=} [properties] Properties to set
-                 */
-                function PageInfo(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-
-                /**
-                 * PageInfo totalCount.
-                 * @member {number} totalCount
-                 * @memberof messages.entry.CreateEntryResponse.PageInfo
-                 * @instance
-                 */
-                PageInfo.prototype.totalCount = 0;
-
-                /**
-                 * PageInfo hasNextPage.
-                 * @member {boolean} hasNextPage
-                 * @memberof messages.entry.CreateEntryResponse.PageInfo
-                 * @instance
-                 */
-                PageInfo.prototype.hasNextPage = false;
-
-                /**
-                 * PageInfo startCursor.
-                 * @member {string} startCursor
-                 * @memberof messages.entry.CreateEntryResponse.PageInfo
-                 * @instance
-                 */
-                PageInfo.prototype.startCursor = "";
-
-                /**
-                 * PageInfo endCursor.
-                 * @member {string} endCursor
-                 * @memberof messages.entry.CreateEntryResponse.PageInfo
-                 * @instance
-                 */
-                PageInfo.prototype.endCursor = "";
-
-                /**
-                 * Creates a new PageInfo instance using the specified properties.
-                 * @function create
-                 * @memberof messages.entry.CreateEntryResponse.PageInfo
-                 * @static
-                 * @param {messages.entry.CreateEntryResponse.IPageInfo=} [properties] Properties to set
-                 * @returns {messages.entry.CreateEntryResponse.PageInfo} PageInfo instance
-                 */
-                PageInfo.create = function create(properties) {
-                    return new PageInfo(properties);
-                };
-
-                /**
-                 * Encodes the specified PageInfo message. Does not implicitly {@link messages.entry.CreateEntryResponse.PageInfo.verify|verify} messages.
-                 * @function encode
-                 * @memberof messages.entry.CreateEntryResponse.PageInfo
-                 * @static
-                 * @param {messages.entry.CreateEntryResponse.IPageInfo} message PageInfo message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                PageInfo.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.totalCount != null && message.hasOwnProperty("totalCount"))
-                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.totalCount);
-                    if (message.hasNextPage != null && message.hasOwnProperty("hasNextPage"))
-                        writer.uint32(/* id 2, wireType 0 =*/16).bool(message.hasNextPage);
-                    if (message.startCursor != null && message.hasOwnProperty("startCursor"))
-                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.startCursor);
-                    if (message.endCursor != null && message.hasOwnProperty("endCursor"))
-                        writer.uint32(/* id 4, wireType 2 =*/34).string(message.endCursor);
-                    return writer;
-                };
-
-                /**
-                 * Encodes the specified PageInfo message, length delimited. Does not implicitly {@link messages.entry.CreateEntryResponse.PageInfo.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof messages.entry.CreateEntryResponse.PageInfo
-                 * @static
-                 * @param {messages.entry.CreateEntryResponse.IPageInfo} message PageInfo message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                PageInfo.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-
-                /**
-                 * Decodes a PageInfo message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof messages.entry.CreateEntryResponse.PageInfo
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {messages.entry.CreateEntryResponse.PageInfo} PageInfo
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                PageInfo.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.messages.entry.CreateEntryResponse.PageInfo();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1:
-                            message.totalCount = reader.int32();
-                            break;
-                        case 2:
-                            message.hasNextPage = reader.bool();
-                            break;
-                        case 3:
-                            message.startCursor = reader.string();
-                            break;
-                        case 4:
-                            message.endCursor = reader.string();
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-
-                /**
-                 * Decodes a PageInfo message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof messages.entry.CreateEntryResponse.PageInfo
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {messages.entry.CreateEntryResponse.PageInfo} PageInfo
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                PageInfo.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-
-                /**
-                 * Verifies a PageInfo message.
-                 * @function verify
-                 * @memberof messages.entry.CreateEntryResponse.PageInfo
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                PageInfo.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.totalCount != null && message.hasOwnProperty("totalCount"))
-                        if (!$util.isInteger(message.totalCount))
-                            return "totalCount: integer expected";
-                    if (message.hasNextPage != null && message.hasOwnProperty("hasNextPage"))
-                        if (typeof message.hasNextPage !== "boolean")
-                            return "hasNextPage: boolean expected";
-                    if (message.startCursor != null && message.hasOwnProperty("startCursor"))
-                        if (!$util.isString(message.startCursor))
-                            return "startCursor: string expected";
-                    if (message.endCursor != null && message.hasOwnProperty("endCursor"))
-                        if (!$util.isString(message.endCursor))
-                            return "endCursor: string expected";
-                    return null;
-                };
-
-                /**
-                 * Creates a PageInfo message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof messages.entry.CreateEntryResponse.PageInfo
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {messages.entry.CreateEntryResponse.PageInfo} PageInfo
-                 */
-                PageInfo.fromObject = function fromObject(object) {
-                    if (object instanceof $root.messages.entry.CreateEntryResponse.PageInfo)
-                        return object;
-                    var message = new $root.messages.entry.CreateEntryResponse.PageInfo();
-                    if (object.totalCount != null)
-                        message.totalCount = object.totalCount | 0;
-                    if (object.hasNextPage != null)
-                        message.hasNextPage = Boolean(object.hasNextPage);
-                    if (object.startCursor != null)
-                        message.startCursor = String(object.startCursor);
-                    if (object.endCursor != null)
-                        message.endCursor = String(object.endCursor);
-                    return message;
-                };
-
-                /**
-                 * Creates a plain object from a PageInfo message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof messages.entry.CreateEntryResponse.PageInfo
-                 * @static
-                 * @param {messages.entry.CreateEntryResponse.PageInfo} message PageInfo
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                PageInfo.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.defaults) {
-                        object.totalCount = 0;
-                        object.hasNextPage = false;
-                        object.startCursor = "";
-                        object.endCursor = "";
-                    }
-                    if (message.totalCount != null && message.hasOwnProperty("totalCount"))
-                        object.totalCount = message.totalCount;
-                    if (message.hasNextPage != null && message.hasOwnProperty("hasNextPage"))
-                        object.hasNextPage = message.hasNextPage;
-                    if (message.startCursor != null && message.hasOwnProperty("startCursor"))
-                        object.startCursor = message.startCursor;
-                    if (message.endCursor != null && message.hasOwnProperty("endCursor"))
-                        object.endCursor = message.endCursor;
-                    return object;
-                };
-
-                /**
-                 * Converts this PageInfo to JSON.
-                 * @function toJSON
-                 * @memberof messages.entry.CreateEntryResponse.PageInfo
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                PageInfo.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-
-                return PageInfo;
             })();
 
             return CreateEntryResponse;
@@ -2834,6 +2553,8 @@ $root.messages = (function() {
                  * Properties of a Payload.
                  * @memberof messages.entry.GetEntriesRequest
                  * @interface IPayload
+                 * @property {number|null} [first] Payload first
+                 * @property {string|null} [after] Payload after
                  */
 
                 /**
@@ -2850,6 +2571,22 @@ $root.messages = (function() {
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
+
+                /**
+                 * Payload first.
+                 * @member {number} first
+                 * @memberof messages.entry.GetEntriesRequest.Payload
+                 * @instance
+                 */
+                Payload.prototype.first = 0;
+
+                /**
+                 * Payload after.
+                 * @member {string} after
+                 * @memberof messages.entry.GetEntriesRequest.Payload
+                 * @instance
+                 */
+                Payload.prototype.after = "";
 
                 /**
                  * Creates a new Payload instance using the specified properties.
@@ -2875,6 +2612,10 @@ $root.messages = (function() {
                 Payload.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (message.first != null && message.hasOwnProperty("first"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.first);
+                    if (message.after != null && message.hasOwnProperty("after"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.after);
                     return writer;
                 };
 
@@ -2909,6 +2650,12 @@ $root.messages = (function() {
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
+                        case 1:
+                            message.first = reader.int32();
+                            break;
+                        case 2:
+                            message.after = reader.string();
+                            break;
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -2944,6 +2691,12 @@ $root.messages = (function() {
                 Payload.verify = function verify(message) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (message.first != null && message.hasOwnProperty("first"))
+                        if (!$util.isInteger(message.first))
+                            return "first: integer expected";
+                    if (message.after != null && message.hasOwnProperty("after"))
+                        if (!$util.isString(message.after))
+                            return "after: string expected";
                     return null;
                 };
 
@@ -2958,7 +2711,12 @@ $root.messages = (function() {
                 Payload.fromObject = function fromObject(object) {
                     if (object instanceof $root.messages.entry.GetEntriesRequest.Payload)
                         return object;
-                    return new $root.messages.entry.GetEntriesRequest.Payload();
+                    var message = new $root.messages.entry.GetEntriesRequest.Payload();
+                    if (object.first != null)
+                        message.first = object.first | 0;
+                    if (object.after != null)
+                        message.after = String(object.after);
+                    return message;
                 };
 
                 /**
@@ -2970,8 +2728,19 @@ $root.messages = (function() {
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                Payload.toObject = function toObject() {
-                    return {};
+                Payload.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.first = 0;
+                        object.after = "";
+                    }
+                    if (message.first != null && message.hasOwnProperty("first"))
+                        object.first = message.first;
+                    if (message.after != null && message.hasOwnProperty("after"))
+                        object.after = message.after;
+                    return object;
                 };
 
                 /**
@@ -3000,6 +2769,7 @@ $root.messages = (function() {
              * @property {Array.<messages.entry.GetEntriesResponse.IEntity>|null} [payload] GetEntriesResponse payload
              * @property {messages.entry.IError|null} [error] GetEntriesResponse error
              * @property {string|null} [traceId] GetEntriesResponse traceId
+             * @property {messages.entry.GetEntriesResponse.IPageInfo|null} [pageInfo] GetEntriesResponse pageInfo
              */
 
             /**
@@ -3043,6 +2813,14 @@ $root.messages = (function() {
             GetEntriesResponse.prototype.traceId = "";
 
             /**
+             * GetEntriesResponse pageInfo.
+             * @member {messages.entry.GetEntriesResponse.IPageInfo|null|undefined} pageInfo
+             * @memberof messages.entry.GetEntriesResponse
+             * @instance
+             */
+            GetEntriesResponse.prototype.pageInfo = null;
+
+            /**
              * Creates a new GetEntriesResponse instance using the specified properties.
              * @function create
              * @memberof messages.entry.GetEntriesResponse
@@ -3073,6 +2851,8 @@ $root.messages = (function() {
                     $root.messages.entry.Error.encode(message.error, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                 if (message.traceId != null && message.hasOwnProperty("traceId"))
                     writer.uint32(/* id 3, wireType 2 =*/26).string(message.traceId);
+                if (message.pageInfo != null && message.hasOwnProperty("pageInfo"))
+                    $root.messages.entry.GetEntriesResponse.PageInfo.encode(message.pageInfo, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                 return writer;
             };
 
@@ -3117,6 +2897,9 @@ $root.messages = (function() {
                         break;
                     case 3:
                         message.traceId = reader.string();
+                        break;
+                    case 4:
+                        message.pageInfo = $root.messages.entry.GetEntriesResponse.PageInfo.decode(reader, reader.uint32());
                         break;
                     default:
                         reader.skipType(tag & 7);
@@ -3170,6 +2953,11 @@ $root.messages = (function() {
                 if (message.traceId != null && message.hasOwnProperty("traceId"))
                     if (!$util.isString(message.traceId))
                         return "traceId: string expected";
+                if (message.pageInfo != null && message.hasOwnProperty("pageInfo")) {
+                    var error = $root.messages.entry.GetEntriesResponse.PageInfo.verify(message.pageInfo);
+                    if (error)
+                        return "pageInfo." + error;
+                }
                 return null;
             };
 
@@ -3202,6 +2990,11 @@ $root.messages = (function() {
                 }
                 if (object.traceId != null)
                     message.traceId = String(object.traceId);
+                if (object.pageInfo != null) {
+                    if (typeof object.pageInfo !== "object")
+                        throw TypeError(".messages.entry.GetEntriesResponse.pageInfo: object expected");
+                    message.pageInfo = $root.messages.entry.GetEntriesResponse.PageInfo.fromObject(object.pageInfo);
+                }
                 return message;
             };
 
@@ -3223,6 +3016,7 @@ $root.messages = (function() {
                 if (options.defaults) {
                     object.error = null;
                     object.traceId = "";
+                    object.pageInfo = null;
                 }
                 if (message.payload && message.payload.length) {
                     object.payload = [];
@@ -3233,6 +3027,8 @@ $root.messages = (function() {
                     object.error = $root.messages.entry.Error.toObject(message.error, options);
                 if (message.traceId != null && message.hasOwnProperty("traceId"))
                     object.traceId = message.traceId;
+                if (message.pageInfo != null && message.hasOwnProperty("pageInfo"))
+                    object.pageInfo = $root.messages.entry.GetEntriesResponse.PageInfo.toObject(message.pageInfo, options);
                 return object;
             };
 
@@ -3246,6 +3042,260 @@ $root.messages = (function() {
             GetEntriesResponse.prototype.toJSON = function toJSON() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
+
+            GetEntriesResponse.PageInfo = (function() {
+
+                /**
+                 * Properties of a PageInfo.
+                 * @memberof messages.entry.GetEntriesResponse
+                 * @interface IPageInfo
+                 * @property {number|null} [totalCount] PageInfo totalCount
+                 * @property {boolean|null} [hasNextPage] PageInfo hasNextPage
+                 * @property {string|null} [startCursor] PageInfo startCursor
+                 * @property {string|null} [endCursor] PageInfo endCursor
+                 */
+
+                /**
+                 * Constructs a new PageInfo.
+                 * @memberof messages.entry.GetEntriesResponse
+                 * @classdesc Represents a PageInfo.
+                 * @implements IPageInfo
+                 * @constructor
+                 * @param {messages.entry.GetEntriesResponse.IPageInfo=} [properties] Properties to set
+                 */
+                function PageInfo(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+
+                /**
+                 * PageInfo totalCount.
+                 * @member {number} totalCount
+                 * @memberof messages.entry.GetEntriesResponse.PageInfo
+                 * @instance
+                 */
+                PageInfo.prototype.totalCount = 0;
+
+                /**
+                 * PageInfo hasNextPage.
+                 * @member {boolean} hasNextPage
+                 * @memberof messages.entry.GetEntriesResponse.PageInfo
+                 * @instance
+                 */
+                PageInfo.prototype.hasNextPage = false;
+
+                /**
+                 * PageInfo startCursor.
+                 * @member {string} startCursor
+                 * @memberof messages.entry.GetEntriesResponse.PageInfo
+                 * @instance
+                 */
+                PageInfo.prototype.startCursor = "";
+
+                /**
+                 * PageInfo endCursor.
+                 * @member {string} endCursor
+                 * @memberof messages.entry.GetEntriesResponse.PageInfo
+                 * @instance
+                 */
+                PageInfo.prototype.endCursor = "";
+
+                /**
+                 * Creates a new PageInfo instance using the specified properties.
+                 * @function create
+                 * @memberof messages.entry.GetEntriesResponse.PageInfo
+                 * @static
+                 * @param {messages.entry.GetEntriesResponse.IPageInfo=} [properties] Properties to set
+                 * @returns {messages.entry.GetEntriesResponse.PageInfo} PageInfo instance
+                 */
+                PageInfo.create = function create(properties) {
+                    return new PageInfo(properties);
+                };
+
+                /**
+                 * Encodes the specified PageInfo message. Does not implicitly {@link messages.entry.GetEntriesResponse.PageInfo.verify|verify} messages.
+                 * @function encode
+                 * @memberof messages.entry.GetEntriesResponse.PageInfo
+                 * @static
+                 * @param {messages.entry.GetEntriesResponse.IPageInfo} message PageInfo message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                PageInfo.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.totalCount != null && message.hasOwnProperty("totalCount"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.totalCount);
+                    if (message.hasNextPage != null && message.hasOwnProperty("hasNextPage"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).bool(message.hasNextPage);
+                    if (message.startCursor != null && message.hasOwnProperty("startCursor"))
+                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.startCursor);
+                    if (message.endCursor != null && message.hasOwnProperty("endCursor"))
+                        writer.uint32(/* id 4, wireType 2 =*/34).string(message.endCursor);
+                    return writer;
+                };
+
+                /**
+                 * Encodes the specified PageInfo message, length delimited. Does not implicitly {@link messages.entry.GetEntriesResponse.PageInfo.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof messages.entry.GetEntriesResponse.PageInfo
+                 * @static
+                 * @param {messages.entry.GetEntriesResponse.IPageInfo} message PageInfo message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                PageInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+
+                /**
+                 * Decodes a PageInfo message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof messages.entry.GetEntriesResponse.PageInfo
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {messages.entry.GetEntriesResponse.PageInfo} PageInfo
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                PageInfo.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.messages.entry.GetEntriesResponse.PageInfo();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.totalCount = reader.int32();
+                            break;
+                        case 2:
+                            message.hasNextPage = reader.bool();
+                            break;
+                        case 3:
+                            message.startCursor = reader.string();
+                            break;
+                        case 4:
+                            message.endCursor = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+
+                /**
+                 * Decodes a PageInfo message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof messages.entry.GetEntriesResponse.PageInfo
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {messages.entry.GetEntriesResponse.PageInfo} PageInfo
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                PageInfo.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+
+                /**
+                 * Verifies a PageInfo message.
+                 * @function verify
+                 * @memberof messages.entry.GetEntriesResponse.PageInfo
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                PageInfo.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.totalCount != null && message.hasOwnProperty("totalCount"))
+                        if (!$util.isInteger(message.totalCount))
+                            return "totalCount: integer expected";
+                    if (message.hasNextPage != null && message.hasOwnProperty("hasNextPage"))
+                        if (typeof message.hasNextPage !== "boolean")
+                            return "hasNextPage: boolean expected";
+                    if (message.startCursor != null && message.hasOwnProperty("startCursor"))
+                        if (!$util.isString(message.startCursor))
+                            return "startCursor: string expected";
+                    if (message.endCursor != null && message.hasOwnProperty("endCursor"))
+                        if (!$util.isString(message.endCursor))
+                            return "endCursor: string expected";
+                    return null;
+                };
+
+                /**
+                 * Creates a PageInfo message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof messages.entry.GetEntriesResponse.PageInfo
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {messages.entry.GetEntriesResponse.PageInfo} PageInfo
+                 */
+                PageInfo.fromObject = function fromObject(object) {
+                    if (object instanceof $root.messages.entry.GetEntriesResponse.PageInfo)
+                        return object;
+                    var message = new $root.messages.entry.GetEntriesResponse.PageInfo();
+                    if (object.totalCount != null)
+                        message.totalCount = object.totalCount | 0;
+                    if (object.hasNextPage != null)
+                        message.hasNextPage = Boolean(object.hasNextPage);
+                    if (object.startCursor != null)
+                        message.startCursor = String(object.startCursor);
+                    if (object.endCursor != null)
+                        message.endCursor = String(object.endCursor);
+                    return message;
+                };
+
+                /**
+                 * Creates a plain object from a PageInfo message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof messages.entry.GetEntriesResponse.PageInfo
+                 * @static
+                 * @param {messages.entry.GetEntriesResponse.PageInfo} message PageInfo
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                PageInfo.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.totalCount = 0;
+                        object.hasNextPage = false;
+                        object.startCursor = "";
+                        object.endCursor = "";
+                    }
+                    if (message.totalCount != null && message.hasOwnProperty("totalCount"))
+                        object.totalCount = message.totalCount;
+                    if (message.hasNextPage != null && message.hasOwnProperty("hasNextPage"))
+                        object.hasNextPage = message.hasNextPage;
+                    if (message.startCursor != null && message.hasOwnProperty("startCursor"))
+                        object.startCursor = message.startCursor;
+                    if (message.endCursor != null && message.hasOwnProperty("endCursor"))
+                        object.endCursor = message.endCursor;
+                    return object;
+                };
+
+                /**
+                 * Converts this PageInfo to JSON.
+                 * @function toJSON
+                 * @memberof messages.entry.GetEntriesResponse.PageInfo
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                PageInfo.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+
+                return PageInfo;
+            })();
 
             GetEntriesResponse.Entity = (function() {
 
