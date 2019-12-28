@@ -1,5 +1,5 @@
 import { messages } from '../src/messages';
-import { connect, Payload } from 'ts-nats';
+import { connect, Payload, Client } from 'ts-nats';
 
 const TIMEOUT = 1000;
 
@@ -52,6 +52,46 @@ it('create.entry flow', async () => {
   });
 
   nc.close();
+});
+
+function createNEntries(nc: Client, n: number) {
+  let requests = [];
+
+  for (let i = 0; i < n; i++) {
+    const request = messages.entry.CreateEntryRequest.encode({
+      payload: {
+        text: `Testing text ${i}`,
+      },
+      context: {
+        userId: '123',
+      }
+    }).finish();
+    requests.push(nc.request('create.entry', TIMEOUT, request));
+  }
+
+  return Promise.all(requests);
+}
+
+describe('get.entries', () => {
+  it('returns list', async () => {
+    const nc = await connect({
+      servers: ['nats://localhost:4222'],
+      payload: Payload.BINARY
+    });
+
+    await createNEntries(nc, 2);
+    const request = messages.entry.GetEntriesRequest.encode({
+      context: {
+        userId: '123'
+      }
+    }).finish();
+    const message = await nc.request('list.entry', TIMEOUT, request);
+    const { payload: entries, error } = messages.entry.GetEntriesResponse.decode(message.data);
+    expect(error).toEqual(null);
+    expect(entries.length > 2).toEqual(true); // TODO: This is kind of dumb. Make a better assertion, here.
+
+    nc.close();
+  });
 });
 
 describe('errors', () => {

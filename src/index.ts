@@ -3,6 +3,7 @@ import { connect, Payload, Msg, Client} from 'ts-nats';
 
 import createEntry from './op/createEntry';
 import getEntry from './op/getEntry';
+import getEntries from './op/getEntries';
 import checkStatus from './op/checkStatus';
 import bootstrapDatabase from './db/bootstrapDatabase';
 
@@ -145,6 +146,68 @@ async function bootstrap() {
         traceId: context?.traceId
       }).finish();
       handleError(nc, message, error, response);
+    }
+  });
+
+  nc.subscribe('list.entry', async (error, message) => {
+    logMessage(message.subject);
+    if (error) {
+      const response = messages.entry.GetEntriesResponse.encode({
+        error: {
+          code: messages.entry.Error.Code.UNKNOWN
+        }
+      }).finish();
+      return handleError(nc, message, error, response);
+    }
+
+    const { context } = messages.entry.GetEntriesRequest.decode(message.data);
+    const creatorId = context?.userId;
+
+    if (!creatorId) {
+      const response = messages.entry.GetEntriesResponse.encode({
+        error: {
+          code: messages.entry.Error.Code.VALIDATION_FAILED,
+          message: 'oops',
+        }
+      }).finish();
+      return handleError(nc, message, new Error(String(messages.entry.Error.Code.VALIDATION_FAILED)), response);
+    }
+
+    try {
+      interface Entry {
+       id: string;
+       text: string;
+       creatorId: string;
+      }
+
+      const entries: Entry[] | null = await getEntries(db, { creatorId });
+
+      if (!entries) {
+        const response = messages.entry.GetEntriesResponse.encode({
+          error: {
+            code: messages.entry.Error.Code.NOT_FOUND,
+            message: 'oops',
+          },
+          traceId: context?.traceId
+        }).finish();
+        return handleError(nc, message, new Error(String(messages.entry.Error.Code.NOT_FOUND)), response);
+      }
+
+      if (message.reply) {
+        const response = messages.entry.GetEntriesResponse.encode({
+          payload: entries,
+          traceId: context?.traceId
+        }).finish();
+        nc.publish(message.reply, response);
+      }
+    } catch (error) {
+      const response = messages.entry.GetEntriesResponse.encode({
+        error: {
+          code: messages.entry.Error.Code.UNKNOWN
+        },
+        traceId: context?.traceId
+      }).finish();
+      return handleError(nc, message, error, response);
     }
   });
 }
