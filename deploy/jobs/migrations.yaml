@@ -10,6 +10,7 @@ data:
   DB_USER: di
   DB_PASSWORD: di
   DB_HOST: di-entry-psql
+  DB_DATABASE: di_entry
 ---
 apiVersion: batch/v1
 kind: Job

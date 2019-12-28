@@ -64,7 +64,7 @@ async function bootstrap() {
           message: 'oops',
         }
       }).finish();
-      return handleError(nc, message, new Error(), response);
+      return handleError(nc, message, new Error(String(messages.entry.Error.Code.VALIDATION_FAILED)), response);
     }
 
     try {
@@ -79,7 +79,7 @@ async function bootstrap() {
             },
             traceId: context?.traceId
           }).finish();
-          return handleError(nc, message, new Error(), response);
+          return handleError(nc, message, new Error(String(messages.entry.Error.Code.NOT_FOUND)), response);
         }
 
         const response = messages.entry.GetEntryResponse.encode({
@@ -123,7 +123,7 @@ async function bootstrap() {
           message: 'oops'
         }
       }).finish();
-      return handleError(nc, message, new Error(), response);
+      return handleError(nc, message, new Error(String(messages.entry.Error.Code.VALIDATION_FAILED)), response);
     }
 
     try {
