@@ -31,9 +31,9 @@ async function bootstrap() {
   });
 
   const db = await bootstrapDatabase({ connectionString: dbConnectionString });
-
   setInterval(() => {
-    checkStatus({ nc })
+
+    checkStatus({ nc, db })
       .catch(status => {
         console.log(status);
       });

@@ -1,8 +1,10 @@
 import fs from 'fs';
 import { Client } from 'ts-nats';
+import { DbConnection } from '../db/DbConnection';
 
 interface CheckStatusInput {
   nc: Client;
+  db: DbConnection;
 }
 
 enum Status {
@@ -10,15 +12,19 @@ enum Status {
   DOWN = "DOWN",
 }
 
-export default async function checkStatus({ nc }: CheckStatusInput) {
+
+export default async function checkStatus({ nc, db }: CheckStatusInput) {
   interface Services {
     [key: string]: boolean
   }
 
   const services: Services = {
     nats: !nc.isClosed(),
+    db: await db.isConnected()
   }
   const status = Object.keys(services).every(key => services[key] === true) ? Status.UP : Status.DOWN;
+
+  if (status === Status.DOWN) console.log(services);
 
   return new Promise((resolve, reject) => {
     fs.writeFile(`${__dirname}/../../HEALTH_STATUS`, status, (error) => {
@@ -26,7 +32,7 @@ export default async function checkStatus({ nc }: CheckStatusInput) {
         console.log(error);
         reject(status);
       }
-      resolve(status);
+      !!status ? resolve(status) : reject(status);
     });
   });
 }
