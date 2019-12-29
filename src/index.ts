@@ -5,6 +5,7 @@ import createEntry from './op/createEntry';
 import getEntry from './op/getEntry';
 import listEntries from './op/listEntries';
 import deleteEntry from './op/deleteEntry';
+import updateEntry from './op/updateEntry';
 import checkStatus from './op/checkStatus';
 import getEntryPageInfo from './op/getEntryPageInfo';
 import bootstrapDatabase from './db/bootstrapDatabase';
@@ -151,6 +152,66 @@ async function bootstrap() {
     }
   });
 
+  nc.subscribe('update.entry', async (error, message) => {
+    logMessage(message.subject);
+    if (error) {
+      const response = messages.entry.CreateEntryResponse.encode({
+        error: {
+          code: messages.entry.Error.Code.UNKNOWN,
+          message: 'oops'
+        }
+      }).finish();
+      return handleError(nc, message, error, response);
+    }
+
+    const { payload, context } = messages.entry.UpdateEntryRequest.decode(message.data);
+    const text = payload?.text;
+    const id = payload?.id;
+    const creatorId = context?.userId;
+
+    if (!id || !creatorId) {
+      const response = messages.entry.UpdateEntryResponse.encode({
+        error: {
+          code: messages.entry.Error.Code.VALIDATION_FAILED,
+          message: 'oops'
+        }
+      }).finish();
+      return handleError(nc, message, new Error(String(messages.entry.Error.Code.VALIDATION_FAILED)), response);
+    }
+
+    try {
+      const entry = await updateEntry(db, { id, creatorId, text });
+
+      if (message.reply) {
+        if (!entry) {
+          const response = messages.entry.UpdateEntryResponse.encode({
+            error: {
+              code: messages.entry.Error.Code.NOT_FOUND,
+              message: 'oops',
+            },
+            traceId: context?.traceId
+          }).finish();
+          return handleError(nc, message, new Error(String(messages.entry.Error.Code.NOT_FOUND)), response);
+        }
+
+        const response = messages.entry.UpdateEntryResponse.encode({
+          payload: { id },
+          traceId: context?.traceId
+        }).finish();
+        nc.publish(message.reply, response);
+      }
+    } catch (error) {
+      const response = messages.entry.UpdateEntryResponse.encode({
+        error: {
+          code: messages.entry.Error.Code.UNKNOWN,
+          message: 'oops'
+        },
+        traceId: context?.traceId
+      }).finish();
+      handleError(nc, message, error, response);
+    }
+  });
+
   nc.subscribe('list.entry', async (error, message) => {
     logMessage(message.subject);
     if (error) {
@@ -219,6 +280,7 @@ async function bootstrap() {
   });
 
   nc.subscribe('delete.entry', async (error, message) => {
+    logMessage(message.subject);
     if (error) {
       const response = messages.entry.DeleteEntryResponse.encode({
         error: {

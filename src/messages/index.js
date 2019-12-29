@@ -2330,6 +2330,910 @@ $root.messages = (function() {
             return CreateEntryResponse;
         })();
 
+        entry.UpdateEntryRequest = (function() {
+
+            /**
+             * Properties of an UpdateEntryRequest.
+             * @memberof messages.entry
+             * @interface IUpdateEntryRequest
+             * @property {messages.entry.IRequestContext|null} [context] UpdateEntryRequest context
+             * @property {messages.entry.UpdateEntryRequest.IPayload|null} [payload] UpdateEntryRequest payload
+             */
+
+            /**
+             * Constructs a new UpdateEntryRequest.
+             * @memberof messages.entry
+             * @classdesc Represents an UpdateEntryRequest.
+             * @implements IUpdateEntryRequest
+             * @constructor
+             * @param {messages.entry.IUpdateEntryRequest=} [properties] Properties to set
+             */
+            function UpdateEntryRequest(properties) {
+                if (properties)
+                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+
+            /**
+             * UpdateEntryRequest context.
+             * @member {messages.entry.IRequestContext|null|undefined} context
+             * @memberof messages.entry.UpdateEntryRequest
+             * @instance
+             */
+            UpdateEntryRequest.prototype.context = null;
+
+            /**
+             * UpdateEntryRequest payload.
+             * @member {messages.entry.UpdateEntryRequest.IPayload|null|undefined} payload
+             * @memberof messages.entry.UpdateEntryRequest
+             * @instance
+             */
+            UpdateEntryRequest.prototype.payload = null;
+
+            /**
+             * Creates a new UpdateEntryRequest instance using the specified properties.
+             * @function create
+             * @memberof messages.entry.UpdateEntryRequest
+             * @static
+             * @param {messages.entry.IUpdateEntryRequest=} [properties] Properties to set
+             * @returns {messages.entry.UpdateEntryRequest} UpdateEntryRequest instance
+             */
+            UpdateEntryRequest.create = function create(properties) {
+                return new UpdateEntryRequest(properties);
+            };
+
+            /**
+             * Encodes the specified UpdateEntryRequest message. Does not implicitly {@link messages.entry.UpdateEntryRequest.verify|verify} messages.
+             * @function encode
+             * @memberof messages.entry.UpdateEntryRequest
+             * @static
+             * @param {messages.entry.IUpdateEntryRequest} message UpdateEntryRequest message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            UpdateEntryRequest.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.context != null && message.hasOwnProperty("context"))
+                    $root.messages.entry.RequestContext.encode(message.context, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                if (message.payload != null && message.hasOwnProperty("payload"))
+                    $root.messages.entry.UpdateEntryRequest.Payload.encode(message.payload, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                return writer;
+            };
+
+            /**
+             * Encodes the specified UpdateEntryRequest message, length delimited. Does not implicitly {@link messages.entry.UpdateEntryRequest.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof messages.entry.UpdateEntryRequest
+             * @static
+             * @param {messages.entry.IUpdateEntryRequest} message UpdateEntryRequest message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            UpdateEntryRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
+             * Decodes an UpdateEntryRequest message from the specified reader or buffer.
+             * @function decode
+             * @memberof messages.entry.UpdateEntryRequest
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {messages.entry.UpdateEntryRequest} UpdateEntryRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            UpdateEntryRequest.decode = function decode(reader, length) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.messages.entry.UpdateEntryRequest();
+                while (reader.pos < end) {
+                    var tag = reader.uint32();
+                    switch (tag >>> 3) {
+                    case 1:
+                        message.context = $root.messages.entry.RequestContext.decode(reader, reader.uint32());
+                        break;
+                    case 2:
+                        message.payload = $root.messages.entry.UpdateEntryRequest.Payload.decode(reader, reader.uint32());
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+
+            /**
+             * Decodes an UpdateEntryRequest message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof messages.entry.UpdateEntryRequest
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {messages.entry.UpdateEntryRequest} UpdateEntryRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            UpdateEntryRequest.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies an UpdateEntryRequest message.
+             * @function verify
+             * @memberof messages.entry.UpdateEntryRequest
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            UpdateEntryRequest.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.context != null && message.hasOwnProperty("context")) {
+                    var error = $root.messages.entry.RequestContext.verify(message.context);
+                    if (error)
+                        return "context." + error;
+                }
+                if (message.payload != null && message.hasOwnProperty("payload")) {
+                    var error = $root.messages.entry.UpdateEntryRequest.Payload.verify(message.payload);
+                    if (error)
+                        return "payload." + error;
+                }
+                return null;
+            };
+
+            /**
+             * Creates an UpdateEntryRequest message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof messages.entry.UpdateEntryRequest
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {messages.entry.UpdateEntryRequest} UpdateEntryRequest
+             */
+            UpdateEntryRequest.fromObject = function fromObject(object) {
+                if (object instanceof $root.messages.entry.UpdateEntryRequest)
+                    return object;
+                var message = new $root.messages.entry.UpdateEntryRequest();
+                if (object.context != null) {
+                    if (typeof object.context !== "object")
+                        throw TypeError(".messages.entry.UpdateEntryRequest.context: object expected");
+                    message.context = $root.messages.entry.RequestContext.fromObject(object.context);
+                }
+                if (object.payload != null) {
+                    if (typeof object.payload !== "object")
+                        throw TypeError(".messages.entry.UpdateEntryRequest.payload: object expected");
+                    message.payload = $root.messages.entry.UpdateEntryRequest.Payload.fromObject(object.payload);
+                }
+                return message;
+            };
+
+            /**
+             * Creates a plain object from an UpdateEntryRequest message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof messages.entry.UpdateEntryRequest
+             * @static
+             * @param {messages.entry.UpdateEntryRequest} message UpdateEntryRequest
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            UpdateEntryRequest.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                var object = {};
+                if (options.defaults) {
+                    object.context = null;
+                    object.payload = null;
+                }
+                if (message.context != null && message.hasOwnProperty("context"))
+                    object.context = $root.messages.entry.RequestContext.toObject(message.context, options);
+                if (message.payload != null && message.hasOwnProperty("payload"))
+                    object.payload = $root.messages.entry.UpdateEntryRequest.Payload.toObject(message.payload, options);
+                return object;
+            };
+
+            /**
+             * Converts this UpdateEntryRequest to JSON.
+             * @function toJSON
+             * @memberof messages.entry.UpdateEntryRequest
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            UpdateEntryRequest.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            UpdateEntryRequest.Payload = (function() {
+
+                /**
+                 * Properties of a Payload.
+                 * @memberof messages.entry.UpdateEntryRequest
+                 * @interface IPayload
+                 * @property {string|null} [id] Payload id
+                 * @property {string|null} [text] Payload text
+                 */
+
+                /**
+                 * Constructs a new Payload.
+                 * @memberof messages.entry.UpdateEntryRequest
+                 * @classdesc Represents a Payload.
+                 * @implements IPayload
+                 * @constructor
+                 * @param {messages.entry.UpdateEntryRequest.IPayload=} [properties] Properties to set
+                 */
+                function Payload(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+
+                /**
+                 * Payload id.
+                 * @member {string} id
+                 * @memberof messages.entry.UpdateEntryRequest.Payload
+                 * @instance
+                 */
+                Payload.prototype.id = "";
+
+                /**
+                 * Payload text.
+                 * @member {string} text
+                 * @memberof messages.entry.UpdateEntryRequest.Payload
+                 * @instance
+                 */
+                Payload.prototype.text = "";
+
+                /**
+                 * Creates a new Payload instance using the specified properties.
+                 * @function create
+                 * @memberof messages.entry.UpdateEntryRequest.Payload
+                 * @static
+                 * @param {messages.entry.UpdateEntryRequest.IPayload=} [properties] Properties to set
+                 * @returns {messages.entry.UpdateEntryRequest.Payload} Payload instance
+                 */
+                Payload.create = function create(properties) {
+                    return new Payload(properties);
+                };
+
+                /**
+                 * Encodes the specified Payload message. Does not implicitly {@link messages.entry.UpdateEntryRequest.Payload.verify|verify} messages.
+                 * @function encode
+                 * @memberof messages.entry.UpdateEntryRequest.Payload
+                 * @static
+                 * @param {messages.entry.UpdateEntryRequest.IPayload} message Payload message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Payload.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.id != null && message.hasOwnProperty("id"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.id);
+                    if (message.text != null && message.hasOwnProperty("text"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.text);
+                    return writer;
+                };
+
+                /**
+                 * Encodes the specified Payload message, length delimited. Does not implicitly {@link messages.entry.UpdateEntryRequest.Payload.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof messages.entry.UpdateEntryRequest.Payload
+                 * @static
+                 * @param {messages.entry.UpdateEntryRequest.IPayload} message Payload message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Payload.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+
+                /**
+                 * Decodes a Payload message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof messages.entry.UpdateEntryRequest.Payload
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {messages.entry.UpdateEntryRequest.Payload} Payload
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Payload.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.messages.entry.UpdateEntryRequest.Payload();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.id = reader.string();
+                            break;
+                        case 2:
+                            message.text = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+
+                /**
+                 * Decodes a Payload message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof messages.entry.UpdateEntryRequest.Payload
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {messages.entry.UpdateEntryRequest.Payload} Payload
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Payload.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+
+                /**
+                 * Verifies a Payload message.
+                 * @function verify
+                 * @memberof messages.entry.UpdateEntryRequest.Payload
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Payload.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.id != null && message.hasOwnProperty("id"))
+                        if (!$util.isString(message.id))
+                            return "id: string expected";
+                    if (message.text != null && message.hasOwnProperty("text"))
+                        if (!$util.isString(message.text))
+                            return "text: string expected";
+                    return null;
+                };
+
+                /**
+                 * Creates a Payload message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof messages.entry.UpdateEntryRequest.Payload
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {messages.entry.UpdateEntryRequest.Payload} Payload
+                 */
+                Payload.fromObject = function fromObject(object) {
+                    if (object instanceof $root.messages.entry.UpdateEntryRequest.Payload)
+                        return object;
+                    var message = new $root.messages.entry.UpdateEntryRequest.Payload();
+                    if (object.id != null)
+                        message.id = String(object.id);
+                    if (object.text != null)
+                        message.text = String(object.text);
+                    return message;
+                };
+
+                /**
+                 * Creates a plain object from a Payload message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof messages.entry.UpdateEntryRequest.Payload
+                 * @static
+                 * @param {messages.entry.UpdateEntryRequest.Payload} message Payload
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Payload.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.id = "";
+                        object.text = "";
+                    }
+                    if (message.id != null && message.hasOwnProperty("id"))
+                        object.id = message.id;
+                    if (message.text != null && message.hasOwnProperty("text"))
+                        object.text = message.text;
+                    return object;
+                };
+
+                /**
+                 * Converts this Payload to JSON.
+                 * @function toJSON
+                 * @memberof messages.entry.UpdateEntryRequest.Payload
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Payload.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+
+                return Payload;
+            })();
+
+            return UpdateEntryRequest;
+        })();
+
+        entry.UpdateEntryResponse = (function() {
+
+            /**
+             * Properties of an UpdateEntryResponse.
+             * @memberof messages.entry
+             * @interface IUpdateEntryResponse
+             * @property {messages.entry.UpdateEntryResponse.IPayload|null} [payload] UpdateEntryResponse payload
+             * @property {messages.entry.IError|null} [error] UpdateEntryResponse error
+             * @property {string|null} [traceId] UpdateEntryResponse traceId
+             */
+
+            /**
+             * Constructs a new UpdateEntryResponse.
+             * @memberof messages.entry
+             * @classdesc Represents an UpdateEntryResponse.
+             * @implements IUpdateEntryResponse
+             * @constructor
+             * @param {messages.entry.IUpdateEntryResponse=} [properties] Properties to set
+             */
+            function UpdateEntryResponse(properties) {
+                if (properties)
+                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+
+            /**
+             * UpdateEntryResponse payload.
+             * @member {messages.entry.UpdateEntryResponse.IPayload|null|undefined} payload
+             * @memberof messages.entry.UpdateEntryResponse
+             * @instance
+             */
+            UpdateEntryResponse.prototype.payload = null;
+
+            /**
+             * UpdateEntryResponse error.
+             * @member {messages.entry.IError|null|undefined} error
+             * @memberof messages.entry.UpdateEntryResponse
+             * @instance
+             */
+            UpdateEntryResponse.prototype.error = null;
+
+            /**
+             * UpdateEntryResponse traceId.
+             * @member {string} traceId
+             * @memberof messages.entry.UpdateEntryResponse
+             * @instance
+             */
+            UpdateEntryResponse.prototype.traceId = "";
+
+            /**
+             * Creates a new UpdateEntryResponse instance using the specified properties.
+             * @function create
+             * @memberof messages.entry.UpdateEntryResponse
+             * @static
+             * @param {messages.entry.IUpdateEntryResponse=} [properties] Properties to set
+             * @returns {messages.entry.UpdateEntryResponse} UpdateEntryResponse instance
+             */
+            UpdateEntryResponse.create = function create(properties) {
+                return new UpdateEntryResponse(properties);
+            };
+
+            /**
+             * Encodes the specified UpdateEntryResponse message. Does not implicitly {@link messages.entry.UpdateEntryResponse.verify|verify} messages.
+             * @function encode
+             * @memberof messages.entry.UpdateEntryResponse
+             * @static
+             * @param {messages.entry.IUpdateEntryResponse} message UpdateEntryResponse message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            UpdateEntryResponse.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.payload != null && message.hasOwnProperty("payload"))
+                    $root.messages.entry.UpdateEntryResponse.Payload.encode(message.payload, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                if (message.error != null && message.hasOwnProperty("error"))
+                    $root.messages.entry.Error.encode(message.error, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                if (message.traceId != null && message.hasOwnProperty("traceId"))
+                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.traceId);
+                return writer;
+            };
+
+            /**
+             * Encodes the specified UpdateEntryResponse message, length delimited. Does not implicitly {@link messages.entry.UpdateEntryResponse.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof messages.entry.UpdateEntryResponse
+             * @static
+             * @param {messages.entry.IUpdateEntryResponse} message UpdateEntryResponse message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            UpdateEntryResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
+             * Decodes an UpdateEntryResponse message from the specified reader or buffer.
+             * @function decode
+             * @memberof messages.entry.UpdateEntryResponse
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {messages.entry.UpdateEntryResponse} UpdateEntryResponse
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            UpdateEntryResponse.decode = function decode(reader, length) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.messages.entry.UpdateEntryResponse();
+                while (reader.pos < end) {
+                    var tag = reader.uint32();
+                    switch (tag >>> 3) {
+                    case 1:
+                        message.payload = $root.messages.entry.UpdateEntryResponse.Payload.decode(reader, reader.uint32());
+                        break;
+                    case 2:
+                        message.error = $root.messages.entry.Error.decode(reader, reader.uint32());
+                        break;
+                    case 3:
+                        message.traceId = reader.string();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+
+            /**
+             * Decodes an UpdateEntryResponse message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof messages.entry.UpdateEntryResponse
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {messages.entry.UpdateEntryResponse} UpdateEntryResponse
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            UpdateEntryResponse.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies an UpdateEntryResponse message.
+             * @function verify
+             * @memberof messages.entry.UpdateEntryResponse
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            UpdateEntryResponse.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.payload != null && message.hasOwnProperty("payload")) {
+                    var error = $root.messages.entry.UpdateEntryResponse.Payload.verify(message.payload);
+                    if (error)
+                        return "payload." + error;
+                }
+                if (message.error != null && message.hasOwnProperty("error")) {
+                    var error = $root.messages.entry.Error.verify(message.error);
+                    if (error)
+                        return "error." + error;
+                }
+                if (message.traceId != null && message.hasOwnProperty("traceId"))
+                    if (!$util.isString(message.traceId))
+                        return "traceId: string expected";
+                return null;
+            };
+
+            /**
+             * Creates an UpdateEntryResponse message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof messages.entry.UpdateEntryResponse
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {messages.entry.UpdateEntryResponse} UpdateEntryResponse
+             */
+            UpdateEntryResponse.fromObject = function fromObject(object) {
+                if (object instanceof $root.messages.entry.UpdateEntryResponse)
+                    return object;
+                var message = new $root.messages.entry.UpdateEntryResponse();
+                if (object.payload != null) {
+                    if (typeof object.payload !== "object")
+                        throw TypeError(".messages.entry.UpdateEntryResponse.payload: object expected");
+                    message.payload = $root.messages.entry.UpdateEntryResponse.Payload.fromObject(object.payload);
+                }
+                if (object.error != null) {
+                    if (typeof object.error !== "object")
+                        throw TypeError(".messages.entry.UpdateEntryResponse.error: object expected");
+                    message.error = $root.messages.entry.Error.fromObject(object.error);
+                }
+                if (object.traceId != null)
+                    message.traceId = String(object.traceId);
+                return message;
+            };
+
+            /**
+             * Creates a plain object from an UpdateEntryResponse message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof messages.entry.UpdateEntryResponse
+             * @static
+             * @param {messages.entry.UpdateEntryResponse} message UpdateEntryResponse
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            UpdateEntryResponse.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                var object = {};
+                if (options.defaults) {
+                    object.payload = null;
+                    object.error = null;
+                    object.traceId = "";
+                }
+                if (message.payload != null && message.hasOwnProperty("payload"))
+                    object.payload = $root.messages.entry.UpdateEntryResponse.Payload.toObject(message.payload, options);
+                if (message.error != null && message.hasOwnProperty("error"))
+                    object.error = $root.messages.entry.Error.toObject(message.error, options);
+                if (message.traceId != null && message.hasOwnProperty("traceId"))
+                    object.traceId = message.traceId;
+                return object;
+            };
+
+            /**
+             * Converts this UpdateEntryResponse to JSON.
+             * @function toJSON
+             * @memberof messages.entry.UpdateEntryResponse
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            UpdateEntryResponse.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            UpdateEntryResponse.Payload = (function() {
+
+                /**
+                 * Properties of a Payload.
+                 * @memberof messages.entry.UpdateEntryResponse
+                 * @interface IPayload
+                 * @property {string|null} [id] Payload id
+                 * @property {string|null} [text] Payload text
+                 * @property {string|null} [creatorId] Payload creatorId
+                 */
+
+                /**
+                 * Constructs a new Payload.
+                 * @memberof messages.entry.UpdateEntryResponse
+                 * @classdesc Represents a Payload.
+                 * @implements IPayload
+                 * @constructor
+                 * @param {messages.entry.UpdateEntryResponse.IPayload=} [properties] Properties to set
+                 */
+                function Payload(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+
+                /**
+                 * Payload id.
+                 * @member {string} id
+                 * @memberof messages.entry.UpdateEntryResponse.Payload
+                 * @instance
+                 */
+                Payload.prototype.id = "";
+
+                /**
+                 * Payload text.
+                 * @member {string} text
+                 * @memberof messages.entry.UpdateEntryResponse.Payload
+                 * @instance
+                 */
+                Payload.prototype.text = "";
+
+                /**
+                 * Payload creatorId.
+                 * @member {string} creatorId
+                 * @memberof messages.entry.UpdateEntryResponse.Payload
+                 * @instance
+                 */
+                Payload.prototype.creatorId = "";
+
+                /**
+                 * Creates a new Payload instance using the specified properties.
+                 * @function create
+                 * @memberof messages.entry.UpdateEntryResponse.Payload
+                 * @static
+                 * @param {messages.entry.UpdateEntryResponse.IPayload=} [properties] Properties to set
+                 * @returns {messages.entry.UpdateEntryResponse.Payload} Payload instance
+                 */
+                Payload.create = function create(properties) {
+                    return new Payload(properties);
+                };
+
+                /**
+                 * Encodes the specified Payload message. Does not implicitly {@link messages.entry.UpdateEntryResponse.Payload.verify|verify} messages.
+                 * @function encode
+                 * @memberof messages.entry.UpdateEntryResponse.Payload
+                 * @static
+                 * @param {messages.entry.UpdateEntryResponse.IPayload} message Payload message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Payload.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.id != null && message.hasOwnProperty("id"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.id);
+                    if (message.text != null && message.hasOwnProperty("text"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.text);
+                    if (message.creatorId != null && message.hasOwnProperty("creatorId"))
+                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.creatorId);
+                    return writer;
+                };
+
+                /**
+                 * Encodes the specified Payload message, length delimited. Does not implicitly {@link messages.entry.UpdateEntryResponse.Payload.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof messages.entry.UpdateEntryResponse.Payload
+                 * @static
+                 * @param {messages.entry.UpdateEntryResponse.IPayload} message Payload message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Payload.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+
+                /**
+                 * Decodes a Payload message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof messages.entry.UpdateEntryResponse.Payload
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {messages.entry.UpdateEntryResponse.Payload} Payload
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Payload.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.messages.entry.UpdateEntryResponse.Payload();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.id = reader.string();
+                            break;
+                        case 2:
+                            message.text = reader.string();
+                            break;
+                        case 3:
+                            message.creatorId = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+
+                /**
+                 * Decodes a Payload message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof messages.entry.UpdateEntryResponse.Payload
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {messages.entry.UpdateEntryResponse.Payload} Payload
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Payload.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+
+                /**
+                 * Verifies a Payload message.
+                 * @function verify
+                 * @memberof messages.entry.UpdateEntryResponse.Payload
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Payload.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.id != null && message.hasOwnProperty("id"))
+                        if (!$util.isString(message.id))
+                            return "id: string expected";
+                    if (message.text != null && message.hasOwnProperty("text"))
+                        if (!$util.isString(message.text))
+                            return "text: string expected";
+                    if (message.creatorId != null && message.hasOwnProperty("creatorId"))
+                        if (!$util.isString(message.creatorId))
+                            return "creatorId: string expected";
+                    return null;
+                };
+
+                /**
+                 * Creates a Payload message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof messages.entry.UpdateEntryResponse.Payload
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {messages.entry.UpdateEntryResponse.Payload} Payload
+                 */
+                Payload.fromObject = function fromObject(object) {
+                    if (object instanceof $root.messages.entry.UpdateEntryResponse.Payload)
+                        return object;
+                    var message = new $root.messages.entry.UpdateEntryResponse.Payload();
+                    if (object.id != null)
+                        message.id = String(object.id);
+                    if (object.text != null)
+                        message.text = String(object.text);
+                    if (object.creatorId != null)
+                        message.creatorId = String(object.creatorId);
+                    return message;
+                };
+
+                /**
+                 * Creates a plain object from a Payload message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof messages.entry.UpdateEntryResponse.Payload
+                 * @static
+                 * @param {messages.entry.UpdateEntryResponse.Payload} message Payload
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Payload.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.id = "";
+                        object.text = "";
+                        object.creatorId = "";
+                    }
+                    if (message.id != null && message.hasOwnProperty("id"))
+                        object.id = message.id;
+                    if (message.text != null && message.hasOwnProperty("text"))
+                        object.text = message.text;
+                    if (message.creatorId != null && message.hasOwnProperty("creatorId"))
+                        object.creatorId = message.creatorId;
+                    return object;
+                };
+
+                /**
+                 * Converts this Payload to JSON.
+                 * @function toJSON
+                 * @memberof messages.entry.UpdateEntryResponse.Payload
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Payload.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+
+                return Payload;
+            })();
+
+            return UpdateEntryResponse;
+        })();
+
         entry.ListEntriesRequest = (function() {
 
             /**

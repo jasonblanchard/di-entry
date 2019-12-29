@@ -154,6 +154,68 @@ describe('delete.entry', () => {
   });
 });
 
+describe('update.entry', () => {
+  it('updates an entry', async () => {
+    const text = "Testing 123"
+    const creatorId = '123';
+
+    const nc = await connect({
+      servers: ['nats://localhost:4222'],
+      payload: Payload.BINARY
+    });
+
+    const request = messages.entry.CreateEntryRequest.encode({
+      payload: {
+        text,
+      },
+      context: {
+        userId: creatorId,
+      }
+    }).finish();
+    const message = await nc.request('create.entry', TIMEOUT, request);
+    const response = message.data;
+    const { payload: entry } = messages.entry.CreateEntryResponse.decode(response);
+    expect(entry).toEqual({
+      id: expect.any(String)
+    });
+
+    if (!entry) throw new Error();
+
+    const updatedText = 'Updated text!';
+
+    const updateRequest = messages.entry.UpdateEntryRequest.encode({
+      payload: {
+        id: entry.id,
+        text: updatedText
+      },
+      context: {
+        userId: creatorId
+      }
+    }).finish();
+    await nc.request('update.entry', TIMEOUT, updateRequest);
+
+    const getRequest = messages.entry.GetEntryRequest.encode({
+      payload: {
+        id: entry.id,
+      },
+      context: {
+        userId: creatorId
+      }
+    }).finish();
+    const getMessage = await nc.request('get.entry', TIMEOUT, getRequest);
+    const getResponse = getMessage.data;
+    const { payload: updatedEntry, error } = messages.entry.GetEntryResponse.decode(getResponse);
+    expect(error).toEqual(null);
+    expect(updatedEntry).toEqual({
+      id: expect.any(String),
+      text: updatedText,
+      creatorId
+    });
+
+    nc.close();
+  });
+});
+
 describe('errors', () => {
   it('create.entry', async () => {
     const nc = await connect({
