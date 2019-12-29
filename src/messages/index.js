@@ -2330,25 +2330,25 @@ $root.messages = (function() {
             return CreateEntryResponse;
         })();
 
-        entry.GetEntriesRequest = (function() {
+        entry.ListEntriesRequest = (function() {
 
             /**
-             * Properties of a GetEntriesRequest.
+             * Properties of a ListEntriesRequest.
              * @memberof messages.entry
-             * @interface IGetEntriesRequest
-             * @property {messages.entry.IRequestContext|null} [context] GetEntriesRequest context
-             * @property {messages.entry.GetEntriesRequest.IPayload|null} [payload] GetEntriesRequest payload
+             * @interface IListEntriesRequest
+             * @property {messages.entry.IRequestContext|null} [context] ListEntriesRequest context
+             * @property {messages.entry.ListEntriesRequest.IPayload|null} [payload] ListEntriesRequest payload
              */
 
             /**
-             * Constructs a new GetEntriesRequest.
+             * Constructs a new ListEntriesRequest.
              * @memberof messages.entry
-             * @classdesc Represents a GetEntriesRequest.
-             * @implements IGetEntriesRequest
+             * @classdesc Represents a ListEntriesRequest.
+             * @implements IListEntriesRequest
              * @constructor
-             * @param {messages.entry.IGetEntriesRequest=} [properties] Properties to set
+             * @param {messages.entry.IListEntriesRequest=} [properties] Properties to set
              */
-            function GetEntriesRequest(properties) {
+            function ListEntriesRequest(properties) {
                 if (properties)
                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                         if (properties[keys[i]] != null)
@@ -2356,80 +2356,80 @@ $root.messages = (function() {
             }
 
             /**
-             * GetEntriesRequest context.
+             * ListEntriesRequest context.
              * @member {messages.entry.IRequestContext|null|undefined} context
-             * @memberof messages.entry.GetEntriesRequest
+             * @memberof messages.entry.ListEntriesRequest
              * @instance
              */
-            GetEntriesRequest.prototype.context = null;
+            ListEntriesRequest.prototype.context = null;
 
             /**
-             * GetEntriesRequest payload.
-             * @member {messages.entry.GetEntriesRequest.IPayload|null|undefined} payload
-             * @memberof messages.entry.GetEntriesRequest
+             * ListEntriesRequest payload.
+             * @member {messages.entry.ListEntriesRequest.IPayload|null|undefined} payload
+             * @memberof messages.entry.ListEntriesRequest
              * @instance
              */
-            GetEntriesRequest.prototype.payload = null;
+            ListEntriesRequest.prototype.payload = null;
 
             /**
-             * Creates a new GetEntriesRequest instance using the specified properties.
+             * Creates a new ListEntriesRequest instance using the specified properties.
              * @function create
-             * @memberof messages.entry.GetEntriesRequest
+             * @memberof messages.entry.ListEntriesRequest
              * @static
-             * @param {messages.entry.IGetEntriesRequest=} [properties] Properties to set
-             * @returns {messages.entry.GetEntriesRequest} GetEntriesRequest instance
+             * @param {messages.entry.IListEntriesRequest=} [properties] Properties to set
+             * @returns {messages.entry.ListEntriesRequest} ListEntriesRequest instance
              */
-            GetEntriesRequest.create = function create(properties) {
-                return new GetEntriesRequest(properties);
+            ListEntriesRequest.create = function create(properties) {
+                return new ListEntriesRequest(properties);
             };
 
             /**
-             * Encodes the specified GetEntriesRequest message. Does not implicitly {@link messages.entry.GetEntriesRequest.verify|verify} messages.
+             * Encodes the specified ListEntriesRequest message. Does not implicitly {@link messages.entry.ListEntriesRequest.verify|verify} messages.
              * @function encode
-             * @memberof messages.entry.GetEntriesRequest
+             * @memberof messages.entry.ListEntriesRequest
              * @static
-             * @param {messages.entry.IGetEntriesRequest} message GetEntriesRequest message or plain object to encode
+             * @param {messages.entry.IListEntriesRequest} message ListEntriesRequest message or plain object to encode
              * @param {$protobuf.Writer} [writer] Writer to encode to
              * @returns {$protobuf.Writer} Writer
              */
-            GetEntriesRequest.encode = function encode(message, writer) {
+            ListEntriesRequest.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
                 if (message.context != null && message.hasOwnProperty("context"))
                     $root.messages.entry.RequestContext.encode(message.context, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                 if (message.payload != null && message.hasOwnProperty("payload"))
-                    $root.messages.entry.GetEntriesRequest.Payload.encode(message.payload, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                    $root.messages.entry.ListEntriesRequest.Payload.encode(message.payload, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                 return writer;
             };
 
             /**
-             * Encodes the specified GetEntriesRequest message, length delimited. Does not implicitly {@link messages.entry.GetEntriesRequest.verify|verify} messages.
+             * Encodes the specified ListEntriesRequest message, length delimited. Does not implicitly {@link messages.entry.ListEntriesRequest.verify|verify} messages.
              * @function encodeDelimited
-             * @memberof messages.entry.GetEntriesRequest
+             * @memberof messages.entry.ListEntriesRequest
              * @static
-             * @param {messages.entry.IGetEntriesRequest} message GetEntriesRequest message or plain object to encode
+             * @param {messages.entry.IListEntriesRequest} message ListEntriesRequest message or plain object to encode
              * @param {$protobuf.Writer} [writer] Writer to encode to
              * @returns {$protobuf.Writer} Writer
              */
-            GetEntriesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+            ListEntriesRequest.encodeDelimited = function encodeDelimited(message, writer) {
                 return this.encode(message, writer).ldelim();
             };
 
             /**
-             * Decodes a GetEntriesRequest message from the specified reader or buffer.
+             * Decodes a ListEntriesRequest message from the specified reader or buffer.
              * @function decode
-             * @memberof messages.entry.GetEntriesRequest
+             * @memberof messages.entry.ListEntriesRequest
              * @static
              * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
              * @param {number} [length] Message length if known beforehand
-             * @returns {messages.entry.GetEntriesRequest} GetEntriesRequest
+             * @returns {messages.entry.ListEntriesRequest} ListEntriesRequest
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            GetEntriesRequest.decode = function decode(reader, length) {
+            ListEntriesRequest.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
-                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.messages.entry.GetEntriesRequest();
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.messages.entry.ListEntriesRequest();
                 while (reader.pos < end) {
                     var tag = reader.uint32();
                     switch (tag >>> 3) {
@@ -2437,7 +2437,7 @@ $root.messages = (function() {
                         message.context = $root.messages.entry.RequestContext.decode(reader, reader.uint32());
                         break;
                     case 2:
-                        message.payload = $root.messages.entry.GetEntriesRequest.Payload.decode(reader, reader.uint32());
+                        message.payload = $root.messages.entry.ListEntriesRequest.Payload.decode(reader, reader.uint32());
                         break;
                     default:
                         reader.skipType(tag & 7);
@@ -2448,30 +2448,30 @@ $root.messages = (function() {
             };
 
             /**
-             * Decodes a GetEntriesRequest message from the specified reader or buffer, length delimited.
+             * Decodes a ListEntriesRequest message from the specified reader or buffer, length delimited.
              * @function decodeDelimited
-             * @memberof messages.entry.GetEntriesRequest
+             * @memberof messages.entry.ListEntriesRequest
              * @static
              * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {messages.entry.GetEntriesRequest} GetEntriesRequest
+             * @returns {messages.entry.ListEntriesRequest} ListEntriesRequest
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            GetEntriesRequest.decodeDelimited = function decodeDelimited(reader) {
+            ListEntriesRequest.decodeDelimited = function decodeDelimited(reader) {
                 if (!(reader instanceof $Reader))
                     reader = new $Reader(reader);
                 return this.decode(reader, reader.uint32());
             };
 
             /**
-             * Verifies a GetEntriesRequest message.
+             * Verifies a ListEntriesRequest message.
              * @function verify
-             * @memberof messages.entry.GetEntriesRequest
+             * @memberof messages.entry.ListEntriesRequest
              * @static
              * @param {Object.<string,*>} message Plain object to verify
              * @returns {string|null} `null` if valid, otherwise the reason why it is not
              */
-            GetEntriesRequest.verify = function verify(message) {
+            ListEntriesRequest.verify = function verify(message) {
                 if (typeof message !== "object" || message === null)
                     return "object expected";
                 if (message.context != null && message.hasOwnProperty("context")) {
@@ -2480,7 +2480,7 @@ $root.messages = (function() {
                         return "context." + error;
                 }
                 if (message.payload != null && message.hasOwnProperty("payload")) {
-                    var error = $root.messages.entry.GetEntriesRequest.Payload.verify(message.payload);
+                    var error = $root.messages.entry.ListEntriesRequest.Payload.verify(message.payload);
                     if (error)
                         return "payload." + error;
                 }
@@ -2488,40 +2488,40 @@ $root.messages = (function() {
             };
 
             /**
-             * Creates a GetEntriesRequest message from a plain object. Also converts values to their respective internal types.
+             * Creates a ListEntriesRequest message from a plain object. Also converts values to their respective internal types.
              * @function fromObject
-             * @memberof messages.entry.GetEntriesRequest
+             * @memberof messages.entry.ListEntriesRequest
              * @static
              * @param {Object.<string,*>} object Plain object
-             * @returns {messages.entry.GetEntriesRequest} GetEntriesRequest
+             * @returns {messages.entry.ListEntriesRequest} ListEntriesRequest
              */
-            GetEntriesRequest.fromObject = function fromObject(object) {
-                if (object instanceof $root.messages.entry.GetEntriesRequest)
+            ListEntriesRequest.fromObject = function fromObject(object) {
+                if (object instanceof $root.messages.entry.ListEntriesRequest)
                     return object;
-                var message = new $root.messages.entry.GetEntriesRequest();
+                var message = new $root.messages.entry.ListEntriesRequest();
                 if (object.context != null) {
                     if (typeof object.context !== "object")
-                        throw TypeError(".messages.entry.GetEntriesRequest.context: object expected");
+                        throw TypeError(".messages.entry.ListEntriesRequest.context: object expected");
                     message.context = $root.messages.entry.RequestContext.fromObject(object.context);
                 }
                 if (object.payload != null) {
                     if (typeof object.payload !== "object")
-                        throw TypeError(".messages.entry.GetEntriesRequest.payload: object expected");
-                    message.payload = $root.messages.entry.GetEntriesRequest.Payload.fromObject(object.payload);
+                        throw TypeError(".messages.entry.ListEntriesRequest.payload: object expected");
+                    message.payload = $root.messages.entry.ListEntriesRequest.Payload.fromObject(object.payload);
                 }
                 return message;
             };
 
             /**
-             * Creates a plain object from a GetEntriesRequest message. Also converts values to other types if specified.
+             * Creates a plain object from a ListEntriesRequest message. Also converts values to other types if specified.
              * @function toObject
-             * @memberof messages.entry.GetEntriesRequest
+             * @memberof messages.entry.ListEntriesRequest
              * @static
-             * @param {messages.entry.GetEntriesRequest} message GetEntriesRequest
+             * @param {messages.entry.ListEntriesRequest} message ListEntriesRequest
              * @param {$protobuf.IConversionOptions} [options] Conversion options
              * @returns {Object.<string,*>} Plain object
              */
-            GetEntriesRequest.toObject = function toObject(message, options) {
+            ListEntriesRequest.toObject = function toObject(message, options) {
                 if (!options)
                     options = {};
                 var object = {};
@@ -2532,26 +2532,26 @@ $root.messages = (function() {
                 if (message.context != null && message.hasOwnProperty("context"))
                     object.context = $root.messages.entry.RequestContext.toObject(message.context, options);
                 if (message.payload != null && message.hasOwnProperty("payload"))
-                    object.payload = $root.messages.entry.GetEntriesRequest.Payload.toObject(message.payload, options);
+                    object.payload = $root.messages.entry.ListEntriesRequest.Payload.toObject(message.payload, options);
                 return object;
             };
 
             /**
-             * Converts this GetEntriesRequest to JSON.
+             * Converts this ListEntriesRequest to JSON.
              * @function toJSON
-             * @memberof messages.entry.GetEntriesRequest
+             * @memberof messages.entry.ListEntriesRequest
              * @instance
              * @returns {Object.<string,*>} JSON object
              */
-            GetEntriesRequest.prototype.toJSON = function toJSON() {
+            ListEntriesRequest.prototype.toJSON = function toJSON() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
 
-            GetEntriesRequest.Payload = (function() {
+            ListEntriesRequest.Payload = (function() {
 
                 /**
                  * Properties of a Payload.
-                 * @memberof messages.entry.GetEntriesRequest
+                 * @memberof messages.entry.ListEntriesRequest
                  * @interface IPayload
                  * @property {number|null} [first] Payload first
                  * @property {string|null} [after] Payload after
@@ -2559,11 +2559,11 @@ $root.messages = (function() {
 
                 /**
                  * Constructs a new Payload.
-                 * @memberof messages.entry.GetEntriesRequest
+                 * @memberof messages.entry.ListEntriesRequest
                  * @classdesc Represents a Payload.
                  * @implements IPayload
                  * @constructor
-                 * @param {messages.entry.GetEntriesRequest.IPayload=} [properties] Properties to set
+                 * @param {messages.entry.ListEntriesRequest.IPayload=} [properties] Properties to set
                  */
                 function Payload(properties) {
                     if (properties)
@@ -2575,7 +2575,7 @@ $root.messages = (function() {
                 /**
                  * Payload first.
                  * @member {number} first
-                 * @memberof messages.entry.GetEntriesRequest.Payload
+                 * @memberof messages.entry.ListEntriesRequest.Payload
                  * @instance
                  */
                 Payload.prototype.first = 0;
@@ -2583,7 +2583,7 @@ $root.messages = (function() {
                 /**
                  * Payload after.
                  * @member {string} after
-                 * @memberof messages.entry.GetEntriesRequest.Payload
+                 * @memberof messages.entry.ListEntriesRequest.Payload
                  * @instance
                  */
                 Payload.prototype.after = "";
@@ -2591,21 +2591,21 @@ $root.messages = (function() {
                 /**
                  * Creates a new Payload instance using the specified properties.
                  * @function create
-                 * @memberof messages.entry.GetEntriesRequest.Payload
+                 * @memberof messages.entry.ListEntriesRequest.Payload
                  * @static
-                 * @param {messages.entry.GetEntriesRequest.IPayload=} [properties] Properties to set
-                 * @returns {messages.entry.GetEntriesRequest.Payload} Payload instance
+                 * @param {messages.entry.ListEntriesRequest.IPayload=} [properties] Properties to set
+                 * @returns {messages.entry.ListEntriesRequest.Payload} Payload instance
                  */
                 Payload.create = function create(properties) {
                     return new Payload(properties);
                 };
 
                 /**
-                 * Encodes the specified Payload message. Does not implicitly {@link messages.entry.GetEntriesRequest.Payload.verify|verify} messages.
+                 * Encodes the specified Payload message. Does not implicitly {@link messages.entry.ListEntriesRequest.Payload.verify|verify} messages.
                  * @function encode
-                 * @memberof messages.entry.GetEntriesRequest.Payload
+                 * @memberof messages.entry.ListEntriesRequest.Payload
                  * @static
-                 * @param {messages.entry.GetEntriesRequest.IPayload} message Payload message or plain object to encode
+                 * @param {messages.entry.ListEntriesRequest.IPayload} message Payload message or plain object to encode
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
@@ -2620,11 +2620,11 @@ $root.messages = (function() {
                 };
 
                 /**
-                 * Encodes the specified Payload message, length delimited. Does not implicitly {@link messages.entry.GetEntriesRequest.Payload.verify|verify} messages.
+                 * Encodes the specified Payload message, length delimited. Does not implicitly {@link messages.entry.ListEntriesRequest.Payload.verify|verify} messages.
                  * @function encodeDelimited
-                 * @memberof messages.entry.GetEntriesRequest.Payload
+                 * @memberof messages.entry.ListEntriesRequest.Payload
                  * @static
-                 * @param {messages.entry.GetEntriesRequest.IPayload} message Payload message or plain object to encode
+                 * @param {messages.entry.ListEntriesRequest.IPayload} message Payload message or plain object to encode
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
@@ -2635,18 +2635,18 @@ $root.messages = (function() {
                 /**
                  * Decodes a Payload message from the specified reader or buffer.
                  * @function decode
-                 * @memberof messages.entry.GetEntriesRequest.Payload
+                 * @memberof messages.entry.ListEntriesRequest.Payload
                  * @static
                  * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
                  * @param {number} [length] Message length if known beforehand
-                 * @returns {messages.entry.GetEntriesRequest.Payload} Payload
+                 * @returns {messages.entry.ListEntriesRequest.Payload} Payload
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
                 Payload.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.messages.entry.GetEntriesRequest.Payload();
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.messages.entry.ListEntriesRequest.Payload();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
@@ -2667,10 +2667,10 @@ $root.messages = (function() {
                 /**
                  * Decodes a Payload message from the specified reader or buffer, length delimited.
                  * @function decodeDelimited
-                 * @memberof messages.entry.GetEntriesRequest.Payload
+                 * @memberof messages.entry.ListEntriesRequest.Payload
                  * @static
                  * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {messages.entry.GetEntriesRequest.Payload} Payload
+                 * @returns {messages.entry.ListEntriesRequest.Payload} Payload
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
@@ -2683,7 +2683,7 @@ $root.messages = (function() {
                 /**
                  * Verifies a Payload message.
                  * @function verify
-                 * @memberof messages.entry.GetEntriesRequest.Payload
+                 * @memberof messages.entry.ListEntriesRequest.Payload
                  * @static
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
@@ -2703,15 +2703,15 @@ $root.messages = (function() {
                 /**
                  * Creates a Payload message from a plain object. Also converts values to their respective internal types.
                  * @function fromObject
-                 * @memberof messages.entry.GetEntriesRequest.Payload
+                 * @memberof messages.entry.ListEntriesRequest.Payload
                  * @static
                  * @param {Object.<string,*>} object Plain object
-                 * @returns {messages.entry.GetEntriesRequest.Payload} Payload
+                 * @returns {messages.entry.ListEntriesRequest.Payload} Payload
                  */
                 Payload.fromObject = function fromObject(object) {
-                    if (object instanceof $root.messages.entry.GetEntriesRequest.Payload)
+                    if (object instanceof $root.messages.entry.ListEntriesRequest.Payload)
                         return object;
-                    var message = new $root.messages.entry.GetEntriesRequest.Payload();
+                    var message = new $root.messages.entry.ListEntriesRequest.Payload();
                     if (object.first != null)
                         message.first = object.first | 0;
                     if (object.after != null)
@@ -2722,9 +2722,9 @@ $root.messages = (function() {
                 /**
                  * Creates a plain object from a Payload message. Also converts values to other types if specified.
                  * @function toObject
-                 * @memberof messages.entry.GetEntriesRequest.Payload
+                 * @memberof messages.entry.ListEntriesRequest.Payload
                  * @static
-                 * @param {messages.entry.GetEntriesRequest.Payload} message Payload
+                 * @param {messages.entry.ListEntriesRequest.Payload} message Payload
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
@@ -2746,7 +2746,7 @@ $root.messages = (function() {
                 /**
                  * Converts this Payload to JSON.
                  * @function toJSON
-                 * @memberof messages.entry.GetEntriesRequest.Payload
+                 * @memberof messages.entry.ListEntriesRequest.Payload
                  * @instance
                  * @returns {Object.<string,*>} JSON object
                  */
@@ -2757,30 +2757,30 @@ $root.messages = (function() {
                 return Payload;
             })();
 
-            return GetEntriesRequest;
+            return ListEntriesRequest;
         })();
 
-        entry.GetEntriesResponse = (function() {
+        entry.ListEntriesResponse = (function() {
 
             /**
-             * Properties of a GetEntriesResponse.
+             * Properties of a ListEntriesResponse.
              * @memberof messages.entry
-             * @interface IGetEntriesResponse
-             * @property {Array.<messages.entry.GetEntriesResponse.IEntity>|null} [payload] GetEntriesResponse payload
-             * @property {messages.entry.IError|null} [error] GetEntriesResponse error
-             * @property {string|null} [traceId] GetEntriesResponse traceId
-             * @property {messages.entry.GetEntriesResponse.IPageInfo|null} [pageInfo] GetEntriesResponse pageInfo
+             * @interface IListEntriesResponse
+             * @property {Array.<messages.entry.ListEntriesResponse.IEntity>|null} [payload] ListEntriesResponse payload
+             * @property {messages.entry.IError|null} [error] ListEntriesResponse error
+             * @property {string|null} [traceId] ListEntriesResponse traceId
+             * @property {messages.entry.ListEntriesResponse.IPageInfo|null} [pageInfo] ListEntriesResponse pageInfo
              */
 
             /**
-             * Constructs a new GetEntriesResponse.
+             * Constructs a new ListEntriesResponse.
              * @memberof messages.entry
-             * @classdesc Represents a GetEntriesResponse.
-             * @implements IGetEntriesResponse
+             * @classdesc Represents a ListEntriesResponse.
+             * @implements IListEntriesResponse
              * @constructor
-             * @param {messages.entry.IGetEntriesResponse=} [properties] Properties to set
+             * @param {messages.entry.IListEntriesResponse=} [properties] Properties to set
              */
-            function GetEntriesResponse(properties) {
+            function ListEntriesResponse(properties) {
                 this.payload = [];
                 if (properties)
                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
@@ -2789,108 +2789,108 @@ $root.messages = (function() {
             }
 
             /**
-             * GetEntriesResponse payload.
-             * @member {Array.<messages.entry.GetEntriesResponse.IEntity>} payload
-             * @memberof messages.entry.GetEntriesResponse
+             * ListEntriesResponse payload.
+             * @member {Array.<messages.entry.ListEntriesResponse.IEntity>} payload
+             * @memberof messages.entry.ListEntriesResponse
              * @instance
              */
-            GetEntriesResponse.prototype.payload = $util.emptyArray;
+            ListEntriesResponse.prototype.payload = $util.emptyArray;
 
             /**
-             * GetEntriesResponse error.
+             * ListEntriesResponse error.
              * @member {messages.entry.IError|null|undefined} error
-             * @memberof messages.entry.GetEntriesResponse
+             * @memberof messages.entry.ListEntriesResponse
              * @instance
              */
-            GetEntriesResponse.prototype.error = null;
+            ListEntriesResponse.prototype.error = null;
 
             /**
-             * GetEntriesResponse traceId.
+             * ListEntriesResponse traceId.
              * @member {string} traceId
-             * @memberof messages.entry.GetEntriesResponse
+             * @memberof messages.entry.ListEntriesResponse
              * @instance
              */
-            GetEntriesResponse.prototype.traceId = "";
+            ListEntriesResponse.prototype.traceId = "";
 
             /**
-             * GetEntriesResponse pageInfo.
-             * @member {messages.entry.GetEntriesResponse.IPageInfo|null|undefined} pageInfo
-             * @memberof messages.entry.GetEntriesResponse
+             * ListEntriesResponse pageInfo.
+             * @member {messages.entry.ListEntriesResponse.IPageInfo|null|undefined} pageInfo
+             * @memberof messages.entry.ListEntriesResponse
              * @instance
              */
-            GetEntriesResponse.prototype.pageInfo = null;
+            ListEntriesResponse.prototype.pageInfo = null;
 
             /**
-             * Creates a new GetEntriesResponse instance using the specified properties.
+             * Creates a new ListEntriesResponse instance using the specified properties.
              * @function create
-             * @memberof messages.entry.GetEntriesResponse
+             * @memberof messages.entry.ListEntriesResponse
              * @static
-             * @param {messages.entry.IGetEntriesResponse=} [properties] Properties to set
-             * @returns {messages.entry.GetEntriesResponse} GetEntriesResponse instance
+             * @param {messages.entry.IListEntriesResponse=} [properties] Properties to set
+             * @returns {messages.entry.ListEntriesResponse} ListEntriesResponse instance
              */
-            GetEntriesResponse.create = function create(properties) {
-                return new GetEntriesResponse(properties);
+            ListEntriesResponse.create = function create(properties) {
+                return new ListEntriesResponse(properties);
             };
 
             /**
-             * Encodes the specified GetEntriesResponse message. Does not implicitly {@link messages.entry.GetEntriesResponse.verify|verify} messages.
+             * Encodes the specified ListEntriesResponse message. Does not implicitly {@link messages.entry.ListEntriesResponse.verify|verify} messages.
              * @function encode
-             * @memberof messages.entry.GetEntriesResponse
+             * @memberof messages.entry.ListEntriesResponse
              * @static
-             * @param {messages.entry.IGetEntriesResponse} message GetEntriesResponse message or plain object to encode
+             * @param {messages.entry.IListEntriesResponse} message ListEntriesResponse message or plain object to encode
              * @param {$protobuf.Writer} [writer] Writer to encode to
              * @returns {$protobuf.Writer} Writer
              */
-            GetEntriesResponse.encode = function encode(message, writer) {
+            ListEntriesResponse.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
                 if (message.payload != null && message.payload.length)
                     for (var i = 0; i < message.payload.length; ++i)
-                        $root.messages.entry.GetEntriesResponse.Entity.encode(message.payload[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        $root.messages.entry.ListEntriesResponse.Entity.encode(message.payload[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                 if (message.error != null && message.hasOwnProperty("error"))
                     $root.messages.entry.Error.encode(message.error, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                 if (message.traceId != null && message.hasOwnProperty("traceId"))
                     writer.uint32(/* id 3, wireType 2 =*/26).string(message.traceId);
                 if (message.pageInfo != null && message.hasOwnProperty("pageInfo"))
-                    $root.messages.entry.GetEntriesResponse.PageInfo.encode(message.pageInfo, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                    $root.messages.entry.ListEntriesResponse.PageInfo.encode(message.pageInfo, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                 return writer;
             };
 
             /**
-             * Encodes the specified GetEntriesResponse message, length delimited. Does not implicitly {@link messages.entry.GetEntriesResponse.verify|verify} messages.
+             * Encodes the specified ListEntriesResponse message, length delimited. Does not implicitly {@link messages.entry.ListEntriesResponse.verify|verify} messages.
              * @function encodeDelimited
-             * @memberof messages.entry.GetEntriesResponse
+             * @memberof messages.entry.ListEntriesResponse
              * @static
-             * @param {messages.entry.IGetEntriesResponse} message GetEntriesResponse message or plain object to encode
+             * @param {messages.entry.IListEntriesResponse} message ListEntriesResponse message or plain object to encode
              * @param {$protobuf.Writer} [writer] Writer to encode to
              * @returns {$protobuf.Writer} Writer
              */
-            GetEntriesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+            ListEntriesResponse.encodeDelimited = function encodeDelimited(message, writer) {
                 return this.encode(message, writer).ldelim();
             };
 
             /**
-             * Decodes a GetEntriesResponse message from the specified reader or buffer.
+             * Decodes a ListEntriesResponse message from the specified reader or buffer.
              * @function decode
-             * @memberof messages.entry.GetEntriesResponse
+             * @memberof messages.entry.ListEntriesResponse
              * @static
              * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
              * @param {number} [length] Message length if known beforehand
-             * @returns {messages.entry.GetEntriesResponse} GetEntriesResponse
+             * @returns {messages.entry.ListEntriesResponse} ListEntriesResponse
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            GetEntriesResponse.decode = function decode(reader, length) {
+            ListEntriesResponse.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
-                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.messages.entry.GetEntriesResponse();
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.messages.entry.ListEntriesResponse();
                 while (reader.pos < end) {
                     var tag = reader.uint32();
                     switch (tag >>> 3) {
                     case 1:
                         if (!(message.payload && message.payload.length))
                             message.payload = [];
-                        message.payload.push($root.messages.entry.GetEntriesResponse.Entity.decode(reader, reader.uint32()));
+                        message.payload.push($root.messages.entry.ListEntriesResponse.Entity.decode(reader, reader.uint32()));
                         break;
                     case 2:
                         message.error = $root.messages.entry.Error.decode(reader, reader.uint32());
@@ -2899,7 +2899,7 @@ $root.messages = (function() {
                         message.traceId = reader.string();
                         break;
                     case 4:
-                        message.pageInfo = $root.messages.entry.GetEntriesResponse.PageInfo.decode(reader, reader.uint32());
+                        message.pageInfo = $root.messages.entry.ListEntriesResponse.PageInfo.decode(reader, reader.uint32());
                         break;
                     default:
                         reader.skipType(tag & 7);
@@ -2910,37 +2910,37 @@ $root.messages = (function() {
             };
 
             /**
-             * Decodes a GetEntriesResponse message from the specified reader or buffer, length delimited.
+             * Decodes a ListEntriesResponse message from the specified reader or buffer, length delimited.
              * @function decodeDelimited
-             * @memberof messages.entry.GetEntriesResponse
+             * @memberof messages.entry.ListEntriesResponse
              * @static
              * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {messages.entry.GetEntriesResponse} GetEntriesResponse
+             * @returns {messages.entry.ListEntriesResponse} ListEntriesResponse
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            GetEntriesResponse.decodeDelimited = function decodeDelimited(reader) {
+            ListEntriesResponse.decodeDelimited = function decodeDelimited(reader) {
                 if (!(reader instanceof $Reader))
                     reader = new $Reader(reader);
                 return this.decode(reader, reader.uint32());
             };
 
             /**
-             * Verifies a GetEntriesResponse message.
+             * Verifies a ListEntriesResponse message.
              * @function verify
-             * @memberof messages.entry.GetEntriesResponse
+             * @memberof messages.entry.ListEntriesResponse
              * @static
              * @param {Object.<string,*>} message Plain object to verify
              * @returns {string|null} `null` if valid, otherwise the reason why it is not
              */
-            GetEntriesResponse.verify = function verify(message) {
+            ListEntriesResponse.verify = function verify(message) {
                 if (typeof message !== "object" || message === null)
                     return "object expected";
                 if (message.payload != null && message.hasOwnProperty("payload")) {
                     if (!Array.isArray(message.payload))
                         return "payload: array expected";
                     for (var i = 0; i < message.payload.length; ++i) {
-                        var error = $root.messages.entry.GetEntriesResponse.Entity.verify(message.payload[i]);
+                        var error = $root.messages.entry.ListEntriesResponse.Entity.verify(message.payload[i]);
                         if (error)
                             return "payload." + error;
                     }
@@ -2954,7 +2954,7 @@ $root.messages = (function() {
                     if (!$util.isString(message.traceId))
                         return "traceId: string expected";
                 if (message.pageInfo != null && message.hasOwnProperty("pageInfo")) {
-                    var error = $root.messages.entry.GetEntriesResponse.PageInfo.verify(message.pageInfo);
+                    var error = $root.messages.entry.ListEntriesResponse.PageInfo.verify(message.pageInfo);
                     if (error)
                         return "pageInfo." + error;
                 }
@@ -2962,52 +2962,52 @@ $root.messages = (function() {
             };
 
             /**
-             * Creates a GetEntriesResponse message from a plain object. Also converts values to their respective internal types.
+             * Creates a ListEntriesResponse message from a plain object. Also converts values to their respective internal types.
              * @function fromObject
-             * @memberof messages.entry.GetEntriesResponse
+             * @memberof messages.entry.ListEntriesResponse
              * @static
              * @param {Object.<string,*>} object Plain object
-             * @returns {messages.entry.GetEntriesResponse} GetEntriesResponse
+             * @returns {messages.entry.ListEntriesResponse} ListEntriesResponse
              */
-            GetEntriesResponse.fromObject = function fromObject(object) {
-                if (object instanceof $root.messages.entry.GetEntriesResponse)
+            ListEntriesResponse.fromObject = function fromObject(object) {
+                if (object instanceof $root.messages.entry.ListEntriesResponse)
                     return object;
-                var message = new $root.messages.entry.GetEntriesResponse();
+                var message = new $root.messages.entry.ListEntriesResponse();
                 if (object.payload) {
                     if (!Array.isArray(object.payload))
-                        throw TypeError(".messages.entry.GetEntriesResponse.payload: array expected");
+                        throw TypeError(".messages.entry.ListEntriesResponse.payload: array expected");
                     message.payload = [];
                     for (var i = 0; i < object.payload.length; ++i) {
                         if (typeof object.payload[i] !== "object")
-                            throw TypeError(".messages.entry.GetEntriesResponse.payload: object expected");
-                        message.payload[i] = $root.messages.entry.GetEntriesResponse.Entity.fromObject(object.payload[i]);
+                            throw TypeError(".messages.entry.ListEntriesResponse.payload: object expected");
+                        message.payload[i] = $root.messages.entry.ListEntriesResponse.Entity.fromObject(object.payload[i]);
                     }
                 }
                 if (object.error != null) {
                     if (typeof object.error !== "object")
-                        throw TypeError(".messages.entry.GetEntriesResponse.error: object expected");
+                        throw TypeError(".messages.entry.ListEntriesResponse.error: object expected");
                     message.error = $root.messages.entry.Error.fromObject(object.error);
                 }
                 if (object.traceId != null)
                     message.traceId = String(object.traceId);
                 if (object.pageInfo != null) {
                     if (typeof object.pageInfo !== "object")
-                        throw TypeError(".messages.entry.GetEntriesResponse.pageInfo: object expected");
-                    message.pageInfo = $root.messages.entry.GetEntriesResponse.PageInfo.fromObject(object.pageInfo);
+                        throw TypeError(".messages.entry.ListEntriesResponse.pageInfo: object expected");
+                    message.pageInfo = $root.messages.entry.ListEntriesResponse.PageInfo.fromObject(object.pageInfo);
                 }
                 return message;
             };
 
             /**
-             * Creates a plain object from a GetEntriesResponse message. Also converts values to other types if specified.
+             * Creates a plain object from a ListEntriesResponse message. Also converts values to other types if specified.
              * @function toObject
-             * @memberof messages.entry.GetEntriesResponse
+             * @memberof messages.entry.ListEntriesResponse
              * @static
-             * @param {messages.entry.GetEntriesResponse} message GetEntriesResponse
+             * @param {messages.entry.ListEntriesResponse} message ListEntriesResponse
              * @param {$protobuf.IConversionOptions} [options] Conversion options
              * @returns {Object.<string,*>} Plain object
              */
-            GetEntriesResponse.toObject = function toObject(message, options) {
+            ListEntriesResponse.toObject = function toObject(message, options) {
                 if (!options)
                     options = {};
                 var object = {};
@@ -3021,33 +3021,33 @@ $root.messages = (function() {
                 if (message.payload && message.payload.length) {
                     object.payload = [];
                     for (var j = 0; j < message.payload.length; ++j)
-                        object.payload[j] = $root.messages.entry.GetEntriesResponse.Entity.toObject(message.payload[j], options);
+                        object.payload[j] = $root.messages.entry.ListEntriesResponse.Entity.toObject(message.payload[j], options);
                 }
                 if (message.error != null && message.hasOwnProperty("error"))
                     object.error = $root.messages.entry.Error.toObject(message.error, options);
                 if (message.traceId != null && message.hasOwnProperty("traceId"))
                     object.traceId = message.traceId;
                 if (message.pageInfo != null && message.hasOwnProperty("pageInfo"))
-                    object.pageInfo = $root.messages.entry.GetEntriesResponse.PageInfo.toObject(message.pageInfo, options);
+                    object.pageInfo = $root.messages.entry.ListEntriesResponse.PageInfo.toObject(message.pageInfo, options);
                 return object;
             };
 
             /**
-             * Converts this GetEntriesResponse to JSON.
+             * Converts this ListEntriesResponse to JSON.
              * @function toJSON
-             * @memberof messages.entry.GetEntriesResponse
+             * @memberof messages.entry.ListEntriesResponse
              * @instance
              * @returns {Object.<string,*>} JSON object
              */
-            GetEntriesResponse.prototype.toJSON = function toJSON() {
+            ListEntriesResponse.prototype.toJSON = function toJSON() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
 
-            GetEntriesResponse.PageInfo = (function() {
+            ListEntriesResponse.PageInfo = (function() {
 
                 /**
                  * Properties of a PageInfo.
-                 * @memberof messages.entry.GetEntriesResponse
+                 * @memberof messages.entry.ListEntriesResponse
                  * @interface IPageInfo
                  * @property {number|null} [totalCount] PageInfo totalCount
                  * @property {boolean|null} [hasNextPage] PageInfo hasNextPage
@@ -3057,11 +3057,11 @@ $root.messages = (function() {
 
                 /**
                  * Constructs a new PageInfo.
-                 * @memberof messages.entry.GetEntriesResponse
+                 * @memberof messages.entry.ListEntriesResponse
                  * @classdesc Represents a PageInfo.
                  * @implements IPageInfo
                  * @constructor
-                 * @param {messages.entry.GetEntriesResponse.IPageInfo=} [properties] Properties to set
+                 * @param {messages.entry.ListEntriesResponse.IPageInfo=} [properties] Properties to set
                  */
                 function PageInfo(properties) {
                     if (properties)
@@ -3073,7 +3073,7 @@ $root.messages = (function() {
                 /**
                  * PageInfo totalCount.
                  * @member {number} totalCount
-                 * @memberof messages.entry.GetEntriesResponse.PageInfo
+                 * @memberof messages.entry.ListEntriesResponse.PageInfo
                  * @instance
                  */
                 PageInfo.prototype.totalCount = 0;
@@ -3081,7 +3081,7 @@ $root.messages = (function() {
                 /**
                  * PageInfo hasNextPage.
                  * @member {boolean} hasNextPage
-                 * @memberof messages.entry.GetEntriesResponse.PageInfo
+                 * @memberof messages.entry.ListEntriesResponse.PageInfo
                  * @instance
                  */
                 PageInfo.prototype.hasNextPage = false;
@@ -3089,7 +3089,7 @@ $root.messages = (function() {
                 /**
                  * PageInfo startCursor.
                  * @member {string} startCursor
-                 * @memberof messages.entry.GetEntriesResponse.PageInfo
+                 * @memberof messages.entry.ListEntriesResponse.PageInfo
                  * @instance
                  */
                 PageInfo.prototype.startCursor = "";
@@ -3097,7 +3097,7 @@ $root.messages = (function() {
                 /**
                  * PageInfo endCursor.
                  * @member {string} endCursor
-                 * @memberof messages.entry.GetEntriesResponse.PageInfo
+                 * @memberof messages.entry.ListEntriesResponse.PageInfo
                  * @instance
                  */
                 PageInfo.prototype.endCursor = "";
@@ -3105,21 +3105,21 @@ $root.messages = (function() {
                 /**
                  * Creates a new PageInfo instance using the specified properties.
                  * @function create
-                 * @memberof messages.entry.GetEntriesResponse.PageInfo
+                 * @memberof messages.entry.ListEntriesResponse.PageInfo
                  * @static
-                 * @param {messages.entry.GetEntriesResponse.IPageInfo=} [properties] Properties to set
-                 * @returns {messages.entry.GetEntriesResponse.PageInfo} PageInfo instance
+                 * @param {messages.entry.ListEntriesResponse.IPageInfo=} [properties] Properties to set
+                 * @returns {messages.entry.ListEntriesResponse.PageInfo} PageInfo instance
                  */
                 PageInfo.create = function create(properties) {
                     return new PageInfo(properties);
                 };
 
                 /**
-                 * Encodes the specified PageInfo message. Does not implicitly {@link messages.entry.GetEntriesResponse.PageInfo.verify|verify} messages.
+                 * Encodes the specified PageInfo message. Does not implicitly {@link messages.entry.ListEntriesResponse.PageInfo.verify|verify} messages.
                  * @function encode
-                 * @memberof messages.entry.GetEntriesResponse.PageInfo
+                 * @memberof messages.entry.ListEntriesResponse.PageInfo
                  * @static
-                 * @param {messages.entry.GetEntriesResponse.IPageInfo} message PageInfo message or plain object to encode
+                 * @param {messages.entry.ListEntriesResponse.IPageInfo} message PageInfo message or plain object to encode
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
@@ -3138,11 +3138,11 @@ $root.messages = (function() {
                 };
 
                 /**
-                 * Encodes the specified PageInfo message, length delimited. Does not implicitly {@link messages.entry.GetEntriesResponse.PageInfo.verify|verify} messages.
+                 * Encodes the specified PageInfo message, length delimited. Does not implicitly {@link messages.entry.ListEntriesResponse.PageInfo.verify|verify} messages.
                  * @function encodeDelimited
-                 * @memberof messages.entry.GetEntriesResponse.PageInfo
+                 * @memberof messages.entry.ListEntriesResponse.PageInfo
                  * @static
-                 * @param {messages.entry.GetEntriesResponse.IPageInfo} message PageInfo message or plain object to encode
+                 * @param {messages.entry.ListEntriesResponse.IPageInfo} message PageInfo message or plain object to encode
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
@@ -3153,18 +3153,18 @@ $root.messages = (function() {
                 /**
                  * Decodes a PageInfo message from the specified reader or buffer.
                  * @function decode
-                 * @memberof messages.entry.GetEntriesResponse.PageInfo
+                 * @memberof messages.entry.ListEntriesResponse.PageInfo
                  * @static
                  * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
                  * @param {number} [length] Message length if known beforehand
-                 * @returns {messages.entry.GetEntriesResponse.PageInfo} PageInfo
+                 * @returns {messages.entry.ListEntriesResponse.PageInfo} PageInfo
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
                 PageInfo.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.messages.entry.GetEntriesResponse.PageInfo();
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.messages.entry.ListEntriesResponse.PageInfo();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
@@ -3191,10 +3191,10 @@ $root.messages = (function() {
                 /**
                  * Decodes a PageInfo message from the specified reader or buffer, length delimited.
                  * @function decodeDelimited
-                 * @memberof messages.entry.GetEntriesResponse.PageInfo
+                 * @memberof messages.entry.ListEntriesResponse.PageInfo
                  * @static
                  * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {messages.entry.GetEntriesResponse.PageInfo} PageInfo
+                 * @returns {messages.entry.ListEntriesResponse.PageInfo} PageInfo
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
@@ -3207,7 +3207,7 @@ $root.messages = (function() {
                 /**
                  * Verifies a PageInfo message.
                  * @function verify
-                 * @memberof messages.entry.GetEntriesResponse.PageInfo
+                 * @memberof messages.entry.ListEntriesResponse.PageInfo
                  * @static
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
@@ -3233,15 +3233,15 @@ $root.messages = (function() {
                 /**
                  * Creates a PageInfo message from a plain object. Also converts values to their respective internal types.
                  * @function fromObject
-                 * @memberof messages.entry.GetEntriesResponse.PageInfo
+                 * @memberof messages.entry.ListEntriesResponse.PageInfo
                  * @static
                  * @param {Object.<string,*>} object Plain object
-                 * @returns {messages.entry.GetEntriesResponse.PageInfo} PageInfo
+                 * @returns {messages.entry.ListEntriesResponse.PageInfo} PageInfo
                  */
                 PageInfo.fromObject = function fromObject(object) {
-                    if (object instanceof $root.messages.entry.GetEntriesResponse.PageInfo)
+                    if (object instanceof $root.messages.entry.ListEntriesResponse.PageInfo)
                         return object;
-                    var message = new $root.messages.entry.GetEntriesResponse.PageInfo();
+                    var message = new $root.messages.entry.ListEntriesResponse.PageInfo();
                     if (object.totalCount != null)
                         message.totalCount = object.totalCount | 0;
                     if (object.hasNextPage != null)
@@ -3256,9 +3256,9 @@ $root.messages = (function() {
                 /**
                  * Creates a plain object from a PageInfo message. Also converts values to other types if specified.
                  * @function toObject
-                 * @memberof messages.entry.GetEntriesResponse.PageInfo
+                 * @memberof messages.entry.ListEntriesResponse.PageInfo
                  * @static
-                 * @param {messages.entry.GetEntriesResponse.PageInfo} message PageInfo
+                 * @param {messages.entry.ListEntriesResponse.PageInfo} message PageInfo
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
@@ -3286,7 +3286,7 @@ $root.messages = (function() {
                 /**
                  * Converts this PageInfo to JSON.
                  * @function toJSON
-                 * @memberof messages.entry.GetEntriesResponse.PageInfo
+                 * @memberof messages.entry.ListEntriesResponse.PageInfo
                  * @instance
                  * @returns {Object.<string,*>} JSON object
                  */
@@ -3297,11 +3297,11 @@ $root.messages = (function() {
                 return PageInfo;
             })();
 
-            GetEntriesResponse.Entity = (function() {
+            ListEntriesResponse.Entity = (function() {
 
                 /**
                  * Properties of an Entity.
-                 * @memberof messages.entry.GetEntriesResponse
+                 * @memberof messages.entry.ListEntriesResponse
                  * @interface IEntity
                  * @property {string|null} [id] Entity id
                  * @property {string|null} [text] Entity text
@@ -3310,11 +3310,11 @@ $root.messages = (function() {
 
                 /**
                  * Constructs a new Entity.
-                 * @memberof messages.entry.GetEntriesResponse
+                 * @memberof messages.entry.ListEntriesResponse
                  * @classdesc Represents an Entity.
                  * @implements IEntity
                  * @constructor
-                 * @param {messages.entry.GetEntriesResponse.IEntity=} [properties] Properties to set
+                 * @param {messages.entry.ListEntriesResponse.IEntity=} [properties] Properties to set
                  */
                 function Entity(properties) {
                     if (properties)
@@ -3326,7 +3326,7 @@ $root.messages = (function() {
                 /**
                  * Entity id.
                  * @member {string} id
-                 * @memberof messages.entry.GetEntriesResponse.Entity
+                 * @memberof messages.entry.ListEntriesResponse.Entity
                  * @instance
                  */
                 Entity.prototype.id = "";
@@ -3334,7 +3334,7 @@ $root.messages = (function() {
                 /**
                  * Entity text.
                  * @member {string} text
-                 * @memberof messages.entry.GetEntriesResponse.Entity
+                 * @memberof messages.entry.ListEntriesResponse.Entity
                  * @instance
                  */
                 Entity.prototype.text = "";
@@ -3342,7 +3342,7 @@ $root.messages = (function() {
                 /**
                  * Entity creatorId.
                  * @member {string} creatorId
-                 * @memberof messages.entry.GetEntriesResponse.Entity
+                 * @memberof messages.entry.ListEntriesResponse.Entity
                  * @instance
                  */
                 Entity.prototype.creatorId = "";
@@ -3350,21 +3350,21 @@ $root.messages = (function() {
                 /**
                  * Creates a new Entity instance using the specified properties.
                  * @function create
-                 * @memberof messages.entry.GetEntriesResponse.Entity
+                 * @memberof messages.entry.ListEntriesResponse.Entity
                  * @static
-                 * @param {messages.entry.GetEntriesResponse.IEntity=} [properties] Properties to set
-                 * @returns {messages.entry.GetEntriesResponse.Entity} Entity instance
+                 * @param {messages.entry.ListEntriesResponse.IEntity=} [properties] Properties to set
+                 * @returns {messages.entry.ListEntriesResponse.Entity} Entity instance
                  */
                 Entity.create = function create(properties) {
                     return new Entity(properties);
                 };
 
                 /**
-                 * Encodes the specified Entity message. Does not implicitly {@link messages.entry.GetEntriesResponse.Entity.verify|verify} messages.
+                 * Encodes the specified Entity message. Does not implicitly {@link messages.entry.ListEntriesResponse.Entity.verify|verify} messages.
                  * @function encode
-                 * @memberof messages.entry.GetEntriesResponse.Entity
+                 * @memberof messages.entry.ListEntriesResponse.Entity
                  * @static
-                 * @param {messages.entry.GetEntriesResponse.IEntity} message Entity message or plain object to encode
+                 * @param {messages.entry.ListEntriesResponse.IEntity} message Entity message or plain object to encode
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
@@ -3381,11 +3381,11 @@ $root.messages = (function() {
                 };
 
                 /**
-                 * Encodes the specified Entity message, length delimited. Does not implicitly {@link messages.entry.GetEntriesResponse.Entity.verify|verify} messages.
+                 * Encodes the specified Entity message, length delimited. Does not implicitly {@link messages.entry.ListEntriesResponse.Entity.verify|verify} messages.
                  * @function encodeDelimited
-                 * @memberof messages.entry.GetEntriesResponse.Entity
+                 * @memberof messages.entry.ListEntriesResponse.Entity
                  * @static
-                 * @param {messages.entry.GetEntriesResponse.IEntity} message Entity message or plain object to encode
+                 * @param {messages.entry.ListEntriesResponse.IEntity} message Entity message or plain object to encode
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
@@ -3396,18 +3396,18 @@ $root.messages = (function() {
                 /**
                  * Decodes an Entity message from the specified reader or buffer.
                  * @function decode
-                 * @memberof messages.entry.GetEntriesResponse.Entity
+                 * @memberof messages.entry.ListEntriesResponse.Entity
                  * @static
                  * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
                  * @param {number} [length] Message length if known beforehand
-                 * @returns {messages.entry.GetEntriesResponse.Entity} Entity
+                 * @returns {messages.entry.ListEntriesResponse.Entity} Entity
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
                 Entity.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.messages.entry.GetEntriesResponse.Entity();
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.messages.entry.ListEntriesResponse.Entity();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
@@ -3431,10 +3431,10 @@ $root.messages = (function() {
                 /**
                  * Decodes an Entity message from the specified reader or buffer, length delimited.
                  * @function decodeDelimited
-                 * @memberof messages.entry.GetEntriesResponse.Entity
+                 * @memberof messages.entry.ListEntriesResponse.Entity
                  * @static
                  * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {messages.entry.GetEntriesResponse.Entity} Entity
+                 * @returns {messages.entry.ListEntriesResponse.Entity} Entity
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
@@ -3447,7 +3447,7 @@ $root.messages = (function() {
                 /**
                  * Verifies an Entity message.
                  * @function verify
-                 * @memberof messages.entry.GetEntriesResponse.Entity
+                 * @memberof messages.entry.ListEntriesResponse.Entity
                  * @static
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
@@ -3470,15 +3470,15 @@ $root.messages = (function() {
                 /**
                  * Creates an Entity message from a plain object. Also converts values to their respective internal types.
                  * @function fromObject
-                 * @memberof messages.entry.GetEntriesResponse.Entity
+                 * @memberof messages.entry.ListEntriesResponse.Entity
                  * @static
                  * @param {Object.<string,*>} object Plain object
-                 * @returns {messages.entry.GetEntriesResponse.Entity} Entity
+                 * @returns {messages.entry.ListEntriesResponse.Entity} Entity
                  */
                 Entity.fromObject = function fromObject(object) {
-                    if (object instanceof $root.messages.entry.GetEntriesResponse.Entity)
+                    if (object instanceof $root.messages.entry.ListEntriesResponse.Entity)
                         return object;
-                    var message = new $root.messages.entry.GetEntriesResponse.Entity();
+                    var message = new $root.messages.entry.ListEntriesResponse.Entity();
                     if (object.id != null)
                         message.id = String(object.id);
                     if (object.text != null)
@@ -3491,9 +3491,9 @@ $root.messages = (function() {
                 /**
                  * Creates a plain object from an Entity message. Also converts values to other types if specified.
                  * @function toObject
-                 * @memberof messages.entry.GetEntriesResponse.Entity
+                 * @memberof messages.entry.ListEntriesResponse.Entity
                  * @static
-                 * @param {messages.entry.GetEntriesResponse.Entity} message Entity
+                 * @param {messages.entry.ListEntriesResponse.Entity} message Entity
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
@@ -3518,7 +3518,7 @@ $root.messages = (function() {
                 /**
                  * Converts this Entity to JSON.
                  * @function toJSON
-                 * @memberof messages.entry.GetEntriesResponse.Entity
+                 * @memberof messages.entry.ListEntriesResponse.Entity
                  * @instance
                  * @returns {Object.<string,*>} JSON object
                  */
@@ -3529,7 +3529,7 @@ $root.messages = (function() {
                 return Entity;
             })();
 
-            return GetEntriesResponse;
+            return ListEntriesResponse;
         })();
 
         entry.InfoEntry = (function() {

@@ -153,7 +153,7 @@ async function bootstrap() {
   nc.subscribe('list.entry', async (error, message) => {
     logMessage(message.subject);
     if (error) {
-      const response = messages.entry.GetEntriesResponse.encode({
+      const response = messages.entry.ListEntriesResponse.encode({
         error: {
           code: messages.entry.Error.Code.UNKNOWN
         }
@@ -161,13 +161,13 @@ async function bootstrap() {
       return handleError(nc, message, error, response);
     }
 
-    const { context, payload } = messages.entry.GetEntriesRequest.decode(message.data);
+    const { context, payload } = messages.entry.ListEntriesRequest.decode(message.data);
     const creatorId = context?.userId;
     const first = payload?.first;
     const after = payload?.after;
 
     if (!creatorId) {
-      const response = messages.entry.GetEntriesResponse.encode({
+      const response = messages.entry.ListEntriesResponse.encode({
         error: {
           code: messages.entry.Error.Code.VALIDATION_FAILED,
           message: 'oops',
@@ -186,7 +186,7 @@ async function bootstrap() {
       const entries: Entry[] | null = await getEntries(db, { creatorId, first, after });
 
       if (!entries) {
-        const response = messages.entry.GetEntriesResponse.encode({
+        const response = messages.entry.ListEntriesResponse.encode({
           error: {
             code: messages.entry.Error.Code.NOT_FOUND,
             message: 'oops',
@@ -199,7 +199,7 @@ async function bootstrap() {
       const pageInfo = await getEntryPageInfo(db, { creatorId, first, after });
 
       if (message.reply) {
-        const response = messages.entry.GetEntriesResponse.encode({
+        const response = messages.entry.ListEntriesResponse.encode({
           payload: entries,
           pageInfo: pageInfo,
           traceId: context?.traceId,
@@ -207,7 +207,7 @@ async function bootstrap() {
         nc.publish(message.reply, response);
       }
     } catch (error) {
-      const response = messages.entry.GetEntriesResponse.encode({
+      const response = messages.entry.ListEntriesResponse.encode({
         error: {
           code: messages.entry.Error.Code.UNKNOWN
         },

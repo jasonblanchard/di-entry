@@ -72,7 +72,7 @@ function createNEntries(nc: Client, n: number) {
   return Promise.all(requests);
 }
 
-describe('get.entries', () => {
+describe('list.entries', () => {
   it('returns list', async () => {
     const nc = await connect({
       servers: ['nats://localhost:4222'],
@@ -80,13 +80,13 @@ describe('get.entries', () => {
     });
 
     await createNEntries(nc, 2);
-    const request = messages.entry.GetEntriesRequest.encode({
+    const request = messages.entry.ListEntriesRequest.encode({
       context: {
         userId: '123'
       }
     }).finish();
     const message = await nc.request('list.entry', TIMEOUT, request);
-    const { payload: entries, pageInfo, error } = messages.entry.GetEntriesResponse.decode(message.data);
+    const { payload: entries, pageInfo, error } = messages.entry.ListEntriesResponse.decode(message.data);
     expect(error).toEqual(null);
     expect(entries.length > 2).toEqual(true); // TODO: This is kind of dumb. Make a better assertion, here.
     expect(pageInfo).toEqual({
