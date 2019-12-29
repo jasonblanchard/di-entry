@@ -3532,6 +3532,628 @@ $root.messages = (function() {
             return ListEntriesResponse;
         })();
 
+        entry.DeleteEntryRequest = (function() {
+
+            /**
+             * Properties of a DeleteEntryRequest.
+             * @memberof messages.entry
+             * @interface IDeleteEntryRequest
+             * @property {messages.entry.IRequestContext|null} [context] DeleteEntryRequest context
+             * @property {messages.entry.DeleteEntryRequest.IPayload|null} [payload] DeleteEntryRequest payload
+             */
+
+            /**
+             * Constructs a new DeleteEntryRequest.
+             * @memberof messages.entry
+             * @classdesc Represents a DeleteEntryRequest.
+             * @implements IDeleteEntryRequest
+             * @constructor
+             * @param {messages.entry.IDeleteEntryRequest=} [properties] Properties to set
+             */
+            function DeleteEntryRequest(properties) {
+                if (properties)
+                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+
+            /**
+             * DeleteEntryRequest context.
+             * @member {messages.entry.IRequestContext|null|undefined} context
+             * @memberof messages.entry.DeleteEntryRequest
+             * @instance
+             */
+            DeleteEntryRequest.prototype.context = null;
+
+            /**
+             * DeleteEntryRequest payload.
+             * @member {messages.entry.DeleteEntryRequest.IPayload|null|undefined} payload
+             * @memberof messages.entry.DeleteEntryRequest
+             * @instance
+             */
+            DeleteEntryRequest.prototype.payload = null;
+
+            /**
+             * Creates a new DeleteEntryRequest instance using the specified properties.
+             * @function create
+             * @memberof messages.entry.DeleteEntryRequest
+             * @static
+             * @param {messages.entry.IDeleteEntryRequest=} [properties] Properties to set
+             * @returns {messages.entry.DeleteEntryRequest} DeleteEntryRequest instance
+             */
+            DeleteEntryRequest.create = function create(properties) {
+                return new DeleteEntryRequest(properties);
+            };
+
+            /**
+             * Encodes the specified DeleteEntryRequest message. Does not implicitly {@link messages.entry.DeleteEntryRequest.verify|verify} messages.
+             * @function encode
+             * @memberof messages.entry.DeleteEntryRequest
+             * @static
+             * @param {messages.entry.IDeleteEntryRequest} message DeleteEntryRequest message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            DeleteEntryRequest.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.context != null && message.hasOwnProperty("context"))
+                    $root.messages.entry.RequestContext.encode(message.context, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                if (message.payload != null && message.hasOwnProperty("payload"))
+                    $root.messages.entry.DeleteEntryRequest.Payload.encode(message.payload, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                return writer;
+            };
+
+            /**
+             * Encodes the specified DeleteEntryRequest message, length delimited. Does not implicitly {@link messages.entry.DeleteEntryRequest.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof messages.entry.DeleteEntryRequest
+             * @static
+             * @param {messages.entry.IDeleteEntryRequest} message DeleteEntryRequest message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            DeleteEntryRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
+             * Decodes a DeleteEntryRequest message from the specified reader or buffer.
+             * @function decode
+             * @memberof messages.entry.DeleteEntryRequest
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {messages.entry.DeleteEntryRequest} DeleteEntryRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            DeleteEntryRequest.decode = function decode(reader, length) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.messages.entry.DeleteEntryRequest();
+                while (reader.pos < end) {
+                    var tag = reader.uint32();
+                    switch (tag >>> 3) {
+                    case 1:
+                        message.context = $root.messages.entry.RequestContext.decode(reader, reader.uint32());
+                        break;
+                    case 2:
+                        message.payload = $root.messages.entry.DeleteEntryRequest.Payload.decode(reader, reader.uint32());
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+
+            /**
+             * Decodes a DeleteEntryRequest message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof messages.entry.DeleteEntryRequest
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {messages.entry.DeleteEntryRequest} DeleteEntryRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            DeleteEntryRequest.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a DeleteEntryRequest message.
+             * @function verify
+             * @memberof messages.entry.DeleteEntryRequest
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            DeleteEntryRequest.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.context != null && message.hasOwnProperty("context")) {
+                    var error = $root.messages.entry.RequestContext.verify(message.context);
+                    if (error)
+                        return "context." + error;
+                }
+                if (message.payload != null && message.hasOwnProperty("payload")) {
+                    var error = $root.messages.entry.DeleteEntryRequest.Payload.verify(message.payload);
+                    if (error)
+                        return "payload." + error;
+                }
+                return null;
+            };
+
+            /**
+             * Creates a DeleteEntryRequest message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof messages.entry.DeleteEntryRequest
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {messages.entry.DeleteEntryRequest} DeleteEntryRequest
+             */
+            DeleteEntryRequest.fromObject = function fromObject(object) {
+                if (object instanceof $root.messages.entry.DeleteEntryRequest)
+                    return object;
+                var message = new $root.messages.entry.DeleteEntryRequest();
+                if (object.context != null) {
+                    if (typeof object.context !== "object")
+                        throw TypeError(".messages.entry.DeleteEntryRequest.context: object expected");
+                    message.context = $root.messages.entry.RequestContext.fromObject(object.context);
+                }
+                if (object.payload != null) {
+                    if (typeof object.payload !== "object")
+                        throw TypeError(".messages.entry.DeleteEntryRequest.payload: object expected");
+                    message.payload = $root.messages.entry.DeleteEntryRequest.Payload.fromObject(object.payload);
+                }
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a DeleteEntryRequest message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof messages.entry.DeleteEntryRequest
+             * @static
+             * @param {messages.entry.DeleteEntryRequest} message DeleteEntryRequest
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            DeleteEntryRequest.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                var object = {};
+                if (options.defaults) {
+                    object.context = null;
+                    object.payload = null;
+                }
+                if (message.context != null && message.hasOwnProperty("context"))
+                    object.context = $root.messages.entry.RequestContext.toObject(message.context, options);
+                if (message.payload != null && message.hasOwnProperty("payload"))
+                    object.payload = $root.messages.entry.DeleteEntryRequest.Payload.toObject(message.payload, options);
+                return object;
+            };
+
+            /**
+             * Converts this DeleteEntryRequest to JSON.
+             * @function toJSON
+             * @memberof messages.entry.DeleteEntryRequest
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            DeleteEntryRequest.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            DeleteEntryRequest.Payload = (function() {
+
+                /**
+                 * Properties of a Payload.
+                 * @memberof messages.entry.DeleteEntryRequest
+                 * @interface IPayload
+                 * @property {string|null} [id] Payload id
+                 */
+
+                /**
+                 * Constructs a new Payload.
+                 * @memberof messages.entry.DeleteEntryRequest
+                 * @classdesc Represents a Payload.
+                 * @implements IPayload
+                 * @constructor
+                 * @param {messages.entry.DeleteEntryRequest.IPayload=} [properties] Properties to set
+                 */
+                function Payload(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+
+                /**
+                 * Payload id.
+                 * @member {string} id
+                 * @memberof messages.entry.DeleteEntryRequest.Payload
+                 * @instance
+                 */
+                Payload.prototype.id = "";
+
+                /**
+                 * Creates a new Payload instance using the specified properties.
+                 * @function create
+                 * @memberof messages.entry.DeleteEntryRequest.Payload
+                 * @static
+                 * @param {messages.entry.DeleteEntryRequest.IPayload=} [properties] Properties to set
+                 * @returns {messages.entry.DeleteEntryRequest.Payload} Payload instance
+                 */
+                Payload.create = function create(properties) {
+                    return new Payload(properties);
+                };
+
+                /**
+                 * Encodes the specified Payload message. Does not implicitly {@link messages.entry.DeleteEntryRequest.Payload.verify|verify} messages.
+                 * @function encode
+                 * @memberof messages.entry.DeleteEntryRequest.Payload
+                 * @static
+                 * @param {messages.entry.DeleteEntryRequest.IPayload} message Payload message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Payload.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.id != null && message.hasOwnProperty("id"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.id);
+                    return writer;
+                };
+
+                /**
+                 * Encodes the specified Payload message, length delimited. Does not implicitly {@link messages.entry.DeleteEntryRequest.Payload.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof messages.entry.DeleteEntryRequest.Payload
+                 * @static
+                 * @param {messages.entry.DeleteEntryRequest.IPayload} message Payload message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Payload.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+
+                /**
+                 * Decodes a Payload message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof messages.entry.DeleteEntryRequest.Payload
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {messages.entry.DeleteEntryRequest.Payload} Payload
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Payload.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.messages.entry.DeleteEntryRequest.Payload();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.id = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+
+                /**
+                 * Decodes a Payload message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof messages.entry.DeleteEntryRequest.Payload
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {messages.entry.DeleteEntryRequest.Payload} Payload
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Payload.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+
+                /**
+                 * Verifies a Payload message.
+                 * @function verify
+                 * @memberof messages.entry.DeleteEntryRequest.Payload
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Payload.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.id != null && message.hasOwnProperty("id"))
+                        if (!$util.isString(message.id))
+                            return "id: string expected";
+                    return null;
+                };
+
+                /**
+                 * Creates a Payload message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof messages.entry.DeleteEntryRequest.Payload
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {messages.entry.DeleteEntryRequest.Payload} Payload
+                 */
+                Payload.fromObject = function fromObject(object) {
+                    if (object instanceof $root.messages.entry.DeleteEntryRequest.Payload)
+                        return object;
+                    var message = new $root.messages.entry.DeleteEntryRequest.Payload();
+                    if (object.id != null)
+                        message.id = String(object.id);
+                    return message;
+                };
+
+                /**
+                 * Creates a plain object from a Payload message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof messages.entry.DeleteEntryRequest.Payload
+                 * @static
+                 * @param {messages.entry.DeleteEntryRequest.Payload} message Payload
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Payload.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults)
+                        object.id = "";
+                    if (message.id != null && message.hasOwnProperty("id"))
+                        object.id = message.id;
+                    return object;
+                };
+
+                /**
+                 * Converts this Payload to JSON.
+                 * @function toJSON
+                 * @memberof messages.entry.DeleteEntryRequest.Payload
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Payload.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+
+                return Payload;
+            })();
+
+            return DeleteEntryRequest;
+        })();
+
+        entry.DeleteEntryResponse = (function() {
+
+            /**
+             * Properties of a DeleteEntryResponse.
+             * @memberof messages.entry
+             * @interface IDeleteEntryResponse
+             * @property {messages.entry.IError|null} [error] DeleteEntryResponse error
+             * @property {string|null} [traceId] DeleteEntryResponse traceId
+             */
+
+            /**
+             * Constructs a new DeleteEntryResponse.
+             * @memberof messages.entry
+             * @classdesc Represents a DeleteEntryResponse.
+             * @implements IDeleteEntryResponse
+             * @constructor
+             * @param {messages.entry.IDeleteEntryResponse=} [properties] Properties to set
+             */
+            function DeleteEntryResponse(properties) {
+                if (properties)
+                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+
+            /**
+             * DeleteEntryResponse error.
+             * @member {messages.entry.IError|null|undefined} error
+             * @memberof messages.entry.DeleteEntryResponse
+             * @instance
+             */
+            DeleteEntryResponse.prototype.error = null;
+
+            /**
+             * DeleteEntryResponse traceId.
+             * @member {string} traceId
+             * @memberof messages.entry.DeleteEntryResponse
+             * @instance
+             */
+            DeleteEntryResponse.prototype.traceId = "";
+
+            /**
+             * Creates a new DeleteEntryResponse instance using the specified properties.
+             * @function create
+             * @memberof messages.entry.DeleteEntryResponse
+             * @static
+             * @param {messages.entry.IDeleteEntryResponse=} [properties] Properties to set
+             * @returns {messages.entry.DeleteEntryResponse} DeleteEntryResponse instance
+             */
+            DeleteEntryResponse.create = function create(properties) {
+                return new DeleteEntryResponse(properties);
+            };
+
+            /**
+             * Encodes the specified DeleteEntryResponse message. Does not implicitly {@link messages.entry.DeleteEntryResponse.verify|verify} messages.
+             * @function encode
+             * @memberof messages.entry.DeleteEntryResponse
+             * @static
+             * @param {messages.entry.IDeleteEntryResponse} message DeleteEntryResponse message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            DeleteEntryResponse.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.error != null && message.hasOwnProperty("error"))
+                    $root.messages.entry.Error.encode(message.error, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                if (message.traceId != null && message.hasOwnProperty("traceId"))
+                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.traceId);
+                return writer;
+            };
+
+            /**
+             * Encodes the specified DeleteEntryResponse message, length delimited. Does not implicitly {@link messages.entry.DeleteEntryResponse.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof messages.entry.DeleteEntryResponse
+             * @static
+             * @param {messages.entry.IDeleteEntryResponse} message DeleteEntryResponse message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            DeleteEntryResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
+             * Decodes a DeleteEntryResponse message from the specified reader or buffer.
+             * @function decode
+             * @memberof messages.entry.DeleteEntryResponse
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {messages.entry.DeleteEntryResponse} DeleteEntryResponse
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            DeleteEntryResponse.decode = function decode(reader, length) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.messages.entry.DeleteEntryResponse();
+                while (reader.pos < end) {
+                    var tag = reader.uint32();
+                    switch (tag >>> 3) {
+                    case 1:
+                        message.error = $root.messages.entry.Error.decode(reader, reader.uint32());
+                        break;
+                    case 2:
+                        message.traceId = reader.string();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+
+            /**
+             * Decodes a DeleteEntryResponse message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof messages.entry.DeleteEntryResponse
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {messages.entry.DeleteEntryResponse} DeleteEntryResponse
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            DeleteEntryResponse.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a DeleteEntryResponse message.
+             * @function verify
+             * @memberof messages.entry.DeleteEntryResponse
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            DeleteEntryResponse.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.error != null && message.hasOwnProperty("error")) {
+                    var error = $root.messages.entry.Error.verify(message.error);
+                    if (error)
+                        return "error." + error;
+                }
+                if (message.traceId != null && message.hasOwnProperty("traceId"))
+                    if (!$util.isString(message.traceId))
+                        return "traceId: string expected";
+                return null;
+            };
+
+            /**
+             * Creates a DeleteEntryResponse message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof messages.entry.DeleteEntryResponse
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {messages.entry.DeleteEntryResponse} DeleteEntryResponse
+             */
+            DeleteEntryResponse.fromObject = function fromObject(object) {
+                if (object instanceof $root.messages.entry.DeleteEntryResponse)
+                    return object;
+                var message = new $root.messages.entry.DeleteEntryResponse();
+                if (object.error != null) {
+                    if (typeof object.error !== "object")
+                        throw TypeError(".messages.entry.DeleteEntryResponse.error: object expected");
+                    message.error = $root.messages.entry.Error.fromObject(object.error);
+                }
+                if (object.traceId != null)
+                    message.traceId = String(object.traceId);
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a DeleteEntryResponse message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof messages.entry.DeleteEntryResponse
+             * @static
+             * @param {messages.entry.DeleteEntryResponse} message DeleteEntryResponse
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            DeleteEntryResponse.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                var object = {};
+                if (options.defaults) {
+                    object.error = null;
+                    object.traceId = "";
+                }
+                if (message.error != null && message.hasOwnProperty("error"))
+                    object.error = $root.messages.entry.Error.toObject(message.error, options);
+                if (message.traceId != null && message.hasOwnProperty("traceId"))
+                    object.traceId = message.traceId;
+                return object;
+            };
+
+            /**
+             * Converts this DeleteEntryResponse to JSON.
+             * @function toJSON
+             * @memberof messages.entry.DeleteEntryResponse
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            DeleteEntryResponse.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            return DeleteEntryResponse;
+        })();
+
         entry.InfoEntry = (function() {
 
             /**

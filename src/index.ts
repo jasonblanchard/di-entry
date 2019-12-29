@@ -3,7 +3,8 @@ import { connect, Payload, Msg, Client} from 'ts-nats';
 
 import createEntry from './op/createEntry';
 import getEntry from './op/getEntry';
-import getEntries from './op/getEntries';
+import listEntries from './op/listEntries';
+import deleteEntry from './op/deleteEntry';
 import checkStatus from './op/checkStatus';
 import getEntryPageInfo from './op/getEntryPageInfo';
 import bootstrapDatabase from './db/bootstrapDatabase';
@@ -183,7 +184,7 @@ async function bootstrap() {
        creatorId: string;
       }
 
-      const entries: Entry[] | null = await getEntries(db, { creatorId, first, after });
+      const entries: Entry[] | null = await listEntries(db, { creatorId, first, after });
 
       if (!entries) {
         const response = messages.entry.ListEntriesResponse.encode({
@@ -215,6 +216,52 @@ async function bootstrap() {
       }).finish();
       return handleError(nc, message, error, response);
     }
+  });
+
+  nc.subscribe('delete.entry', async (error, message) => {
+    if (error) {
+      const response = messages.entry.DeleteEntryResponse.encode({
+        error: {
+          code: messages.entry.Error.Code.UNKNOWN,
+          message: 'oops'
+        }
+      }).finish();
+      return handleError(nc, message, error, response);
+    }
+
+    const { payload, context } = messages.entry.DeleteEntryRequest.decode(message.data);
+    const id = payload?.id;
+    const creatorId = context?.userId;
+
+    if (!id || !creatorId) {
+      const response = messages.entry.DeleteEntryResponse.encode({
+        error: {
+          code: messages.entry.Error.Code.VALIDATION_FAILED,
+          message: 'oops'
+        }
+      }).finish();
+      return handleError(nc, message, new Error(String(messages.entry.Error.Code.VALIDATION_FAILED)), response);
+    }
+
+    try {
+      await deleteEntry(db, { id, creatorId });
+
+      if (message.reply) {
+        const response = messages.entry.DeleteEntryResponse.encode({}).finish();
+        nc.publish(message.reply, response);
+      }
+    } catch (error) {
+      const response = messages.entry.DeleteEntryResponse.encode({
+        error: {
+          code: messages.entry.Error.Code.UNKNOWN,
+          message: 'oops'
+        },
+        traceId: context?.traceId
+      }).finish();
+      handleError(nc, message, error, response);
+    }
+
+
   });
 }
 

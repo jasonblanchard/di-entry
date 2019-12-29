@@ -6,7 +6,14 @@ interface GetEntryInput {
 }
 
 export default async function getEntry(db: DbConnection, { id, creatorId }: GetEntryInput) {
-  const result = await db.query("SELECT id, text, creator_id FROM entries WHERE id = $1 AND creator_id = $2", [id, creatorId]);
+  const result = await db.query(`
+    SELECT id, text, creator_id
+    FROM entries
+    WHERE id = $1
+    AND creator_id = $2
+    AND is_deleted = false
+    `,
+    [id, creatorId]);
   const entity = result.rows[0];
 
   if (!entity) {

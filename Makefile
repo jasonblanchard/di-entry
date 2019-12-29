@@ -32,4 +32,4 @@ init_db:
 	npm run db:migrate -- up
 
 drop_db:
-	npm run db -- db:drop di
+	npm run db -- db:drop di_entry

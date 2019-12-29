@@ -4,10 +4,6 @@ import { connect, Payload, Client } from 'ts-nats';
 const TIMEOUT = 1000;
 
 it('create.entry flow', async () => {
-  interface Scope {
-    [key: string]: any;
-  }
-
   const text = "Testing 123"
   const creatorId = '123';
 
@@ -72,7 +68,7 @@ function createNEntries(nc: Client, n: number) {
   return Promise.all(requests);
 }
 
-describe('list.entries', () => {
+describe('list.entry', () => {
   it('returns list', async () => {
     const nc = await connect({
       servers: ['nats://localhost:4222'],
@@ -94,6 +90,64 @@ describe('list.entries', () => {
       hasNextPage: expect.any(Boolean),
       startCursor: expect.any(String),
       endCursor: expect.any(String)
+    });
+
+    nc.close();
+  });
+});
+
+describe('delete.entry', () => {
+  it('deletes an entry', async () => {
+    const text = "Testing 123"
+    const creatorId = '123';
+
+    const nc = await connect({
+      servers: ['nats://localhost:4222'],
+      payload: Payload.BINARY
+    });
+
+    const request = messages.entry.CreateEntryRequest.encode({
+      payload: {
+        text,
+      },
+      context: {
+        userId: creatorId,
+      }
+    }).finish();
+    const message = await nc.request('create.entry', TIMEOUT, request);
+    const response = message.data;
+    const { payload: entry } = messages.entry.CreateEntryResponse.decode(response);
+    expect(entry).toEqual({
+      id: expect.any(String)
+    });
+
+    if (!entry) throw new Error();
+
+    const deleteRequest = messages.entry.DeleteEntryRequest.encode({
+      payload: {
+        id: entry.id
+      },
+      context: {
+        userId: creatorId
+      }
+    }).finish();
+    await nc.request('delete.entry', TIMEOUT, deleteRequest);
+
+    const getRequest = messages.entry.GetEntryRequest.encode({
+      payload: {
+        id: entry.id,
+      },
+      context: {
+        userId: creatorId
+      }
+    }).finish();
+    const getMessage = await nc.request('get.entry', TIMEOUT, getRequest);
+    const getResponse = getMessage.data;
+    const { error } = messages.entry.GetEntryResponse.decode(getResponse);
+
+    expect(error).toEqual({
+      code: messages.entry.Error.Code.NOT_FOUND,
+      message: 'oops'
     });
 
     nc.close();

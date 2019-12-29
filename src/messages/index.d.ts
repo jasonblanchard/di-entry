@@ -1539,6 +1539,291 @@ export namespace messages {
             }
         }
 
+        /** Properties of a DeleteEntryRequest. */
+        interface IDeleteEntryRequest {
+
+            /** DeleteEntryRequest context */
+            context?: (messages.entry.IRequestContext|null);
+
+            /** DeleteEntryRequest payload */
+            payload?: (messages.entry.DeleteEntryRequest.IPayload|null);
+        }
+
+        /** Represents a DeleteEntryRequest. */
+        class DeleteEntryRequest implements IDeleteEntryRequest {
+
+            /**
+             * Constructs a new DeleteEntryRequest.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: messages.entry.IDeleteEntryRequest);
+
+            /** DeleteEntryRequest context. */
+            public context?: (messages.entry.IRequestContext|null);
+
+            /** DeleteEntryRequest payload. */
+            public payload?: (messages.entry.DeleteEntryRequest.IPayload|null);
+
+            /**
+             * Creates a new DeleteEntryRequest instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns DeleteEntryRequest instance
+             */
+            public static create(properties?: messages.entry.IDeleteEntryRequest): messages.entry.DeleteEntryRequest;
+
+            /**
+             * Encodes the specified DeleteEntryRequest message. Does not implicitly {@link messages.entry.DeleteEntryRequest.verify|verify} messages.
+             * @param message DeleteEntryRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: messages.entry.IDeleteEntryRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified DeleteEntryRequest message, length delimited. Does not implicitly {@link messages.entry.DeleteEntryRequest.verify|verify} messages.
+             * @param message DeleteEntryRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: messages.entry.IDeleteEntryRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a DeleteEntryRequest message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns DeleteEntryRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): messages.entry.DeleteEntryRequest;
+
+            /**
+             * Decodes a DeleteEntryRequest message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns DeleteEntryRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): messages.entry.DeleteEntryRequest;
+
+            /**
+             * Verifies a DeleteEntryRequest message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a DeleteEntryRequest message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns DeleteEntryRequest
+             */
+            public static fromObject(object: { [k: string]: any }): messages.entry.DeleteEntryRequest;
+
+            /**
+             * Creates a plain object from a DeleteEntryRequest message. Also converts values to other types if specified.
+             * @param message DeleteEntryRequest
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: messages.entry.DeleteEntryRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this DeleteEntryRequest to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        namespace DeleteEntryRequest {
+
+            /** Properties of a Payload. */
+            interface IPayload {
+
+                /** Payload id */
+                id?: (string|null);
+            }
+
+            /** Represents a Payload. */
+            class Payload implements IPayload {
+
+                /**
+                 * Constructs a new Payload.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: messages.entry.DeleteEntryRequest.IPayload);
+
+                /** Payload id. */
+                public id: string;
+
+                /**
+                 * Creates a new Payload instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns Payload instance
+                 */
+                public static create(properties?: messages.entry.DeleteEntryRequest.IPayload): messages.entry.DeleteEntryRequest.Payload;
+
+                /**
+                 * Encodes the specified Payload message. Does not implicitly {@link messages.entry.DeleteEntryRequest.Payload.verify|verify} messages.
+                 * @param message Payload message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: messages.entry.DeleteEntryRequest.IPayload, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified Payload message, length delimited. Does not implicitly {@link messages.entry.DeleteEntryRequest.Payload.verify|verify} messages.
+                 * @param message Payload message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: messages.entry.DeleteEntryRequest.IPayload, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a Payload message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns Payload
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): messages.entry.DeleteEntryRequest.Payload;
+
+                /**
+                 * Decodes a Payload message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns Payload
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): messages.entry.DeleteEntryRequest.Payload;
+
+                /**
+                 * Verifies a Payload message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a Payload message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns Payload
+                 */
+                public static fromObject(object: { [k: string]: any }): messages.entry.DeleteEntryRequest.Payload;
+
+                /**
+                 * Creates a plain object from a Payload message. Also converts values to other types if specified.
+                 * @param message Payload
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: messages.entry.DeleteEntryRequest.Payload, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this Payload to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+        }
+
+        /** Properties of a DeleteEntryResponse. */
+        interface IDeleteEntryResponse {
+
+            /** DeleteEntryResponse error */
+            error?: (messages.entry.IError|null);
+
+            /** DeleteEntryResponse traceId */
+            traceId?: (string|null);
+        }
+
+        /** Represents a DeleteEntryResponse. */
+        class DeleteEntryResponse implements IDeleteEntryResponse {
+
+            /**
+             * Constructs a new DeleteEntryResponse.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: messages.entry.IDeleteEntryResponse);
+
+            /** DeleteEntryResponse error. */
+            public error?: (messages.entry.IError|null);
+
+            /** DeleteEntryResponse traceId. */
+            public traceId: string;
+
+            /**
+             * Creates a new DeleteEntryResponse instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns DeleteEntryResponse instance
+             */
+            public static create(properties?: messages.entry.IDeleteEntryResponse): messages.entry.DeleteEntryResponse;
+
+            /**
+             * Encodes the specified DeleteEntryResponse message. Does not implicitly {@link messages.entry.DeleteEntryResponse.verify|verify} messages.
+             * @param message DeleteEntryResponse message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: messages.entry.IDeleteEntryResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified DeleteEntryResponse message, length delimited. Does not implicitly {@link messages.entry.DeleteEntryResponse.verify|verify} messages.
+             * @param message DeleteEntryResponse message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: messages.entry.IDeleteEntryResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a DeleteEntryResponse message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns DeleteEntryResponse
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): messages.entry.DeleteEntryResponse;
+
+            /**
+             * Decodes a DeleteEntryResponse message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns DeleteEntryResponse
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): messages.entry.DeleteEntryResponse;
+
+            /**
+             * Verifies a DeleteEntryResponse message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a DeleteEntryResponse message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns DeleteEntryResponse
+             */
+            public static fromObject(object: { [k: string]: any }): messages.entry.DeleteEntryResponse;
+
+            /**
+             * Creates a plain object from a DeleteEntryResponse message. Also converts values to other types if specified.
+             * @param message DeleteEntryResponse
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: messages.entry.DeleteEntryResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this DeleteEntryResponse to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
         /** Properties of an InfoEntry. */
         interface IInfoEntry {
 
