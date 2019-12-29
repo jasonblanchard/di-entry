@@ -195,7 +195,11 @@ async function bootstrap() {
         }
 
         const response = messages.entry.UpdateEntryResponse.encode({
-          payload: { id },
+          payload: {
+            id,
+            text: entry.text,
+            creatorId: entry.creatorId
+          },
           traceId: context?.traceId
         }).finish();
         nc.publish(message.reply, response);

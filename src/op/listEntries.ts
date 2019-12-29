@@ -21,6 +21,7 @@ export default async function listEntries(db: DbConnection, { creatorId, first =
       FROM entries
       WHERE creator_id = $1
       AND is_deleted = false
+      ORDER BY id
       LIMIT $2
       `,
       [creatorId, first]);

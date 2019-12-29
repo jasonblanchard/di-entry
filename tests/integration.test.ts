@@ -192,7 +192,15 @@ describe('update.entry', () => {
         userId: creatorId
       }
     }).finish();
-    await nc.request('update.entry', TIMEOUT, updateRequest);
+    const updateMessage = await nc.request('update.entry', TIMEOUT, updateRequest);
+    const updateResponse = updateMessage.data;
+    const { payload: updatedEntry, error } = messages.entry.GetEntryResponse.decode(updateResponse);
+    expect(error).toEqual(null);
+    expect(updatedEntry).toEqual({
+      id: expect.any(String),
+      text: updatedText,
+      creatorId
+    });
 
     const getRequest = messages.entry.GetEntryRequest.encode({
       payload: {
@@ -204,9 +212,9 @@ describe('update.entry', () => {
     }).finish();
     const getMessage = await nc.request('get.entry', TIMEOUT, getRequest);
     const getResponse = getMessage.data;
-    const { payload: updatedEntry, error } = messages.entry.GetEntryResponse.decode(getResponse);
-    expect(error).toEqual(null);
-    expect(updatedEntry).toEqual({
+    const { payload: fetchedEntry, error: fetchError } = messages.entry.GetEntryResponse.decode(getResponse);
+    expect(fetchError).toEqual(null);
+    expect(fetchedEntry).toEqual({
       id: expect.any(String),
       text: updatedText,
       creatorId
