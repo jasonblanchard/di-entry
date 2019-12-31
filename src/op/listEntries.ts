@@ -13,32 +13,30 @@ interface Entity {
 }
 
 export default async function listEntries(db: DbConnection, { creatorId, first = 50, after }: ListEntriesInput) {
-  let entities;
-
-  if (!after) {
-    const result = await db.query(`
-      SELECT id, text, creator_id
+  let startCursor = after;
+  if (!startCursor) {
+    const firstResult = await db.query(`
+      SELECT id
       FROM entries
       WHERE creator_id = $1
-      AND is_deleted = false
       ORDER BY id DESC
-      LIMIT $2
+      LIMIT 1
       `,
-      [creatorId, first]);
-    entities = result.rows;
-  } else {
-    const result = await db.query(`
+      [creatorId]);
+    startCursor = String(firstResult.rows[0].id);
+  }
+
+  const result = await db.query(`
       SELECT id, text, creator_id
       FROM entries
       WHERE creator_id = $1
       AND is_deleted = false
-      AND id > $2
+      AND id < $2
       ORDER BY id DESC
       LIMIT $3
       `,
-      [creatorId, after, first]);
-    entities = result.rows;
-  }
+    [creatorId, startCursor, first]);
+  const entities = result.rows;
 
   if (!entities) {
     return null;

@@ -262,7 +262,9 @@ async function bootstrap() {
         return handleError(nc, message, new Error(String(messages.entry.Error.Code.NOT_FOUND)), response);
       }
 
-      const pageInfo = await getEntryPageInfo(db, { creatorId, first, after });
+      const endId: string = entries[entries.length - 1]?.id;
+      const startId = entries[0]?.id;
+      const pageInfo = await getEntryPageInfo(db, { startId, endId, creatorId, first });
 
       if (message.reply) {
         const response = messages.entry.ListEntriesResponse.encode({
