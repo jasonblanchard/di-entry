@@ -131,7 +131,7 @@ async function bootstrap() {
     }
 
     try {
-      const { id } = await createEntry(db, { text, creatorId });
+      const { id } = await createEntry(db, { text: text || '', creatorId });
 
       if (message.reply) {
         const response = messages.entry.CreateEntryResponse.encode({
