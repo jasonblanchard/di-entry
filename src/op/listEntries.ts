@@ -21,13 +21,22 @@ export default async function listEntries(db: DbConnection, { creatorId, first =
       FROM entries
       WHERE creator_id = $1
       AND is_deleted = false
-      ORDER BY id
+      ORDER BY id DESC
       LIMIT $2
       `,
       [creatorId, first]);
     entities = result.rows;
   } else {
-    const result = await db.query("SELECT id, text, creator_id FROM entries WHERE creator_id = $1 AND id > $2 LIMIT $3", [creatorId, after, first]);
+    const result = await db.query(`
+      SELECT id, text, creator_id
+      FROM entries
+      WHERE creator_id = $1
+      AND is_deleted = false
+      AND id > $2
+      ORDER BY id DESC
+      LIMIT $3
+      `,
+      [creatorId, after, first]);
     entities = result.rows;
   }
 

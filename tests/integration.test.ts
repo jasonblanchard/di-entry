@@ -231,10 +231,7 @@ describe('errors', () => {
       payload: Payload.BINARY
     });
     const request = messages.entry.CreateEntryRequest.encode({
-      payload: {}, // Triggers a validation error
-      context: {
-        userId: '123',
-      }
+      context: {} // Triggers a validation error
     }).finish();
     const message = await nc.request('create.entry', TIMEOUT, request);
     const response = message.data;

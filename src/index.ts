@@ -120,7 +120,7 @@ async function bootstrap() {
     const text = payload?.text;
     const creatorId = context?.userId;
 
-    if (!text || !creatorId) {
+    if (!creatorId) {
       const response = messages.entry.CreateEntryResponse.encode({
         error: {
           code: messages.entry.Error.Code.VALIDATION_FAILED,
