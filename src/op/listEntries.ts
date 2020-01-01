@@ -31,7 +31,7 @@ export default async function listEntries(db: DbConnection, { creatorId, first =
       FROM entries
       WHERE creator_id = $1
       AND is_deleted = false
-      AND id < $2
+      AND id <= $2
       ORDER BY id DESC
       LIMIT $3
       `,
