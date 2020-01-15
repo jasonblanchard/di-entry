@@ -69,6 +69,31 @@ function createNEntries(nc: Client, n: number) {
 }
 
 describe('list.entry', () => {
+  it('returns empty list', async () => {
+    const nc = await connect({
+      servers: ['nats://localhost:4222'],
+      payload: Payload.BINARY
+    });
+
+    const request = messages.entry.ListEntriesRequest.encode({
+      context: {
+        userId: 'noentriesforme'
+      }
+    }).finish();
+    const message = await nc.request('list.entry', TIMEOUT, request);
+    const { payload: entries, pageInfo, error } = messages.entry.ListEntriesResponse.decode(message.data);
+    expect(error).toEqual(null);
+    expect(entries.length).toEqual(0);
+    expect(pageInfo).toEqual({
+      totalCount: 0,
+      hasNextPage: false,
+      startCursor: undefined,
+      endCursor: undefined,
+    });
+
+    nc.close();
+  });
+
   it('returns list', async () => {
     const nc = await connect({
       servers: ['nats://localhost:4222'],
