@@ -24,7 +24,8 @@ export default async function listEntries(db: DbConnection, { creatorId, first =
       `,
       [creatorId]);
 
-    if (firstResult.rows[0]) startCursor = String(firstResult.rows[0].id);
+    if (!firstResult.rows[0]) return [];
+    startCursor = String(firstResult.rows[0].id);
   }
 
   const result = await db.query(`
