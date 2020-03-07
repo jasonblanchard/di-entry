@@ -10,9 +10,4 @@ images:
 configMapGenerator:
 - literals:
   - NATS_HOST=nats://nats:4222
-  - DB_USER=di
-  - DB_PASSWORD=di
-  - DB_HOST=di-entry-psql
-  - DB_PORT=5432
-  - DB_DATABASE=di_entry
   name: di-entry-config

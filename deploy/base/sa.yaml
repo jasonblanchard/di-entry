@@ -4,3 +4,23 @@ kind: ServiceAccount
 metadata:
   name: di-entry
   namespace: di
+---
+apiVersion: "rbac.authorization.k8s.io/v1"
+kind: Role
+metadata:
+  name: di-entry-rw-role
+  namespace: di
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: di-entry-binding
+  namespace: di
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: di-entry-rw-role
+subjects:
+  - kind: ServiceAccount
+    name: di-entry
+    namespace: di

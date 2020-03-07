@@ -14,11 +14,17 @@ spec:
     metadata:
       labels:
         app: di-entry
+      annotations:
+        vault.security.banzaicloud.io/vault-addr: http://vault.di.svc.cluster.local:8200
+        vault.security.banzaicloud.io/vault-role: di-entry-rw-role
+        vault.security.banzaicloud.io/vault-skip-verify: "true"
+        vault.security.banzaicloud.io/vault-path: kubernetes
     spec:
       serviceAccountName: di-entry
       containers:
       - image: jasonblanchard/di-entry
         name: di-entry
+        command: ["npm", "start", "--production"]
         envFrom:
           - configMapRef:
               name: di-entry-config
