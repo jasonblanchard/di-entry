@@ -4,5 +4,5 @@ sanctum:
 sync:
   - name: dev
     prefix: secret/di-entry/development
-    path: overlays/development/secrets
+    path: secrets/development
     secrets_version: 2
