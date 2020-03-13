@@ -1,0 +1,8 @@
+sanctum:
+  transit_key: transit/keys/sanctum
+
+sync:
+  - name: dev
+    prefix: secret/di-entry/development
+    path: overlays/development/secrets
+    secrets_version: 2

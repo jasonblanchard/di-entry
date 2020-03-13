@@ -7,20 +7,24 @@ metadata:
   labels:
     app: di-entry-jobs
 data:
-  POSTGRES_USER: di
-  POSTGRES_PASSWORD: di
   DB_USER: di
-  DB_PASSWORD: di
+  DB_PASSWORD: vault:secret/data/di-entry/development/app#DB_PASSWORD
   DB_HOST: di-entry-psql
 ---
 apiVersion: batch/v1
 kind: Job
 metadata:
   name: di-entry-init-db
+  namespace: di
 spec:
   template:
     metadata:
+      annotations:
+        vault.security.banzaicloud.io/vault-addr: https://vault.vault:8200
+        vault.security.banzaicloud.io/vault-role: di-entry
+        vault.security.banzaicloud.io/vault-skip-verify: "true"
     spec:
+      serviceAccountName: di-entry
       containers:
       - image: postgres:10.7
         name: di-entry-init-db

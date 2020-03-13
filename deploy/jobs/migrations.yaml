@@ -8,7 +8,7 @@ metadata:
     app: di-entry-jobs
 data:
   DB_USER: di
-  DB_PASSWORD: di
+  DB_PASSWORD: vault:secret/data/di-entry/development/app#DB_PASSWORD
   DB_HOST: di-entry-psql
   DB_DATABASE: di_entry
 ---
@@ -16,10 +16,16 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: di-entry-migrations
+  namespace: di
 spec:
   template:
     metadata:
+      annotations:
+        vault.security.banzaicloud.io/vault-addr: https://vault.vault:8200
+        vault.security.banzaicloud.io/vault-role: di-entry
+        vault.security.banzaicloud.io/vault-skip-verify: "true"
     spec:
+      serviceAccountName: di-entry
       containers:
       - image: jasonblanchard/di-entry # TODO: Kustomize this to get the sha?
         name: di-entry-migrations
