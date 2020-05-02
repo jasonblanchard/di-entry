@@ -24,8 +24,8 @@ spec:
         args:
         - "postgres"
         envFrom:
-          - configMapRef:
-              name: di-entry-psql-config
+        - configMapRef:
+            name: di-entry-psql-config
         ports:
         - containerPort: 5432
           name: postgres
@@ -37,7 +37,7 @@ spec:
   - metadata:
       name: di-entry-psql
     spec:
-      accessModes: [ "ReadWriteOnce" ]
+      accessModes: ["ReadWriteOnce"]
       storageClassName: postgres
       resources:
         requests:
