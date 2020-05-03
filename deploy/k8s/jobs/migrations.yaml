@@ -6,10 +6,10 @@ metadata:
   labels:
     app: di-entry-jobs
 data:
-  DB_USER: di
+  DB_USER: postgres
   DB_PASSWORD: vault:secret/data/di-entry/development/app#DB_PASSWORD
-  DB_HOST: di-entry-psql
-  DB_DATABASE: di_entry
+  DB_HOST: di-entry.cluster-cscliqw1dfil.us-east-1.rds.amazonaws.com
+  DB_DATABASE: di
 ---
 apiVersion: batch/v1
 kind: Job
