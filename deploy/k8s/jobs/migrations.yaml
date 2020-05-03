@@ -26,7 +26,7 @@ spec:
     spec:
       serviceAccountName: di-entry
       containers:
-      - image: jasonblanchard/di-entry # TODO: Kustomize this to get the sha?
+      - image: jasonblanchard/di-entry:latest # {"$ref":"#/definitions/io.k8s.cli.substitutions.image"}
         name: di-entry-migrations
         command:
         - npm
