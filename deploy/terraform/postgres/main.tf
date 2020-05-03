@@ -50,7 +50,7 @@ resource "aws_security_group" "postgres" {
 }
 
 resource "aws_rds_cluster" "default" {
-  cluster_identifier      = "di-entry-tf"
+  cluster_identifier      = "di-entry"
   engine                  = "aurora-postgresql"
   db_subnet_group_name    = aws_db_subnet_group.default.name
   engine_version          = "10.7"
