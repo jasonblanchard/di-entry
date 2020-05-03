@@ -2,11 +2,13 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 bases:
 - ../base
+resources:
+- db.yaml
 configMapGenerator:
 - literals:
   - DB_USER=postgres
   - DB_PASSWORD=vault:secret/data/di-entry/production/app#DB_PASSWORD
-  - DB_HOST=di-entry-tf.cluster-cscliqw1dfil.us-east-1.rds.amazonaws.com
+  - DB_HOST=di-entry-psql
   - DB_PORT=5432
   - DB_DATABASE=di_entry
   name: entry-config
