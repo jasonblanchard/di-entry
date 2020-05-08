@@ -20,7 +20,7 @@ export default async function checkStatus({ nc, db }: CheckStatusInput) {
 
   const services: Services = {
     nats: !nc.isClosed(),
-    db: await db.isConnected()
+    // db: await db.isConnected() // TODO: Disabling to allow db to scale down
   }
   const status = Object.keys(services).every(key => services[key] === true) ? Status.UP : Status.DOWN;
 
