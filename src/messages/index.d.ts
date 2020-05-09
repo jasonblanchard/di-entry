@@ -210,15 +210,6 @@ export namespace messages {
         /** Properties of a GetEntryRequest. */
         interface IGetEntryRequest {
 
-            /** GetEntryRequest id */
-            id?: (string|null);
-
-            /** GetEntryRequest creatorId */
-            creatorId?: (string|null);
-
-            /** GetEntryRequest traceId */
-            traceId?: (string|null);
-
             /** GetEntryRequest context */
             context?: (messages.entry.IRequestContext|null);
 
@@ -234,15 +225,6 @@ export namespace messages {
              * @param [properties] Properties to set
              */
             constructor(properties?: messages.entry.IGetEntryRequest);
-
-            /** GetEntryRequest id. */
-            public id: string;
-
-            /** GetEntryRequest creatorId. */
-            public creatorId: string;
-
-            /** GetEntryRequest traceId. */
-            public traceId: string;
 
             /** GetEntryRequest context. */
             public context?: (messages.entry.IRequestContext|null);
@@ -624,15 +606,6 @@ export namespace messages {
         /** Properties of a CreateEntryRequest. */
         interface ICreateEntryRequest {
 
-            /** CreateEntryRequest text */
-            text?: (string|null);
-
-            /** CreateEntryRequest creatorId */
-            creatorId?: (string|null);
-
-            /** CreateEntryRequest traceId */
-            traceId?: (string|null);
-
             /** CreateEntryRequest context */
             context?: (messages.entry.IRequestContext|null);
 
@@ -648,15 +621,6 @@ export namespace messages {
              * @param [properties] Properties to set
              */
             constructor(properties?: messages.entry.ICreateEntryRequest);
-
-            /** CreateEntryRequest text. */
-            public text: string;
-
-            /** CreateEntryRequest creatorId. */
-            public creatorId: string;
-
-            /** CreateEntryRequest traceId. */
-            public traceId: string;
 
             /** CreateEntryRequest context. */
             public context?: (messages.entry.IRequestContext|null);

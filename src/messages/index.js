@@ -487,9 +487,6 @@ $root.messages = (function() {
              * Properties of a GetEntryRequest.
              * @memberof messages.entry
              * @interface IGetEntryRequest
-             * @property {string|null} [id] GetEntryRequest id
-             * @property {string|null} [creatorId] GetEntryRequest creatorId
-             * @property {string|null} [traceId] GetEntryRequest traceId
              * @property {messages.entry.IRequestContext|null} [context] GetEntryRequest context
              * @property {messages.entry.GetEntryRequest.IPayload|null} [payload] GetEntryRequest payload
              */
@@ -508,30 +505,6 @@ $root.messages = (function() {
                         if (properties[keys[i]] != null)
                             this[keys[i]] = properties[keys[i]];
             }
-
-            /**
-             * GetEntryRequest id.
-             * @member {string} id
-             * @memberof messages.entry.GetEntryRequest
-             * @instance
-             */
-            GetEntryRequest.prototype.id = "";
-
-            /**
-             * GetEntryRequest creatorId.
-             * @member {string} creatorId
-             * @memberof messages.entry.GetEntryRequest
-             * @instance
-             */
-            GetEntryRequest.prototype.creatorId = "";
-
-            /**
-             * GetEntryRequest traceId.
-             * @member {string} traceId
-             * @memberof messages.entry.GetEntryRequest
-             * @instance
-             */
-            GetEntryRequest.prototype.traceId = "";
 
             /**
              * GetEntryRequest context.
@@ -573,12 +546,6 @@ $root.messages = (function() {
             GetEntryRequest.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.id != null && message.hasOwnProperty("id"))
-                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.id);
-                if (message.creatorId != null && message.hasOwnProperty("creatorId"))
-                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.creatorId);
-                if (message.traceId != null && message.hasOwnProperty("traceId"))
-                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.traceId);
                 if (message.context != null && message.hasOwnProperty("context"))
                     $root.messages.entry.RequestContext.encode(message.context, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                 if (message.payload != null && message.hasOwnProperty("payload"))
@@ -617,15 +584,6 @@ $root.messages = (function() {
                 while (reader.pos < end) {
                     var tag = reader.uint32();
                     switch (tag >>> 3) {
-                    case 1:
-                        message.id = reader.string();
-                        break;
-                    case 2:
-                        message.creatorId = reader.string();
-                        break;
-                    case 3:
-                        message.traceId = reader.string();
-                        break;
                     case 4:
                         message.context = $root.messages.entry.RequestContext.decode(reader, reader.uint32());
                         break;
@@ -667,15 +625,6 @@ $root.messages = (function() {
             GetEntryRequest.verify = function verify(message) {
                 if (typeof message !== "object" || message === null)
                     return "object expected";
-                if (message.id != null && message.hasOwnProperty("id"))
-                    if (!$util.isString(message.id))
-                        return "id: string expected";
-                if (message.creatorId != null && message.hasOwnProperty("creatorId"))
-                    if (!$util.isString(message.creatorId))
-                        return "creatorId: string expected";
-                if (message.traceId != null && message.hasOwnProperty("traceId"))
-                    if (!$util.isString(message.traceId))
-                        return "traceId: string expected";
                 if (message.context != null && message.hasOwnProperty("context")) {
                     var error = $root.messages.entry.RequestContext.verify(message.context);
                     if (error)
@@ -701,12 +650,6 @@ $root.messages = (function() {
                 if (object instanceof $root.messages.entry.GetEntryRequest)
                     return object;
                 var message = new $root.messages.entry.GetEntryRequest();
-                if (object.id != null)
-                    message.id = String(object.id);
-                if (object.creatorId != null)
-                    message.creatorId = String(object.creatorId);
-                if (object.traceId != null)
-                    message.traceId = String(object.traceId);
                 if (object.context != null) {
                     if (typeof object.context !== "object")
                         throw TypeError(".messages.entry.GetEntryRequest.context: object expected");
@@ -734,18 +677,9 @@ $root.messages = (function() {
                     options = {};
                 var object = {};
                 if (options.defaults) {
-                    object.id = "";
-                    object.creatorId = "";
-                    object.traceId = "";
                     object.context = null;
                     object.payload = null;
                 }
-                if (message.id != null && message.hasOwnProperty("id"))
-                    object.id = message.id;
-                if (message.creatorId != null && message.hasOwnProperty("creatorId"))
-                    object.creatorId = message.creatorId;
-                if (message.traceId != null && message.hasOwnProperty("traceId"))
-                    object.traceId = message.traceId;
                 if (message.context != null && message.hasOwnProperty("context"))
                     object.context = $root.messages.entry.RequestContext.toObject(message.context, options);
                 if (message.payload != null && message.hasOwnProperty("payload"))
@@ -1434,9 +1368,6 @@ $root.messages = (function() {
              * Properties of a CreateEntryRequest.
              * @memberof messages.entry
              * @interface ICreateEntryRequest
-             * @property {string|null} [text] CreateEntryRequest text
-             * @property {string|null} [creatorId] CreateEntryRequest creatorId
-             * @property {string|null} [traceId] CreateEntryRequest traceId
              * @property {messages.entry.IRequestContext|null} [context] CreateEntryRequest context
              * @property {messages.entry.CreateEntryRequest.IPayload|null} [payload] CreateEntryRequest payload
              */
@@ -1455,30 +1386,6 @@ $root.messages = (function() {
                         if (properties[keys[i]] != null)
                             this[keys[i]] = properties[keys[i]];
             }
-
-            /**
-             * CreateEntryRequest text.
-             * @member {string} text
-             * @memberof messages.entry.CreateEntryRequest
-             * @instance
-             */
-            CreateEntryRequest.prototype.text = "";
-
-            /**
-             * CreateEntryRequest creatorId.
-             * @member {string} creatorId
-             * @memberof messages.entry.CreateEntryRequest
-             * @instance
-             */
-            CreateEntryRequest.prototype.creatorId = "";
-
-            /**
-             * CreateEntryRequest traceId.
-             * @member {string} traceId
-             * @memberof messages.entry.CreateEntryRequest
-             * @instance
-             */
-            CreateEntryRequest.prototype.traceId = "";
 
             /**
              * CreateEntryRequest context.
@@ -1520,12 +1427,6 @@ $root.messages = (function() {
             CreateEntryRequest.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.text != null && message.hasOwnProperty("text"))
-                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.text);
-                if (message.creatorId != null && message.hasOwnProperty("creatorId"))
-                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.creatorId);
-                if (message.traceId != null && message.hasOwnProperty("traceId"))
-                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.traceId);
                 if (message.context != null && message.hasOwnProperty("context"))
                     $root.messages.entry.RequestContext.encode(message.context, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                 if (message.payload != null && message.hasOwnProperty("payload"))
@@ -1564,15 +1465,6 @@ $root.messages = (function() {
                 while (reader.pos < end) {
                     var tag = reader.uint32();
                     switch (tag >>> 3) {
-                    case 1:
-                        message.text = reader.string();
-                        break;
-                    case 2:
-                        message.creatorId = reader.string();
-                        break;
-                    case 3:
-                        message.traceId = reader.string();
-                        break;
                     case 4:
                         message.context = $root.messages.entry.RequestContext.decode(reader, reader.uint32());
                         break;
@@ -1614,15 +1506,6 @@ $root.messages = (function() {
             CreateEntryRequest.verify = function verify(message) {
                 if (typeof message !== "object" || message === null)
                     return "object expected";
-                if (message.text != null && message.hasOwnProperty("text"))
-                    if (!$util.isString(message.text))
-                        return "text: string expected";
-                if (message.creatorId != null && message.hasOwnProperty("creatorId"))
-                    if (!$util.isString(message.creatorId))
-                        return "creatorId: string expected";
-                if (message.traceId != null && message.hasOwnProperty("traceId"))
-                    if (!$util.isString(message.traceId))
-                        return "traceId: string expected";
                 if (message.context != null && message.hasOwnProperty("context")) {
                     var error = $root.messages.entry.RequestContext.verify(message.context);
                     if (error)
@@ -1648,12 +1531,6 @@ $root.messages = (function() {
                 if (object instanceof $root.messages.entry.CreateEntryRequest)
                     return object;
                 var message = new $root.messages.entry.CreateEntryRequest();
-                if (object.text != null)
-                    message.text = String(object.text);
-                if (object.creatorId != null)
-                    message.creatorId = String(object.creatorId);
-                if (object.traceId != null)
-                    message.traceId = String(object.traceId);
                 if (object.context != null) {
                     if (typeof object.context !== "object")
                         throw TypeError(".messages.entry.CreateEntryRequest.context: object expected");
@@ -1681,18 +1558,9 @@ $root.messages = (function() {
                     options = {};
                 var object = {};
                 if (options.defaults) {
-                    object.text = "";
-                    object.creatorId = "";
-                    object.traceId = "";
                     object.context = null;
                     object.payload = null;
                 }
-                if (message.text != null && message.hasOwnProperty("text"))
-                    object.text = message.text;
-                if (message.creatorId != null && message.hasOwnProperty("creatorId"))
-                    object.creatorId = message.creatorId;
-                if (message.traceId != null && message.hasOwnProperty("traceId"))
-                    object.traceId = message.traceId;
                 if (message.context != null && message.hasOwnProperty("context"))
                     object.context = $root.messages.entry.RequestContext.toObject(message.context, options);
                 if (message.payload != null && message.hasOwnProperty("payload"))
