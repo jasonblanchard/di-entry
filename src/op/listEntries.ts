@@ -31,7 +31,7 @@ export default async function listEntries(db: DbConnection, { creatorId, first =
   }
 
   const result = await db.query(`
-      SELECT id, text, creator_id
+      SELECT id, text, creator_id, created_at, updated_at
       FROM entries
       WHERE creator_id = $1
       AND is_deleted = false
