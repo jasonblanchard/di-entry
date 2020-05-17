@@ -29,6 +29,6 @@ export default async function updateEntry(db: DbConnection, { id, text = '', cre
     text: entity.text,
     creatorId: entity.creator_id,
     createdAt: entity.created_at,
-    updatedAt: entity.updatedAt,
+    updatedAt: entity.updated_at,
   }
 }
