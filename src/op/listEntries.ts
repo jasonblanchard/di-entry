@@ -9,7 +9,9 @@ interface ListEntriesInput {
 interface Entity {
   id: number;
   text: string;
-  creator_id: string
+  creator_id: string;
+  created_at: Date;
+  updated_at: Date;
 }
 
 export default async function listEntries(db: DbConnection, { creatorId, first = 50, after }: ListEntriesInput) {
@@ -47,6 +49,8 @@ export default async function listEntries(db: DbConnection, { creatorId, first =
   return entities.map((entity: Entity) => ({
     id: String(entity.id),
     text: entity.text,
-    creatorId: entity.creator_id
+    creatorId: entity.creator_id,
+    createdAt: entity.created_at,
+    updatedAt: entity.updated_at,
   }));
 }

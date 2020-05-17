@@ -7,7 +7,7 @@ interface GetEntryInput {
 
 export default async function getEntry(db: DbConnection, { id, creatorId }: GetEntryInput) {
   const result = await db.query(`
-    SELECT id, text, creator_id
+    SELECT id, text, creator_id, created_at, updated_at
     FROM entries
     WHERE id = $1
     AND creator_id = $2
@@ -23,6 +23,8 @@ export default async function getEntry(db: DbConnection, { id, creatorId }: GetE
   return {
     id: String(entity.id),
     text: entity.text,
-    creatorId: entity.creator_id
+    creatorId: entity.creator_id,
+    createdAt: entity.created_at,
+    updatedAt: entity.updated_at,
   };
 }

@@ -111,6 +111,110 @@ export namespace messages {
             }
         }
 
+        /** Properties of a Principal. */
+        interface IPrincipal {
+
+            /** Principal type */
+            type?: (messages.entry.Principal.Type|null);
+
+            /** Principal id */
+            id?: (string|null);
+        }
+
+        /** Represents a Principal. */
+        class Principal implements IPrincipal {
+
+            /**
+             * Constructs a new Principal.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: messages.entry.IPrincipal);
+
+            /** Principal type. */
+            public type: messages.entry.Principal.Type;
+
+            /** Principal id. */
+            public id: string;
+
+            /**
+             * Creates a new Principal instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Principal instance
+             */
+            public static create(properties?: messages.entry.IPrincipal): messages.entry.Principal;
+
+            /**
+             * Encodes the specified Principal message. Does not implicitly {@link messages.entry.Principal.verify|verify} messages.
+             * @param message Principal message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: messages.entry.IPrincipal, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Principal message, length delimited. Does not implicitly {@link messages.entry.Principal.verify|verify} messages.
+             * @param message Principal message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: messages.entry.IPrincipal, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Principal message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Principal
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): messages.entry.Principal;
+
+            /**
+             * Decodes a Principal message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Principal
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): messages.entry.Principal;
+
+            /**
+             * Verifies a Principal message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Principal message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Principal
+             */
+            public static fromObject(object: { [k: string]: any }): messages.entry.Principal;
+
+            /**
+             * Creates a plain object from a Principal message. Also converts values to other types if specified.
+             * @param message Principal
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: messages.entry.Principal, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Principal to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        namespace Principal {
+
+            /** Type enum. */
+            enum Type {
+                USER = 1
+            }
+        }
+
         /** Properties of a RequestContext. */
         interface IRequestContext {
 
@@ -119,6 +223,9 @@ export namespace messages {
 
             /** RequestContext traceId */
             traceId?: (string|null);
+
+            /** RequestContext principal */
+            principal?: (messages.entry.IPrincipal|null);
         }
 
         /** Represents a RequestContext. */
@@ -135,6 +242,9 @@ export namespace messages {
 
             /** RequestContext traceId. */
             public traceId: string;
+
+            /** RequestContext principal. */
+            public principal?: (messages.entry.IPrincipal|null);
 
             /**
              * Creates a new RequestContext instance using the specified properties.
@@ -511,6 +621,12 @@ export namespace messages {
 
                 /** Payload creatorId */
                 creatorId?: (string|null);
+
+                /** Payload createdAt */
+                createdAt?: (google.protobuf.ITimestamp|null);
+
+                /** Payload updatedAt */
+                updatedAt?: (google.protobuf.ITimestamp|null);
             }
 
             /** Represents a Payload. */
@@ -530,6 +646,12 @@ export namespace messages {
 
                 /** Payload creatorId. */
                 public creatorId: string;
+
+                /** Payload createdAt. */
+                public createdAt?: (google.protobuf.ITimestamp|null);
+
+                /** Payload updatedAt. */
+                public updatedAt?: (google.protobuf.ITimestamp|null);
 
                 /**
                  * Creates a new Payload instance using the specified properties.
@@ -706,6 +828,15 @@ export namespace messages {
 
                 /** Payload text */
                 text?: (string|null);
+
+                /** Payload creatorId */
+                creatorId?: (string|null);
+
+                /** Payload createdAt */
+                createdAt?: (google.protobuf.ITimestamp|null);
+
+                /** Payload updatedAt */
+                updatedAt?: (google.protobuf.ITimestamp|null);
             }
 
             /** Represents a Payload. */
@@ -719,6 +850,15 @@ export namespace messages {
 
                 /** Payload text. */
                 public text: string;
+
+                /** Payload creatorId. */
+                public creatorId: string;
+
+                /** Payload createdAt. */
+                public createdAt?: (google.protobuf.ITimestamp|null);
+
+                /** Payload updatedAt. */
+                public updatedAt?: (google.protobuf.ITimestamp|null);
 
                 /**
                  * Creates a new Payload instance using the specified properties.
@@ -1297,6 +1437,12 @@ export namespace messages {
 
                 /** Payload creatorId */
                 creatorId?: (string|null);
+
+                /** Payload createdAt */
+                createdAt?: (google.protobuf.ITimestamp|null);
+
+                /** Payload updatedAt */
+                updatedAt?: (google.protobuf.ITimestamp|null);
             }
 
             /** Represents a Payload. */
@@ -1316,6 +1462,12 @@ export namespace messages {
 
                 /** Payload creatorId. */
                 public creatorId: string;
+
+                /** Payload createdAt. */
+                public createdAt?: (google.protobuf.ITimestamp|null);
+
+                /** Payload updatedAt. */
+                public updatedAt?: (google.protobuf.ITimestamp|null);
 
                 /**
                  * Creates a new Payload instance using the specified properties.
@@ -1813,6 +1965,12 @@ export namespace messages {
 
                 /** Entity creatorId */
                 creatorId?: (string|null);
+
+                /** Entity createdAt */
+                createdAt?: (google.protobuf.ITimestamp|null);
+
+                /** Entity updatedAt */
+                updatedAt?: (google.protobuf.ITimestamp|null);
             }
 
             /** Represents an Entity. */
@@ -1832,6 +1990,12 @@ export namespace messages {
 
                 /** Entity creatorId. */
                 public creatorId: string;
+
+                /** Entity createdAt. */
+                public createdAt?: (google.protobuf.ITimestamp|null);
+
+                /** Entity updatedAt. */
+                public updatedAt?: (google.protobuf.ITimestamp|null);
 
                 /**
                  * Creates a new Entity instance using the specified properties.
@@ -2491,6 +2655,110 @@ export namespace messages {
             enum Code {
                 UNKNOWN = 0
             }
+        }
+    }
+}
+
+/** Namespace google. */
+export namespace google {
+
+    /** Namespace protobuf. */
+    namespace protobuf {
+
+        /** Properties of a Timestamp. */
+        interface ITimestamp {
+
+            /** Timestamp seconds */
+            seconds?: (number|Long|null);
+
+            /** Timestamp nanos */
+            nanos?: (number|null);
+        }
+
+        /** Represents a Timestamp. */
+        class Timestamp implements ITimestamp {
+
+            /**
+             * Constructs a new Timestamp.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.ITimestamp);
+
+            /** Timestamp seconds. */
+            public seconds: (number|Long);
+
+            /** Timestamp nanos. */
+            public nanos: number;
+
+            /**
+             * Creates a new Timestamp instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Timestamp instance
+             */
+            public static create(properties?: google.protobuf.ITimestamp): google.protobuf.Timestamp;
+
+            /**
+             * Encodes the specified Timestamp message. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
+             * @param message Timestamp message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Timestamp message, length delimited. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
+             * @param message Timestamp message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Timestamp message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Timestamp
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Timestamp;
+
+            /**
+             * Decodes a Timestamp message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Timestamp
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Timestamp;
+
+            /**
+             * Verifies a Timestamp message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Timestamp message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Timestamp
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Timestamp;
+
+            /**
+             * Creates a plain object from a Timestamp message. Also converts values to other types if specified.
+             * @param message Timestamp
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Timestamp, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Timestamp to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
         }
     }
 }

@@ -1,4 +1,4 @@
-import { messages } from '../src/messages';
+import proto, { messages } from '../src/messages';
 import { connect, Payload, Client } from 'ts-nats';
 
 const TIMEOUT = 1000;
@@ -44,7 +44,8 @@ it('create.entry flow', async () => {
   expect(newEentry).toEqual({
     id: expect.any(String),
     text,
-    creatorId
+    creatorId,
+    createdAt: expect.any(proto.google.protobuf.Timestamp),
   });
 
   nc.close();
@@ -131,9 +132,13 @@ describe('delete.entry', () => {
       payload: Payload.BINARY
     });
 
+    const createdAt = new proto.google.protobuf.Timestamp();
+    createdAt.seconds = (new Date().getSeconds() / 1000) - 172800;
+
     const request = messages.entry.CreateEntryRequest.encode({
       payload: {
         text,
+        createdAt,
       },
       context: {
         userId: creatorId,
@@ -224,7 +229,8 @@ describe('update.entry', () => {
     expect(updatedEntry).toEqual({
       id: expect.any(String),
       text: updatedText,
-      creatorId
+      creatorId,
+      createdAt: expect.any(proto.google.protobuf.Timestamp),
     });
 
     const getRequest = messages.entry.GetEntryRequest.encode({
@@ -238,11 +244,15 @@ describe('update.entry', () => {
     const getMessage = await nc.request('get.entry', TIMEOUT, getRequest);
     const getResponse = getMessage.data;
     const { payload: fetchedEntry, error: fetchError } = messages.entry.GetEntryResponse.decode(getResponse);
+    const timestamp = fetchedEntry?.createdAt || undefined;
+    const prototimestamp = new proto.google.protobuf.Timestamp(timestamp);
     expect(fetchError).toEqual(null);
     expect(fetchedEntry).toEqual({
       id: expect.any(String),
       text: updatedText,
-      creatorId
+      creatorId,
+      createdAt: expect.any(proto.google.protobuf.Timestamp),
+      updatedAt: expect.any(proto.google.protobuf.Timestamp),
     });
 
     nc.close();

@@ -271,6 +271,236 @@ $root.messages = (function() {
             return Error;
         })();
 
+        entry.Principal = (function() {
+
+            /**
+             * Properties of a Principal.
+             * @memberof messages.entry
+             * @interface IPrincipal
+             * @property {messages.entry.Principal.Type|null} [type] Principal type
+             * @property {string|null} [id] Principal id
+             */
+
+            /**
+             * Constructs a new Principal.
+             * @memberof messages.entry
+             * @classdesc Represents a Principal.
+             * @implements IPrincipal
+             * @constructor
+             * @param {messages.entry.IPrincipal=} [properties] Properties to set
+             */
+            function Principal(properties) {
+                if (properties)
+                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+
+            /**
+             * Principal type.
+             * @member {messages.entry.Principal.Type} type
+             * @memberof messages.entry.Principal
+             * @instance
+             */
+            Principal.prototype.type = 1;
+
+            /**
+             * Principal id.
+             * @member {string} id
+             * @memberof messages.entry.Principal
+             * @instance
+             */
+            Principal.prototype.id = "";
+
+            /**
+             * Creates a new Principal instance using the specified properties.
+             * @function create
+             * @memberof messages.entry.Principal
+             * @static
+             * @param {messages.entry.IPrincipal=} [properties] Properties to set
+             * @returns {messages.entry.Principal} Principal instance
+             */
+            Principal.create = function create(properties) {
+                return new Principal(properties);
+            };
+
+            /**
+             * Encodes the specified Principal message. Does not implicitly {@link messages.entry.Principal.verify|verify} messages.
+             * @function encode
+             * @memberof messages.entry.Principal
+             * @static
+             * @param {messages.entry.IPrincipal} message Principal message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            Principal.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.type != null && message.hasOwnProperty("type"))
+                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.type);
+                if (message.id != null && message.hasOwnProperty("id"))
+                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.id);
+                return writer;
+            };
+
+            /**
+             * Encodes the specified Principal message, length delimited. Does not implicitly {@link messages.entry.Principal.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof messages.entry.Principal
+             * @static
+             * @param {messages.entry.IPrincipal} message Principal message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            Principal.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
+             * Decodes a Principal message from the specified reader or buffer.
+             * @function decode
+             * @memberof messages.entry.Principal
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {messages.entry.Principal} Principal
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            Principal.decode = function decode(reader, length) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.messages.entry.Principal();
+                while (reader.pos < end) {
+                    var tag = reader.uint32();
+                    switch (tag >>> 3) {
+                    case 1:
+                        message.type = reader.int32();
+                        break;
+                    case 2:
+                        message.id = reader.string();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+
+            /**
+             * Decodes a Principal message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof messages.entry.Principal
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {messages.entry.Principal} Principal
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            Principal.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a Principal message.
+             * @function verify
+             * @memberof messages.entry.Principal
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            Principal.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.type != null && message.hasOwnProperty("type"))
+                    switch (message.type) {
+                    default:
+                        return "type: enum value expected";
+                    case 1:
+                        break;
+                    }
+                if (message.id != null && message.hasOwnProperty("id"))
+                    if (!$util.isString(message.id))
+                        return "id: string expected";
+                return null;
+            };
+
+            /**
+             * Creates a Principal message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof messages.entry.Principal
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {messages.entry.Principal} Principal
+             */
+            Principal.fromObject = function fromObject(object) {
+                if (object instanceof $root.messages.entry.Principal)
+                    return object;
+                var message = new $root.messages.entry.Principal();
+                switch (object.type) {
+                case "USER":
+                case 1:
+                    message.type = 1;
+                    break;
+                }
+                if (object.id != null)
+                    message.id = String(object.id);
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a Principal message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof messages.entry.Principal
+             * @static
+             * @param {messages.entry.Principal} message Principal
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            Principal.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                var object = {};
+                if (options.defaults) {
+                    object.type = options.enums === String ? "USER" : 1;
+                    object.id = "";
+                }
+                if (message.type != null && message.hasOwnProperty("type"))
+                    object.type = options.enums === String ? $root.messages.entry.Principal.Type[message.type] : message.type;
+                if (message.id != null && message.hasOwnProperty("id"))
+                    object.id = message.id;
+                return object;
+            };
+
+            /**
+             * Converts this Principal to JSON.
+             * @function toJSON
+             * @memberof messages.entry.Principal
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            Principal.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Type enum.
+             * @name messages.entry.Principal.Type
+             * @enum {string}
+             * @property {number} USER=1 USER value
+             */
+            Principal.Type = (function() {
+                var valuesById = {}, values = Object.create(valuesById);
+                values[valuesById[1] = "USER"] = 1;
+                return values;
+            })();
+
+            return Principal;
+        })();
+
         entry.RequestContext = (function() {
 
             /**
@@ -279,6 +509,7 @@ $root.messages = (function() {
              * @interface IRequestContext
              * @property {string|null} [userId] RequestContext userId
              * @property {string|null} [traceId] RequestContext traceId
+             * @property {messages.entry.IPrincipal|null} [principal] RequestContext principal
              */
 
             /**
@@ -313,6 +544,14 @@ $root.messages = (function() {
             RequestContext.prototype.traceId = "";
 
             /**
+             * RequestContext principal.
+             * @member {messages.entry.IPrincipal|null|undefined} principal
+             * @memberof messages.entry.RequestContext
+             * @instance
+             */
+            RequestContext.prototype.principal = null;
+
+            /**
              * Creates a new RequestContext instance using the specified properties.
              * @function create
              * @memberof messages.entry.RequestContext
@@ -340,6 +579,8 @@ $root.messages = (function() {
                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.userId);
                 if (message.traceId != null && message.hasOwnProperty("traceId"))
                     writer.uint32(/* id 2, wireType 2 =*/18).string(message.traceId);
+                if (message.principal != null && message.hasOwnProperty("principal"))
+                    $root.messages.entry.Principal.encode(message.principal, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                 return writer;
             };
 
@@ -379,6 +620,9 @@ $root.messages = (function() {
                         break;
                     case 2:
                         message.traceId = reader.string();
+                        break;
+                    case 3:
+                        message.principal = $root.messages.entry.Principal.decode(reader, reader.uint32());
                         break;
                     default:
                         reader.skipType(tag & 7);
@@ -421,6 +665,11 @@ $root.messages = (function() {
                 if (message.traceId != null && message.hasOwnProperty("traceId"))
                     if (!$util.isString(message.traceId))
                         return "traceId: string expected";
+                if (message.principal != null && message.hasOwnProperty("principal")) {
+                    var error = $root.messages.entry.Principal.verify(message.principal);
+                    if (error)
+                        return "principal." + error;
+                }
                 return null;
             };
 
@@ -440,6 +689,11 @@ $root.messages = (function() {
                     message.userId = String(object.userId);
                 if (object.traceId != null)
                     message.traceId = String(object.traceId);
+                if (object.principal != null) {
+                    if (typeof object.principal !== "object")
+                        throw TypeError(".messages.entry.RequestContext.principal: object expected");
+                    message.principal = $root.messages.entry.Principal.fromObject(object.principal);
+                }
                 return message;
             };
 
@@ -459,11 +713,14 @@ $root.messages = (function() {
                 if (options.defaults) {
                     object.userId = "";
                     object.traceId = "";
+                    object.principal = null;
                 }
                 if (message.userId != null && message.hasOwnProperty("userId"))
                     object.userId = message.userId;
                 if (message.traceId != null && message.hasOwnProperty("traceId"))
                     object.traceId = message.traceId;
+                if (message.principal != null && message.hasOwnProperty("principal"))
+                    object.principal = $root.messages.entry.Principal.toObject(message.principal, options);
                 return object;
             };
 
@@ -1136,6 +1393,8 @@ $root.messages = (function() {
                  * @property {string|null} [id] Payload id
                  * @property {string|null} [text] Payload text
                  * @property {string|null} [creatorId] Payload creatorId
+                 * @property {google.protobuf.ITimestamp|null} [createdAt] Payload createdAt
+                 * @property {google.protobuf.ITimestamp|null} [updatedAt] Payload updatedAt
                  */
 
                 /**
@@ -1178,6 +1437,22 @@ $root.messages = (function() {
                 Payload.prototype.creatorId = "";
 
                 /**
+                 * Payload createdAt.
+                 * @member {google.protobuf.ITimestamp|null|undefined} createdAt
+                 * @memberof messages.entry.GetEntryResponse.Payload
+                 * @instance
+                 */
+                Payload.prototype.createdAt = null;
+
+                /**
+                 * Payload updatedAt.
+                 * @member {google.protobuf.ITimestamp|null|undefined} updatedAt
+                 * @memberof messages.entry.GetEntryResponse.Payload
+                 * @instance
+                 */
+                Payload.prototype.updatedAt = null;
+
+                /**
                  * Creates a new Payload instance using the specified properties.
                  * @function create
                  * @memberof messages.entry.GetEntryResponse.Payload
@@ -1207,6 +1482,10 @@ $root.messages = (function() {
                         writer.uint32(/* id 2, wireType 2 =*/18).string(message.text);
                     if (message.creatorId != null && message.hasOwnProperty("creatorId"))
                         writer.uint32(/* id 3, wireType 2 =*/26).string(message.creatorId);
+                    if (message.createdAt != null && message.hasOwnProperty("createdAt"))
+                        $root.google.protobuf.Timestamp.encode(message.createdAt, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                    if (message.updatedAt != null && message.hasOwnProperty("updatedAt"))
+                        $root.google.protobuf.Timestamp.encode(message.updatedAt, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                     return writer;
                 };
 
@@ -1249,6 +1528,12 @@ $root.messages = (function() {
                             break;
                         case 3:
                             message.creatorId = reader.string();
+                            break;
+                        case 4:
+                            message.createdAt = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                            break;
+                        case 5:
+                            message.updatedAt = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -1294,6 +1579,16 @@ $root.messages = (function() {
                     if (message.creatorId != null && message.hasOwnProperty("creatorId"))
                         if (!$util.isString(message.creatorId))
                             return "creatorId: string expected";
+                    if (message.createdAt != null && message.hasOwnProperty("createdAt")) {
+                        var error = $root.google.protobuf.Timestamp.verify(message.createdAt);
+                        if (error)
+                            return "createdAt." + error;
+                    }
+                    if (message.updatedAt != null && message.hasOwnProperty("updatedAt")) {
+                        var error = $root.google.protobuf.Timestamp.verify(message.updatedAt);
+                        if (error)
+                            return "updatedAt." + error;
+                    }
                     return null;
                 };
 
@@ -1315,6 +1610,16 @@ $root.messages = (function() {
                         message.text = String(object.text);
                     if (object.creatorId != null)
                         message.creatorId = String(object.creatorId);
+                    if (object.createdAt != null) {
+                        if (typeof object.createdAt !== "object")
+                            throw TypeError(".messages.entry.GetEntryResponse.Payload.createdAt: object expected");
+                        message.createdAt = $root.google.protobuf.Timestamp.fromObject(object.createdAt);
+                    }
+                    if (object.updatedAt != null) {
+                        if (typeof object.updatedAt !== "object")
+                            throw TypeError(".messages.entry.GetEntryResponse.Payload.updatedAt: object expected");
+                        message.updatedAt = $root.google.protobuf.Timestamp.fromObject(object.updatedAt);
+                    }
                     return message;
                 };
 
@@ -1335,6 +1640,8 @@ $root.messages = (function() {
                         object.id = "";
                         object.text = "";
                         object.creatorId = "";
+                        object.createdAt = null;
+                        object.updatedAt = null;
                     }
                     if (message.id != null && message.hasOwnProperty("id"))
                         object.id = message.id;
@@ -1342,6 +1649,10 @@ $root.messages = (function() {
                         object.text = message.text;
                     if (message.creatorId != null && message.hasOwnProperty("creatorId"))
                         object.creatorId = message.creatorId;
+                    if (message.createdAt != null && message.hasOwnProperty("createdAt"))
+                        object.createdAt = $root.google.protobuf.Timestamp.toObject(message.createdAt, options);
+                    if (message.updatedAt != null && message.hasOwnProperty("updatedAt"))
+                        object.updatedAt = $root.google.protobuf.Timestamp.toObject(message.updatedAt, options);
                     return object;
                 };
 
@@ -1586,6 +1897,9 @@ $root.messages = (function() {
                  * @memberof messages.entry.CreateEntryRequest
                  * @interface IPayload
                  * @property {string|null} [text] Payload text
+                 * @property {string|null} [creatorId] Payload creatorId
+                 * @property {google.protobuf.ITimestamp|null} [createdAt] Payload createdAt
+                 * @property {google.protobuf.ITimestamp|null} [updatedAt] Payload updatedAt
                  */
 
                 /**
@@ -1610,6 +1924,30 @@ $root.messages = (function() {
                  * @instance
                  */
                 Payload.prototype.text = "";
+
+                /**
+                 * Payload creatorId.
+                 * @member {string} creatorId
+                 * @memberof messages.entry.CreateEntryRequest.Payload
+                 * @instance
+                 */
+                Payload.prototype.creatorId = "";
+
+                /**
+                 * Payload createdAt.
+                 * @member {google.protobuf.ITimestamp|null|undefined} createdAt
+                 * @memberof messages.entry.CreateEntryRequest.Payload
+                 * @instance
+                 */
+                Payload.prototype.createdAt = null;
+
+                /**
+                 * Payload updatedAt.
+                 * @member {google.protobuf.ITimestamp|null|undefined} updatedAt
+                 * @memberof messages.entry.CreateEntryRequest.Payload
+                 * @instance
+                 */
+                Payload.prototype.updatedAt = null;
 
                 /**
                  * Creates a new Payload instance using the specified properties.
@@ -1637,6 +1975,12 @@ $root.messages = (function() {
                         writer = $Writer.create();
                     if (message.text != null && message.hasOwnProperty("text"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.text);
+                    if (message.creatorId != null && message.hasOwnProperty("creatorId"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.creatorId);
+                    if (message.createdAt != null && message.hasOwnProperty("createdAt"))
+                        $root.google.protobuf.Timestamp.encode(message.createdAt, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                    if (message.updatedAt != null && message.hasOwnProperty("updatedAt"))
+                        $root.google.protobuf.Timestamp.encode(message.updatedAt, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                     return writer;
                 };
 
@@ -1673,6 +2017,15 @@ $root.messages = (function() {
                         switch (tag >>> 3) {
                         case 1:
                             message.text = reader.string();
+                            break;
+                        case 2:
+                            message.creatorId = reader.string();
+                            break;
+                        case 3:
+                            message.createdAt = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                            break;
+                        case 4:
+                            message.updatedAt = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -1712,6 +2065,19 @@ $root.messages = (function() {
                     if (message.text != null && message.hasOwnProperty("text"))
                         if (!$util.isString(message.text))
                             return "text: string expected";
+                    if (message.creatorId != null && message.hasOwnProperty("creatorId"))
+                        if (!$util.isString(message.creatorId))
+                            return "creatorId: string expected";
+                    if (message.createdAt != null && message.hasOwnProperty("createdAt")) {
+                        var error = $root.google.protobuf.Timestamp.verify(message.createdAt);
+                        if (error)
+                            return "createdAt." + error;
+                    }
+                    if (message.updatedAt != null && message.hasOwnProperty("updatedAt")) {
+                        var error = $root.google.protobuf.Timestamp.verify(message.updatedAt);
+                        if (error)
+                            return "updatedAt." + error;
+                    }
                     return null;
                 };
 
@@ -1729,6 +2095,18 @@ $root.messages = (function() {
                     var message = new $root.messages.entry.CreateEntryRequest.Payload();
                     if (object.text != null)
                         message.text = String(object.text);
+                    if (object.creatorId != null)
+                        message.creatorId = String(object.creatorId);
+                    if (object.createdAt != null) {
+                        if (typeof object.createdAt !== "object")
+                            throw TypeError(".messages.entry.CreateEntryRequest.Payload.createdAt: object expected");
+                        message.createdAt = $root.google.protobuf.Timestamp.fromObject(object.createdAt);
+                    }
+                    if (object.updatedAt != null) {
+                        if (typeof object.updatedAt !== "object")
+                            throw TypeError(".messages.entry.CreateEntryRequest.Payload.updatedAt: object expected");
+                        message.updatedAt = $root.google.protobuf.Timestamp.fromObject(object.updatedAt);
+                    }
                     return message;
                 };
 
@@ -1745,10 +2123,20 @@ $root.messages = (function() {
                     if (!options)
                         options = {};
                     var object = {};
-                    if (options.defaults)
+                    if (options.defaults) {
                         object.text = "";
+                        object.creatorId = "";
+                        object.createdAt = null;
+                        object.updatedAt = null;
+                    }
                     if (message.text != null && message.hasOwnProperty("text"))
                         object.text = message.text;
+                    if (message.creatorId != null && message.hasOwnProperty("creatorId"))
+                        object.creatorId = message.creatorId;
+                    if (message.createdAt != null && message.hasOwnProperty("createdAt"))
+                        object.createdAt = $root.google.protobuf.Timestamp.toObject(message.createdAt, options);
+                    if (message.updatedAt != null && message.hasOwnProperty("updatedAt"))
+                        object.updatedAt = $root.google.protobuf.Timestamp.toObject(message.updatedAt, options);
                     return object;
                 };
 
@@ -2876,6 +3264,8 @@ $root.messages = (function() {
                  * @property {string|null} [id] Payload id
                  * @property {string|null} [text] Payload text
                  * @property {string|null} [creatorId] Payload creatorId
+                 * @property {google.protobuf.ITimestamp|null} [createdAt] Payload createdAt
+                 * @property {google.protobuf.ITimestamp|null} [updatedAt] Payload updatedAt
                  */
 
                 /**
@@ -2918,6 +3308,22 @@ $root.messages = (function() {
                 Payload.prototype.creatorId = "";
 
                 /**
+                 * Payload createdAt.
+                 * @member {google.protobuf.ITimestamp|null|undefined} createdAt
+                 * @memberof messages.entry.UpdateEntryResponse.Payload
+                 * @instance
+                 */
+                Payload.prototype.createdAt = null;
+
+                /**
+                 * Payload updatedAt.
+                 * @member {google.protobuf.ITimestamp|null|undefined} updatedAt
+                 * @memberof messages.entry.UpdateEntryResponse.Payload
+                 * @instance
+                 */
+                Payload.prototype.updatedAt = null;
+
+                /**
                  * Creates a new Payload instance using the specified properties.
                  * @function create
                  * @memberof messages.entry.UpdateEntryResponse.Payload
@@ -2947,6 +3353,10 @@ $root.messages = (function() {
                         writer.uint32(/* id 2, wireType 2 =*/18).string(message.text);
                     if (message.creatorId != null && message.hasOwnProperty("creatorId"))
                         writer.uint32(/* id 3, wireType 2 =*/26).string(message.creatorId);
+                    if (message.createdAt != null && message.hasOwnProperty("createdAt"))
+                        $root.google.protobuf.Timestamp.encode(message.createdAt, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                    if (message.updatedAt != null && message.hasOwnProperty("updatedAt"))
+                        $root.google.protobuf.Timestamp.encode(message.updatedAt, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                     return writer;
                 };
 
@@ -2989,6 +3399,12 @@ $root.messages = (function() {
                             break;
                         case 3:
                             message.creatorId = reader.string();
+                            break;
+                        case 4:
+                            message.createdAt = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                            break;
+                        case 5:
+                            message.updatedAt = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -3034,6 +3450,16 @@ $root.messages = (function() {
                     if (message.creatorId != null && message.hasOwnProperty("creatorId"))
                         if (!$util.isString(message.creatorId))
                             return "creatorId: string expected";
+                    if (message.createdAt != null && message.hasOwnProperty("createdAt")) {
+                        var error = $root.google.protobuf.Timestamp.verify(message.createdAt);
+                        if (error)
+                            return "createdAt." + error;
+                    }
+                    if (message.updatedAt != null && message.hasOwnProperty("updatedAt")) {
+                        var error = $root.google.protobuf.Timestamp.verify(message.updatedAt);
+                        if (error)
+                            return "updatedAt." + error;
+                    }
                     return null;
                 };
 
@@ -3055,6 +3481,16 @@ $root.messages = (function() {
                         message.text = String(object.text);
                     if (object.creatorId != null)
                         message.creatorId = String(object.creatorId);
+                    if (object.createdAt != null) {
+                        if (typeof object.createdAt !== "object")
+                            throw TypeError(".messages.entry.UpdateEntryResponse.Payload.createdAt: object expected");
+                        message.createdAt = $root.google.protobuf.Timestamp.fromObject(object.createdAt);
+                    }
+                    if (object.updatedAt != null) {
+                        if (typeof object.updatedAt !== "object")
+                            throw TypeError(".messages.entry.UpdateEntryResponse.Payload.updatedAt: object expected");
+                        message.updatedAt = $root.google.protobuf.Timestamp.fromObject(object.updatedAt);
+                    }
                     return message;
                 };
 
@@ -3075,6 +3511,8 @@ $root.messages = (function() {
                         object.id = "";
                         object.text = "";
                         object.creatorId = "";
+                        object.createdAt = null;
+                        object.updatedAt = null;
                     }
                     if (message.id != null && message.hasOwnProperty("id"))
                         object.id = message.id;
@@ -3082,6 +3520,10 @@ $root.messages = (function() {
                         object.text = message.text;
                     if (message.creatorId != null && message.hasOwnProperty("creatorId"))
                         object.creatorId = message.creatorId;
+                    if (message.createdAt != null && message.hasOwnProperty("createdAt"))
+                        object.createdAt = $root.google.protobuf.Timestamp.toObject(message.createdAt, options);
+                    if (message.updatedAt != null && message.hasOwnProperty("updatedAt"))
+                        object.updatedAt = $root.google.protobuf.Timestamp.toObject(message.updatedAt, options);
                     return object;
                 };
 
@@ -4078,6 +4520,8 @@ $root.messages = (function() {
                  * @property {string|null} [id] Entity id
                  * @property {string|null} [text] Entity text
                  * @property {string|null} [creatorId] Entity creatorId
+                 * @property {google.protobuf.ITimestamp|null} [createdAt] Entity createdAt
+                 * @property {google.protobuf.ITimestamp|null} [updatedAt] Entity updatedAt
                  */
 
                 /**
@@ -4120,6 +4564,22 @@ $root.messages = (function() {
                 Entity.prototype.creatorId = "";
 
                 /**
+                 * Entity createdAt.
+                 * @member {google.protobuf.ITimestamp|null|undefined} createdAt
+                 * @memberof messages.entry.ListEntriesResponse.Entity
+                 * @instance
+                 */
+                Entity.prototype.createdAt = null;
+
+                /**
+                 * Entity updatedAt.
+                 * @member {google.protobuf.ITimestamp|null|undefined} updatedAt
+                 * @memberof messages.entry.ListEntriesResponse.Entity
+                 * @instance
+                 */
+                Entity.prototype.updatedAt = null;
+
+                /**
                  * Creates a new Entity instance using the specified properties.
                  * @function create
                  * @memberof messages.entry.ListEntriesResponse.Entity
@@ -4149,6 +4609,10 @@ $root.messages = (function() {
                         writer.uint32(/* id 2, wireType 2 =*/18).string(message.text);
                     if (message.creatorId != null && message.hasOwnProperty("creatorId"))
                         writer.uint32(/* id 3, wireType 2 =*/26).string(message.creatorId);
+                    if (message.createdAt != null && message.hasOwnProperty("createdAt"))
+                        $root.google.protobuf.Timestamp.encode(message.createdAt, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                    if (message.updatedAt != null && message.hasOwnProperty("updatedAt"))
+                        $root.google.protobuf.Timestamp.encode(message.updatedAt, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                     return writer;
                 };
 
@@ -4191,6 +4655,12 @@ $root.messages = (function() {
                             break;
                         case 3:
                             message.creatorId = reader.string();
+                            break;
+                        case 4:
+                            message.createdAt = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                            break;
+                        case 5:
+                            message.updatedAt = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -4236,6 +4706,16 @@ $root.messages = (function() {
                     if (message.creatorId != null && message.hasOwnProperty("creatorId"))
                         if (!$util.isString(message.creatorId))
                             return "creatorId: string expected";
+                    if (message.createdAt != null && message.hasOwnProperty("createdAt")) {
+                        var error = $root.google.protobuf.Timestamp.verify(message.createdAt);
+                        if (error)
+                            return "createdAt." + error;
+                    }
+                    if (message.updatedAt != null && message.hasOwnProperty("updatedAt")) {
+                        var error = $root.google.protobuf.Timestamp.verify(message.updatedAt);
+                        if (error)
+                            return "updatedAt." + error;
+                    }
                     return null;
                 };
 
@@ -4257,6 +4737,16 @@ $root.messages = (function() {
                         message.text = String(object.text);
                     if (object.creatorId != null)
                         message.creatorId = String(object.creatorId);
+                    if (object.createdAt != null) {
+                        if (typeof object.createdAt !== "object")
+                            throw TypeError(".messages.entry.ListEntriesResponse.Entity.createdAt: object expected");
+                        message.createdAt = $root.google.protobuf.Timestamp.fromObject(object.createdAt);
+                    }
+                    if (object.updatedAt != null) {
+                        if (typeof object.updatedAt !== "object")
+                            throw TypeError(".messages.entry.ListEntriesResponse.Entity.updatedAt: object expected");
+                        message.updatedAt = $root.google.protobuf.Timestamp.fromObject(object.updatedAt);
+                    }
                     return message;
                 };
 
@@ -4277,6 +4767,8 @@ $root.messages = (function() {
                         object.id = "";
                         object.text = "";
                         object.creatorId = "";
+                        object.createdAt = null;
+                        object.updatedAt = null;
                     }
                     if (message.id != null && message.hasOwnProperty("id"))
                         object.id = message.id;
@@ -4284,6 +4776,10 @@ $root.messages = (function() {
                         object.text = message.text;
                     if (message.creatorId != null && message.hasOwnProperty("creatorId"))
                         object.creatorId = message.creatorId;
+                    if (message.createdAt != null && message.hasOwnProperty("createdAt"))
+                        object.createdAt = $root.google.protobuf.Timestamp.toObject(message.createdAt, options);
+                    if (message.updatedAt != null && message.hasOwnProperty("updatedAt"))
+                        object.updatedAt = $root.google.protobuf.Timestamp.toObject(message.updatedAt, options);
                     return object;
                 };
 
@@ -5597,6 +6093,254 @@ $root.messages = (function() {
     })();
 
     return messages;
+})();
+
+$root.google = (function() {
+
+    /**
+     * Namespace google.
+     * @exports google
+     * @namespace
+     */
+    var google = {};
+
+    google.protobuf = (function() {
+
+        /**
+         * Namespace protobuf.
+         * @memberof google
+         * @namespace
+         */
+        var protobuf = {};
+
+        protobuf.Timestamp = (function() {
+
+            /**
+             * Properties of a Timestamp.
+             * @memberof google.protobuf
+             * @interface ITimestamp
+             * @property {number|Long|null} [seconds] Timestamp seconds
+             * @property {number|null} [nanos] Timestamp nanos
+             */
+
+            /**
+             * Constructs a new Timestamp.
+             * @memberof google.protobuf
+             * @classdesc Represents a Timestamp.
+             * @implements ITimestamp
+             * @constructor
+             * @param {google.protobuf.ITimestamp=} [properties] Properties to set
+             */
+            function Timestamp(properties) {
+                if (properties)
+                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+
+            /**
+             * Timestamp seconds.
+             * @member {number|Long} seconds
+             * @memberof google.protobuf.Timestamp
+             * @instance
+             */
+            Timestamp.prototype.seconds = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+            /**
+             * Timestamp nanos.
+             * @member {number} nanos
+             * @memberof google.protobuf.Timestamp
+             * @instance
+             */
+            Timestamp.prototype.nanos = 0;
+
+            /**
+             * Creates a new Timestamp instance using the specified properties.
+             * @function create
+             * @memberof google.protobuf.Timestamp
+             * @static
+             * @param {google.protobuf.ITimestamp=} [properties] Properties to set
+             * @returns {google.protobuf.Timestamp} Timestamp instance
+             */
+            Timestamp.create = function create(properties) {
+                return new Timestamp(properties);
+            };
+
+            /**
+             * Encodes the specified Timestamp message. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
+             * @function encode
+             * @memberof google.protobuf.Timestamp
+             * @static
+             * @param {google.protobuf.ITimestamp} message Timestamp message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            Timestamp.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.seconds != null && message.hasOwnProperty("seconds"))
+                    writer.uint32(/* id 1, wireType 0 =*/8).int64(message.seconds);
+                if (message.nanos != null && message.hasOwnProperty("nanos"))
+                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.nanos);
+                return writer;
+            };
+
+            /**
+             * Encodes the specified Timestamp message, length delimited. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof google.protobuf.Timestamp
+             * @static
+             * @param {google.protobuf.ITimestamp} message Timestamp message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            Timestamp.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
+             * Decodes a Timestamp message from the specified reader or buffer.
+             * @function decode
+             * @memberof google.protobuf.Timestamp
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {google.protobuf.Timestamp} Timestamp
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            Timestamp.decode = function decode(reader, length) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Timestamp();
+                while (reader.pos < end) {
+                    var tag = reader.uint32();
+                    switch (tag >>> 3) {
+                    case 1:
+                        message.seconds = reader.int64();
+                        break;
+                    case 2:
+                        message.nanos = reader.int32();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+
+            /**
+             * Decodes a Timestamp message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof google.protobuf.Timestamp
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {google.protobuf.Timestamp} Timestamp
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            Timestamp.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a Timestamp message.
+             * @function verify
+             * @memberof google.protobuf.Timestamp
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            Timestamp.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.seconds != null && message.hasOwnProperty("seconds"))
+                    if (!$util.isInteger(message.seconds) && !(message.seconds && $util.isInteger(message.seconds.low) && $util.isInteger(message.seconds.high)))
+                        return "seconds: integer|Long expected";
+                if (message.nanos != null && message.hasOwnProperty("nanos"))
+                    if (!$util.isInteger(message.nanos))
+                        return "nanos: integer expected";
+                return null;
+            };
+
+            /**
+             * Creates a Timestamp message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof google.protobuf.Timestamp
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {google.protobuf.Timestamp} Timestamp
+             */
+            Timestamp.fromObject = function fromObject(object) {
+                if (object instanceof $root.google.protobuf.Timestamp)
+                    return object;
+                var message = new $root.google.protobuf.Timestamp();
+                if (object.seconds != null)
+                    if ($util.Long)
+                        (message.seconds = $util.Long.fromValue(object.seconds)).unsigned = false;
+                    else if (typeof object.seconds === "string")
+                        message.seconds = parseInt(object.seconds, 10);
+                    else if (typeof object.seconds === "number")
+                        message.seconds = object.seconds;
+                    else if (typeof object.seconds === "object")
+                        message.seconds = new $util.LongBits(object.seconds.low >>> 0, object.seconds.high >>> 0).toNumber();
+                if (object.nanos != null)
+                    message.nanos = object.nanos | 0;
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a Timestamp message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof google.protobuf.Timestamp
+             * @static
+             * @param {google.protobuf.Timestamp} message Timestamp
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            Timestamp.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                var object = {};
+                if (options.defaults) {
+                    if ($util.Long) {
+                        var long = new $util.Long(0, 0, false);
+                        object.seconds = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                    } else
+                        object.seconds = options.longs === String ? "0" : 0;
+                    object.nanos = 0;
+                }
+                if (message.seconds != null && message.hasOwnProperty("seconds"))
+                    if (typeof message.seconds === "number")
+                        object.seconds = options.longs === String ? String(message.seconds) : message.seconds;
+                    else
+                        object.seconds = options.longs === String ? $util.Long.prototype.toString.call(message.seconds) : options.longs === Number ? new $util.LongBits(message.seconds.low >>> 0, message.seconds.high >>> 0).toNumber() : message.seconds;
+                if (message.nanos != null && message.hasOwnProperty("nanos"))
+                    object.nanos = message.nanos;
+                return object;
+            };
+
+            /**
+             * Converts this Timestamp to JSON.
+             * @function toJSON
+             * @memberof google.protobuf.Timestamp
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            Timestamp.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            return Timestamp;
+        })();
+
+        return protobuf;
+    })();
+
+    return google;
 })();
 
 module.exports = $root;

@@ -1,4 +1,4 @@
-import { messages } from './messages';
+import proto, { messages } from './messages';
 import { connect, Payload, Msg, Client} from 'ts-nats';
 
 import createEntry from './op/createEntry';
@@ -9,6 +9,7 @@ import updateEntry from './op/updateEntry';
 import checkStatus from './op/checkStatus';
 import getEntryPageInfo from './op/getEntryPageInfo';
 import bootstrapDatabase from './db/bootstrapDatabase';
+import { dateToProtobufTimestamp, protobufTimestampToDate } from './util/timeUtils';
 
 require('dotenv').config();
 
@@ -48,7 +49,7 @@ async function bootstrap() {
   nc.subscribe('get.entry', async (error, message) => {
     logMessage(message.subject);
     if (error) {
-      const response = messages.entry.CreateEntryResponse.encode({
+      const response = messages.entry.GetEntryResponse.encode({
         error: {
           code: messages.entry.Error.Code.UNKNOWN,
           message: 'oops'
@@ -62,7 +63,7 @@ async function bootstrap() {
     const creatorId = context?.userId;
 
     if (!id || !creatorId) {
-      const response = messages.entry.CreateEntryResponse.encode({
+      const response = messages.entry.GetEntryResponse.encode({
         error: {
           code: messages.entry.Error.Code.VALIDATION_FAILED,
           message: 'oops',
@@ -76,7 +77,7 @@ async function bootstrap() {
 
       if (message.reply) {
         if (!entry) {
-          const response = messages.entry.CreateEntryResponse.encode({
+          const response = messages.entry.GetEntryResponse.encode({
             error: {
               code: messages.entry.Error.Code.NOT_FOUND,
               message: 'oops',
@@ -86,14 +87,21 @@ async function bootstrap() {
           return handleError(nc, message, new Error(String(messages.entry.Error.Code.NOT_FOUND)), response);
         }
 
+        const createdAt = dateToProtobufTimestamp(entry.createdAt);
+        const updatedAt = dateToProtobufTimestamp(entry.updatedAt);
+
         const response = messages.entry.GetEntryResponse.encode({
-          payload: entry,
+          payload: {
+            ...entry,
+            createdAt,
+            updatedAt,
+          },
           traceId: context?.traceId
         }).finish();
         nc.publish(message.reply, response);
       }
     } catch (error) {
-      const response = messages.entry.CreateEntryResponse.encode({
+      const response = messages.entry.GetEntryResponse.encode({
         error: {
           code: messages.entry.Error.Code.UNKNOWN,
           message: 'oops',
@@ -118,6 +126,8 @@ async function bootstrap() {
 
     const { payload, context } = messages.entry.CreateEntryRequest.decode(message.data);
     const text = payload?.text;
+    const createdAt = protobufTimestampToDate(payload?.createdAt);
+    const updatedAt = protobufTimestampToDate(payload?.updatedAt);
     const creatorId = context?.userId;
 
     if (!creatorId) {
@@ -131,7 +141,7 @@ async function bootstrap() {
     }
 
     try {
-      const { id } = await createEntry(db, { text: text || '', creatorId });
+      const { id } = await createEntry(db, { text: text || '', creatorId, createdAt, updatedAt });
 
       if (message.reply) {
         const response = messages.entry.CreateEntryResponse.encode({
@@ -155,7 +165,7 @@ async function bootstrap() {
   nc.subscribe('update.entry', async (error, message) => {
     logMessage(message.subject);
     if (error) {
-      const response = messages.entry.CreateEntryResponse.encode({
+      const response = messages.entry.UpdateEntryResponse.encode({
         error: {
           code: messages.entry.Error.Code.UNKNOWN,
           message: 'oops'
@@ -198,7 +208,9 @@ async function bootstrap() {
           payload: {
             id,
             text: entry.text,
-            creatorId: entry.creatorId
+            creatorId: entry.creatorId,
+            createdAt: dateToProtobufTimestamp(entry.createdAt),
+            updatedAt: dateToProtobufTimestamp(entry.updatedAt),
           },
           traceId: context?.traceId
         }).finish();
@@ -247,6 +259,8 @@ async function bootstrap() {
        id: string;
        text: string;
        creatorId: string;
+       createdAt: Date;
+       updatedAt: Date;
       }
 
       const entries: Entry[] | null = await listEntries(db, { creatorId, first, after });
@@ -265,10 +279,17 @@ async function bootstrap() {
       const endId: string = entries[entries.length - 1]?.id;
       const startId = entries[0]?.id;
       const pageInfo = await getEntryPageInfo(db, { startId, endId, creatorId, first });
+      const payload = entries.map(entry => {
+        return {
+          ...entry,
+          createdAt: dateToProtobufTimestamp(entry.createdAt),
+          updatedAt: dateToProtobufTimestamp(entry.updatedAt),
+        }
+      });
 
       if (message.reply) {
         const response = messages.entry.ListEntriesResponse.encode({
-          payload: entries,
+          payload,
           pageInfo: pageInfo,
           traceId: context?.traceId,
         }).finish();

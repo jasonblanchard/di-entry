@@ -7,15 +7,16 @@ interface UpdateEntryInput {
 }
 
 export default async function updateEntry(db: DbConnection, { id, text = '', creatorId }: UpdateEntryInput) {
+  const updatedAt = new Date();
   const result = await db.query(`
     UPDATE entries
-    SET text = $1
+    SET text = $1, updated_at = $4
     WHERE id = $2
     AND creator_id = $3
     AND is_deleted = false
-    RETURNING id, text, creator_id
+    RETURNING id, text, creator_id, created_at, updated_at
     `,
-    [text, id, creatorId]);
+    [text, id, creatorId, updatedAt]);
 
   const entity = result.rows[0];
 
@@ -26,6 +27,8 @@ export default async function updateEntry(db: DbConnection, { id, text = '', cre
   return {
     id: String(entity.id),
     text: entity.text,
-    creatorId: entity.creator_id
+    creatorId: entity.creator_id,
+    createdAt: entity.created_at,
+    updatedAt: entity.updatedAt,
   }
 }
