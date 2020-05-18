@@ -231,6 +231,7 @@ describe('update.entry', () => {
       text: updatedText,
       creatorId,
       createdAt: expect.any(proto.google.protobuf.Timestamp),
+      updatedAt: expect.any(proto.google.protobuf.Timestamp),
     });
 
     const getRequest = messages.entry.GetEntryRequest.encode({
