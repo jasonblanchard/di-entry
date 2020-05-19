@@ -238,7 +238,7 @@ async function bootstrap() {
     }
 
     const { context, payload } = messages.entry.ListEntriesRequest.decode(message.data);
-    const creatorId = context?.userId;
+    const creatorId = payload?.creatorId;
     const first = payload?.first;
     const after = payload?.after;
 
