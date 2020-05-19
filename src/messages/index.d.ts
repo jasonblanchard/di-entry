@@ -1647,6 +1647,9 @@ export namespace messages {
 
                 /** Payload after */
                 after?: (string|null);
+
+                /** Payload creatorId */
+                creatorId?: (string|null);
             }
 
             /** Represents a Payload. */
@@ -1663,6 +1666,9 @@ export namespace messages {
 
                 /** Payload after. */
                 public after: string;
+
+                /** Payload creatorId. */
+                public creatorId: string;
 
                 /**
                  * Creates a new Payload instance using the specified properties.

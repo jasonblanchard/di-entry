@@ -15,9 +15,13 @@ it('create.entry flow', async () => {
   const request = messages.entry.CreateEntryRequest.encode({
     payload: {
       text,
+      creatorId,
     },
     context: {
-      userId: creatorId,
+      principal: {
+        type: messages.entry.Principal.Type.USER,
+        id: creatorId
+      }
     }
   }).finish();
   const message = await nc.request('create.entry', TIMEOUT, request);
@@ -34,7 +38,10 @@ it('create.entry flow', async () => {
       id: entry.id,
     },
     context: {
-      userId: creatorId
+      principal: {
+        type: messages.entry.Principal.Type.USER,
+        id: creatorId
+      }
     }
   }).finish();
   const getMessage = await nc.request('get.entry', TIMEOUT, getRequest);
@@ -139,14 +146,18 @@ describe('delete.entry', () => {
       payload: {
         text,
         createdAt,
+        creatorId,
       },
       context: {
-        userId: creatorId,
+        principal: {
+          type: messages.entry.Principal.Type.USER,
+          id: creatorId
+        }
       }
     }).finish();
     const message = await nc.request('create.entry', TIMEOUT, request);
     const response = message.data;
-    const { payload: entry } = messages.entry.CreateEntryResponse.decode(response);
+    const { error: responseError, payload: entry } = messages.entry.CreateEntryResponse.decode(response);
     expect(entry).toEqual({
       id: expect.any(String)
     });
@@ -158,7 +169,10 @@ describe('delete.entry', () => {
         id: entry.id
       },
       context: {
-        userId: creatorId
+        principal: {
+          type: messages.entry.Principal.Type.USER,
+          id: creatorId
+        }
       }
     }).finish();
     await nc.request('delete.entry', TIMEOUT, deleteRequest);
@@ -168,7 +182,10 @@ describe('delete.entry', () => {
         id: entry.id,
       },
       context: {
-        userId: creatorId
+        principal: {
+          type: messages.entry.Principal.Type.USER,
+          id: creatorId
+        }
       }
     }).finish();
     const getMessage = await nc.request('get.entry', TIMEOUT, getRequest);
@@ -197,9 +214,13 @@ describe('update.entry', () => {
     const request = messages.entry.CreateEntryRequest.encode({
       payload: {
         text,
+        creatorId: creatorId,
       },
       context: {
-        userId: creatorId,
+        principal: {
+          type: messages.entry.Principal.Type.USER,
+          id: creatorId
+        }
       }
     }).finish();
     const message = await nc.request('create.entry', TIMEOUT, request);
@@ -219,7 +240,10 @@ describe('update.entry', () => {
         text: updatedText
       },
       context: {
-        userId: creatorId
+        principal: {
+          type: messages.entry.Principal.Type.USER,
+          id: creatorId
+        }
       }
     }).finish();
     const updateMessage = await nc.request('update.entry', TIMEOUT, updateRequest);

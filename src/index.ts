@@ -60,9 +60,8 @@ async function bootstrap() {
 
     const { payload, context } = messages.entry.GetEntryRequest.decode(message.data);
     const id = payload?.id;
-    const creatorId = context?.userId;
 
-    if (!id || !creatorId) {
+    if (!id) {
       const response = messages.entry.GetEntryResponse.encode({
         error: {
           code: messages.entry.Error.Code.VALIDATION_FAILED,
@@ -73,7 +72,7 @@ async function bootstrap() {
     }
 
     try {
-      const entry = await getEntry(db, { id, creatorId });
+      const entry = await getEntry(db, { id });
 
       if (message.reply) {
         if (!entry) {
@@ -128,7 +127,7 @@ async function bootstrap() {
     const text = payload?.text;
     const createdAt = protobufTimestampToDate(payload?.createdAt);
     const updatedAt = protobufTimestampToDate(payload?.updatedAt);
-    const creatorId = context?.userId;
+    const creatorId = payload?.creatorId;
 
     if (!creatorId) {
       const response = messages.entry.CreateEntryResponse.encode({
@@ -177,9 +176,8 @@ async function bootstrap() {
     const { payload, context } = messages.entry.UpdateEntryRequest.decode(message.data);
     const text = payload?.text;
     const id = payload?.id;
-    const creatorId = context?.userId;
 
-    if (!id || !creatorId) {
+    if (!id) {
       const response = messages.entry.UpdateEntryResponse.encode({
         error: {
           code: messages.entry.Error.Code.VALIDATION_FAILED,
@@ -190,7 +188,7 @@ async function bootstrap() {
     }
 
     try {
-      const entry = await updateEntry(db, { id, creatorId, text });
+      const entry = await updateEntry(db, { id, text });
 
       if (message.reply) {
         if (!entry) {
@@ -320,9 +318,8 @@ async function bootstrap() {
 
     const { payload, context } = messages.entry.DeleteEntryRequest.decode(message.data);
     const id = payload?.id;
-    const creatorId = context?.userId;
 
-    if (!id || !creatorId) {
+    if (!id) {
       const response = messages.entry.DeleteEntryResponse.encode({
         error: {
           code: messages.entry.Error.Code.VALIDATION_FAILED,
@@ -333,7 +330,7 @@ async function bootstrap() {
     }
 
     try {
-      await deleteEntry(db, { id, creatorId });
+      await deleteEntry(db, { id });
 
       if (message.reply) {
         const response = messages.entry.DeleteEntryResponse.encode({}).finish();

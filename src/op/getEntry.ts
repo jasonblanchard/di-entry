@@ -2,18 +2,16 @@ import { DbConnection } from '../db/DbConnection';
 
 interface GetEntryInput {
   id: string;
-  creatorId: string;
 }
 
-export default async function getEntry(db: DbConnection, { id, creatorId }: GetEntryInput) {
+export default async function getEntry(db: DbConnection, { id }: GetEntryInput) {
   const result = await db.query(`
     SELECT id, text, creator_id, created_at, updated_at
     FROM entries
     WHERE id = $1
-    AND creator_id = $2
     AND is_deleted = false
     `,
-    [id, creatorId]);
+    [id]);
   const entity = result.rows[0];
 
   if (!entity) {

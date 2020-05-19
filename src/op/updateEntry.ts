@@ -3,20 +3,18 @@ import { DbConnection } from '../db/DbConnection';
 interface UpdateEntryInput {
   id: string;
   text: string | null | undefined;
-  creatorId: string;
 }
 
-export default async function updateEntry(db: DbConnection, { id, text = '', creatorId }: UpdateEntryInput) {
+export default async function updateEntry(db: DbConnection, { id, text = '' }: UpdateEntryInput) {
   const updatedAt = new Date();
   const result = await db.query(`
     UPDATE entries
-    SET text = $1, updated_at = $4
+    SET text = $1, updated_at = $3
     WHERE id = $2
-    AND creator_id = $3
     AND is_deleted = false
     RETURNING id, text, creator_id, created_at, updated_at
     `,
-    [text, id, creatorId, updatedAt]);
+    [text, id, updatedAt]);
 
   const entity = result.rows[0];
 
