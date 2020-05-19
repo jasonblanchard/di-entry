@@ -507,7 +507,6 @@ $root.messages = (function() {
              * Properties of a RequestContext.
              * @memberof messages.entry
              * @interface IRequestContext
-             * @property {string|null} [userId] RequestContext userId
              * @property {string|null} [traceId] RequestContext traceId
              * @property {messages.entry.IPrincipal|null} [principal] RequestContext principal
              */
@@ -526,14 +525,6 @@ $root.messages = (function() {
                         if (properties[keys[i]] != null)
                             this[keys[i]] = properties[keys[i]];
             }
-
-            /**
-             * RequestContext userId.
-             * @member {string} userId
-             * @memberof messages.entry.RequestContext
-             * @instance
-             */
-            RequestContext.prototype.userId = "";
 
             /**
              * RequestContext traceId.
@@ -575,8 +566,6 @@ $root.messages = (function() {
             RequestContext.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.userId != null && message.hasOwnProperty("userId"))
-                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.userId);
                 if (message.traceId != null && message.hasOwnProperty("traceId"))
                     writer.uint32(/* id 2, wireType 2 =*/18).string(message.traceId);
                 if (message.principal != null && message.hasOwnProperty("principal"))
@@ -615,9 +604,6 @@ $root.messages = (function() {
                 while (reader.pos < end) {
                     var tag = reader.uint32();
                     switch (tag >>> 3) {
-                    case 1:
-                        message.userId = reader.string();
-                        break;
                     case 2:
                         message.traceId = reader.string();
                         break;
@@ -659,9 +645,6 @@ $root.messages = (function() {
             RequestContext.verify = function verify(message) {
                 if (typeof message !== "object" || message === null)
                     return "object expected";
-                if (message.userId != null && message.hasOwnProperty("userId"))
-                    if (!$util.isString(message.userId))
-                        return "userId: string expected";
                 if (message.traceId != null && message.hasOwnProperty("traceId"))
                     if (!$util.isString(message.traceId))
                         return "traceId: string expected";
@@ -685,8 +668,6 @@ $root.messages = (function() {
                 if (object instanceof $root.messages.entry.RequestContext)
                     return object;
                 var message = new $root.messages.entry.RequestContext();
-                if (object.userId != null)
-                    message.userId = String(object.userId);
                 if (object.traceId != null)
                     message.traceId = String(object.traceId);
                 if (object.principal != null) {
@@ -711,12 +692,9 @@ $root.messages = (function() {
                     options = {};
                 var object = {};
                 if (options.defaults) {
-                    object.userId = "";
                     object.traceId = "";
                     object.principal = null;
                 }
-                if (message.userId != null && message.hasOwnProperty("userId"))
-                    object.userId = message.userId;
                 if (message.traceId != null && message.hasOwnProperty("traceId"))
                     object.traceId = message.traceId;
                 if (message.principal != null && message.hasOwnProperty("principal"))

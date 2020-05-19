@@ -22,7 +22,7 @@ export default async function getEntriesPageInfo(db: DbConnection, { creatorId, 
     AND is_deleted = false
     `,
     [creatorId]);
-  const totalCount = countResult.rows[0].count;
+  const totalCount = countResult.rows[0]?.count;
 
   const countAfterCursorResult = await db.query(`
     SELECT COUNT(*)
@@ -33,7 +33,7 @@ export default async function getEntriesPageInfo(db: DbConnection, { creatorId, 
     LIMIT $3
     `,
     [creatorId, endId, first]);
-  const hasNextPage = countAfterCursorResult.rows[0].count > 0;
+  const hasNextPage = countAfterCursorResult.rows[0]?.count > 0;
 
   const result = {
     totalCount,

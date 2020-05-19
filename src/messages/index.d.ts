@@ -218,9 +218,6 @@ export namespace messages {
         /** Properties of a RequestContext. */
         interface IRequestContext {
 
-            /** RequestContext userId */
-            userId?: (string|null);
-
             /** RequestContext traceId */
             traceId?: (string|null);
 
@@ -236,9 +233,6 @@ export namespace messages {
              * @param [properties] Properties to set
              */
             constructor(properties?: messages.entry.IRequestContext);
-
-            /** RequestContext userId. */
-            public userId: string;
 
             /** RequestContext traceId. */
             public traceId: string;

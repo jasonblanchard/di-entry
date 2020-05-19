@@ -14,7 +14,9 @@ interface Entity {
   updated_at: Date;
 }
 
-export default async function listEntries(db: DbConnection, { creatorId, first = 50, after }: ListEntriesInput) {
+export const FIRST_DEFAULT = 50;
+
+export default async function listEntries(db: DbConnection, { creatorId, first = FIRST_DEFAULT, after }: ListEntriesInput) {
   let startCursor = after;
   if (!startCursor) {
     const firstResult = await db.query(`

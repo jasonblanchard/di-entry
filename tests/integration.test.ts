@@ -65,9 +65,13 @@ function createNEntries(nc: Client, n: number) {
     const request = messages.entry.CreateEntryRequest.encode({
       payload: {
         text: `Testing text ${i}`,
+        creatorId: '123',
       },
       context: {
-        userId: '123',
+        principal: {
+          type: messages.entry.Principal.Type.USER,
+          id: '123'
+        }
       }
     }).finish();
     requests.push(nc.request('create.entry', TIMEOUT, request));
@@ -84,8 +88,14 @@ describe('list.entry', () => {
     });
 
     const request = messages.entry.ListEntriesRequest.encode({
+      payload: {
+        creatorId: 'noentriesforme'
+      },
       context: {
-        userId: 'noentriesforme'
+        principal: {
+          type: messages.entry.Principal.Type.USER,
+          id: 'noentriesforme'
+        }
       }
     }).finish();
     const message = await nc.request('list.entry', TIMEOUT, request);
@@ -110,8 +120,14 @@ describe('list.entry', () => {
 
     await createNEntries(nc, 2);
     const request = messages.entry.ListEntriesRequest.encode({
+      payload: {
+        creatorId: '123'
+      },
       context: {
-        userId: '123'
+        principal: {
+          type: messages.entry.Principal.Type.USER,
+          id: '123'
+        }
       }
     }).finish();
     const message = await nc.request('list.entry', TIMEOUT, request);

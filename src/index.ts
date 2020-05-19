@@ -3,7 +3,7 @@ import { connect, Payload, Msg, Client} from 'ts-nats';
 
 import createEntry from './op/createEntry';
 import getEntry from './op/getEntry';
-import listEntries from './op/listEntries';
+import listEntries, { FIRST_DEFAULT as ListEntriesFirstDefault } from './op/listEntries';
 import deleteEntry from './op/deleteEntry';
 import updateEntry from './op/updateEntry';
 import checkStatus from './op/checkStatus';
@@ -239,7 +239,7 @@ async function bootstrap() {
 
     const { context, payload } = messages.entry.ListEntriesRequest.decode(message.data);
     const creatorId = payload?.creatorId;
-    const first = payload?.first;
+    const first = payload?.first || ListEntriesFirstDefault; // Intentionally falls through to default if first is 0;
     const after = payload?.after;
 
     if (!creatorId) {
