@@ -44,9 +44,41 @@ async function bootstrap() {
       });
   }, 5000);
 
-  // TODO: Consider dispatching 'store.entry.get' from this and do that logic in that handler instead of here directly.
-  // This would expose a domain event AND a store building block.
   nc.subscribe('get.entry', async (error, message) => {
+    // TODO: Do authorization or other business logic here before delegating to the store
+
+    const replyMessage = await nc.request('store.get.entry', 3000, message.data);
+
+    if (message.reply) {
+      nc.publish(message.reply, replyMessage.data);
+    }
+  });
+
+  nc.subscribe('create.entry', async (error, message) => {
+    const replyMessage = await nc.request('store.create.entry', 3000, message.data);
+
+    if (message.reply) {
+      nc.publish(message.reply, replyMessage.data);
+    }
+  });
+
+  nc.subscribe('update.entry', async (error, message) => {
+    const replyMessage = await nc.request('store.update.entry', 3000, message.data);
+
+    if (message.reply) {
+      nc.publish(message.reply, replyMessage.data);
+    }
+  });
+
+  nc.subscribe('list.entry', async (error, message) => {
+    const replyMessage = await nc.request('store.list.entry', 3000, message.data);
+
+    if (message.reply) {
+      nc.publish(message.reply, replyMessage.data);
+    }
+  });
+
+  nc.subscribe('store.get.entry', async (error, message) => {
     logMessage(message.subject);
     if (error) {
       const response = messages.entry.GetEntryResponse.encode({
@@ -111,7 +143,7 @@ async function bootstrap() {
     }
   });
 
-  nc.subscribe('create.entry', async (error, message) => {
+  nc.subscribe('store.create.entry', async (error, message) => {
     logMessage(message.subject);
     if (error) {
       const response = messages.entry.CreateEntryResponse.encode({
@@ -161,7 +193,7 @@ async function bootstrap() {
     }
   });
 
-  nc.subscribe('update.entry', async (error, message) => {
+  nc.subscribe('store.update.entry', async (error, message) => {
     logMessage(message.subject);
     if (error) {
       const response = messages.entry.UpdateEntryResponse.encode({
@@ -226,7 +258,7 @@ async function bootstrap() {
     }
   });
 
-  nc.subscribe('list.entry', async (error, message) => {
+  nc.subscribe('store.list.entry', async (error, message) => {
     logMessage(message.subject);
     if (error) {
       const response = messages.entry.ListEntriesResponse.encode({

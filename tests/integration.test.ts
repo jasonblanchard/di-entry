@@ -279,7 +279,10 @@ describe('update.entry', () => {
         id: entry.id,
       },
       context: {
-        userId: creatorId
+        principal: {
+          type: messages.entry.Principal.Type.USER,
+          id: creatorId
+        }
       }
     }).finish();
     const getMessage = await nc.request('get.entry', TIMEOUT, getRequest);
@@ -330,7 +333,10 @@ describe('errors', () => {
         id: '99999'
       },
       context: {
-        userId: '123',
+        principal: {
+          type: messages.entry.Principal.Type.USER,
+          id: '123'
+        }
       }
     }).finish();
     const message = await nc.request('get.entry', TIMEOUT, request);
