@@ -95,13 +95,18 @@ func main() {
 			e.Payload.UpdatedAt = &updatedAt
 		}
 
-		fmt.Println(fmt.Sprintf("Publishing message: %v for %v", entry.ID.Oid, e.Payload.CreatorId))
-
 		out, err := proto.Marshal(e)
 		if err != nil {
 			panic(err)
 		}
 
-		nc.Publish("store.create.entry", out)
+		err = nc.Publish("store.create.entry", out)
+		if err != nil {
+			panic(err)
+		}
+
+		fmt.Println(fmt.Sprintf("Published message: %v for %v", entry.ID.Oid, e.Payload.CreatorId))
 	}
+
+	fmt.Println(fmt.Sprintf("Dispatched %v messages", len(entries)))
 }
