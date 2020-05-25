@@ -34,7 +34,9 @@ func main() {
 
 	var oldUserIDToNewUserID = make(map[string]string)
 	oldUserIDToNewUserID["58759d46f36d285ed998f155"] = "1"
-	oldUserIDToNewUserID["586ef44becbfca3a811e855b"] = "2"
+	oldUserIDToNewUserID["5aa56c5768720f0035121d53"] = "2"
+	oldUserIDToNewUserID["58759d2ff36d285ed998f148"] = "2"
+	oldUserIDToNewUserID["586ef428f36d281a78399e8d"] = "2"
 
 	type ID struct {
 		Oid string `json:"$oid"`
@@ -54,7 +56,10 @@ func main() {
 	}
 
 	var entries []Entry
-	json.Unmarshal([]byte(data), &entries)
+	marshalErr := json.Unmarshal([]byte(data), &entries)
+	if marshalErr != nil {
+		fmt.Println(marshalErr)
+	}
 
 	for i := 0; i < len(entries); i++ {
 		entry := entries[i]
@@ -90,7 +95,7 @@ func main() {
 			e.Payload.UpdatedAt = &updatedAt
 		}
 
-		fmt.Println(fmt.Sprintf("Publishing message: %v for %v, %v", entry.ID.Oid, e.Payload.CreatorId, entry.UserID))
+		fmt.Println(fmt.Sprintf("Publishing message: %v for %v", entry.ID.Oid, e.Payload.CreatorId))
 
 		out, err := proto.Marshal(e)
 		if err != nil {
