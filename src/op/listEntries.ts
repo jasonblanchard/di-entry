@@ -23,7 +23,7 @@ export default async function listEntries(db: DbConnection, { creatorId, first =
       SELECT id
       FROM entries
       WHERE creator_id = $1
-      ORDER BY id DESC
+      ORDER BY created_at DESC
       LIMIT 1
       `,
       [creatorId]);
