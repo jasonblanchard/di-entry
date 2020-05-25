@@ -15,7 +15,7 @@ import (
 
 func main() {
 
-	nc, err := nats.Connect(nats.DefaultURL)
+	nc, err := nats.Connect("nats://127.0.0.1:4222")
 	if err != nil {
 		panic(err)
 	}
@@ -33,10 +33,10 @@ func main() {
 	*/
 
 	var oldUserIDToNewUserID = make(map[string]string)
-	oldUserIDToNewUserID["58759d46f36d285ed998f155"] = "1"
-	oldUserIDToNewUserID["5aa56c5768720f0035121d53"] = "2"
-	oldUserIDToNewUserID["58759d2ff36d285ed998f148"] = "2"
-	oldUserIDToNewUserID["586ef428f36d281a78399e8d"] = "2"
+	oldUserIDToNewUserID["58759d46f36d285ed998f155"] = "2b5545ef-3557-4f52-994d-daf89e04c390"
+	oldUserIDToNewUserID["5aa56c5768720f0035121d53"] = "bcf4e360-2bd4-41a1-a9d0-786577e02f4a"
+	oldUserIDToNewUserID["58759d2ff36d285ed998f148"] = "bcf4e360-2bd4-41a1-a9d0-786577e02f4a"
+	oldUserIDToNewUserID["586ef428f36d281a78399e8d"] = "bcf4e360-2bd4-41a1-a9d0-786577e02f4a"
 
 	type ID struct {
 		Oid string `json:"$oid"`

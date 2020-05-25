@@ -45,6 +45,8 @@ async function bootstrap() {
   }, 5000);
 
   nc.subscribe('get.entry', async (error, message) => {
+    logMessage(message.subject);
+
     // TODO: Do authorization or other business logic here before delegating to the store
 
     const replyMessage = await nc.request('store.get.entry', 3000, message.data);
@@ -55,6 +57,7 @@ async function bootstrap() {
   });
 
   nc.subscribe('create.entry', async (error, message) => {
+    logMessage(message.subject);
     const replyMessage = await nc.request('store.create.entry', 3000, message.data);
 
     if (message.reply) {
@@ -63,6 +66,7 @@ async function bootstrap() {
   });
 
   nc.subscribe('update.entry', async (error, message) => {
+    logMessage(message.subject);
     const replyMessage = await nc.request('store.update.entry', 3000, message.data);
 
     if (message.reply) {
@@ -71,6 +75,7 @@ async function bootstrap() {
   });
 
   nc.subscribe('list.entry', async (error, message) => {
+    logMessage(message.subject);
     const replyMessage = await nc.request('store.list.entry', 3000, message.data);
 
     if (message.reply) {
