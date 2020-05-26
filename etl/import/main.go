@@ -19,6 +19,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+	defer nc.Close()
 
 	/*
 		{
@@ -100,12 +101,14 @@ func main() {
 			panic(err)
 		}
 
+
+		fmt.Println(fmt.Sprintf("Publishing message: %v for %v", entry.ID.Oid, e.Payload.CreatorId))
+
 		err = nc.Publish("store.create.entry", out)
 		if err != nil {
 			panic(err)
 		}
 
-		fmt.Println(fmt.Sprintf("Published message: %v for %v", entry.ID.Oid, e.Payload.CreatorId))
 	}
 
 	fmt.Println(fmt.Sprintf("Dispatched %v messages", len(entries)))

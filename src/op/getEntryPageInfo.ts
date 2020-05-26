@@ -24,6 +24,7 @@ export default async function getEntriesPageInfo(db: DbConnection, { creatorId, 
     [creatorId]);
   const totalCount = countResult.rows[0]?.count;
 
+  // TODO: Figure out if this is broken since ordering by created_at
   const countAfterCursorResult = await db.query(`
     SELECT COUNT(*)
     FROM entries
