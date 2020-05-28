@@ -7,7 +7,8 @@ import listEntries, { FIRST_DEFAULT as ListEntriesFirstDefault } from './op/list
 import deleteEntry from './op/deleteEntry';
 import updateEntry from './op/updateEntry';
 import checkStatus from './op/checkStatus';
-import getEntryPageInfo from './op/getEntryPageInfo';
+import dropEntries from './op/dropEntries';
+import getEntriesPageInfo from './op/getEntriesPageInfo';
 import bootstrapDatabase from './db/bootstrapDatabase';
 import { dateToProtobufTimestamp, protobufTimestampToDate } from './util/timeUtils';
 
@@ -313,7 +314,7 @@ async function bootstrap() {
 
       const endId: string = entries[entries.length - 1]?.id;
       const startId = entries[0]?.id;
-      const pageInfo = await getEntryPageInfo(db, { startId, endId, creatorId, first });
+      const pageInfo = await getEntriesPageInfo(db, { startId, endId, creatorId, first });
       const payload = entries.map(entry => {
         return {
           ...entry,
@@ -383,9 +384,19 @@ async function bootstrap() {
       }).finish();
       handleError(nc, message, error, response);
     }
-
-
   });
+
+  if (process.env.NODE_ENV === 'test') {
+    nc.subscribe('entry.store.drop', async (error, message) => {
+      logMessage(message.subject);
+
+      await dropEntries(db);
+
+      if (message.reply) {
+        nc.publish(message.reply);
+      }
+    });
+  }
 }
 
 bootstrap()

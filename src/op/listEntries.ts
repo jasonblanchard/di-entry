@@ -19,17 +19,29 @@ export const FIRST_DEFAULT = 50;
 export default async function listEntries(db: DbConnection, { creatorId, first = FIRST_DEFAULT, after }: ListEntriesInput) {
   let startCursor = after;
   if (!startCursor) {
-    const firstResult = await db.query(`
-      SELECT id
+    const result = await db.query(`
+      SELECT id, text, creator_id, created_at, updated_at
       FROM entries
       WHERE creator_id = $1
+      AND is_deleted = false
       ORDER BY created_at DESC
-      LIMIT 1
+      LIMIT $2
       `,
-      [creatorId]);
+      [creatorId, first]);
 
-    if (!firstResult.rows[0]) return [];
-    startCursor = String(firstResult.rows[0].id);
+      const entities = result.rows;
+
+    if (!entities) {
+      return null;
+    }
+
+    return entities.map((entity: Entity) => ({
+      id: String(entity.id),
+      text: entity.text,
+      creatorId: entity.creator_id,
+      createdAt: entity.created_at,
+      updatedAt: entity.updated_at,
+    }));
   }
 
   const result = await db.query(`
@@ -37,7 +49,7 @@ export default async function listEntries(db: DbConnection, { creatorId, first =
       FROM entries
       WHERE creator_id = $1
       AND is_deleted = false
-      AND id <= $2
+      AND id < $2
       ORDER BY created_at DESC
       LIMIT $3
       `,

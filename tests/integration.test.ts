@@ -58,7 +58,13 @@ it('create.entry flow', async () => {
   nc.close();
 });
 
-function createNEntries(nc: Client, n: number) {
+function sleep(n: number) {
+  return new Promise(resolve => {
+    setTimeout(resolve, n);
+  });
+}
+
+async function createNEntries(nc: Client, n: number) {
   let requests = [];
 
   for (let i = 0; i < n; i++) {
@@ -75,6 +81,7 @@ function createNEntries(nc: Client, n: number) {
       }
     }).finish();
     requests.push(nc.request('create.entry', TIMEOUT, request));
+    await sleep(100);
   }
 
   return Promise.all(requests);
@@ -118,30 +125,74 @@ describe('list.entry', () => {
       payload: Payload.BINARY
     });
 
-    await createNEntries(nc, 2);
-    const request = messages.entry.ListEntriesRequest.encode({
-      payload: {
-        creatorId: '123'
-      },
-      context: {
-        principal: {
-          type: messages.entry.Principal.Type.USER,
-          id: '123'
-        }
-      }
-    }).finish();
-    const message = await nc.request('list.entry', TIMEOUT, request);
-    const { payload: entries, pageInfo, error } = messages.entry.ListEntriesResponse.decode(message.data);
-    expect(error).toEqual(null);
-    expect(entries.length > 2).toEqual(true); // TODO: This is kind of dumb. Make a better assertion, here.
-    expect(pageInfo).toEqual({
-      totalCount: expect.any(Number),
-      hasNextPage: expect.any(Boolean),
-      startCursor: expect.any(String),
-      endCursor: expect.any(String)
-    });
+    try {
+      await nc.request('entry.store.drop', 1000, []);
 
-    nc.close();
+      await createNEntries(nc, 10);
+
+      const request1 = messages.entry.ListEntriesRequest.encode({
+        payload: {
+          creatorId: '123',
+          first: 4
+        },
+        context: {
+          principal: {
+            type: messages.entry.Principal.Type.USER,
+            id: '123'
+          }
+        }
+      }).finish();
+      const message = await nc.request('list.entry', TIMEOUT, request1);
+      const { payload: entries, pageInfo, error } = messages.entry.ListEntriesResponse.decode(message.data);
+      expect(error).toEqual(null);
+      expect(entries.length).toEqual(4);
+      expect(pageInfo).toEqual({
+        totalCount: expect.any(Number),
+        hasNextPage: expect.any(Boolean),
+        startCursor: expect.any(String),
+        endCursor: expect.any(String)
+      });
+
+      const request2 = messages.entry.ListEntriesRequest.encode({
+        payload: {
+          creatorId: '123',
+          first: 4,
+          after: pageInfo?.endCursor,
+        },
+        context: {
+          principal: {
+            type: messages.entry.Principal.Type.USER,
+            id: '123'
+          }
+        }
+      }).finish();
+      const message2 = await nc.request('list.entry', TIMEOUT, request2);
+      const { payload: entries2, pageInfo: pageInfo2 } = messages.entry.ListEntriesResponse.decode(message2.data);
+      expect(entries2.length).toEqual(4);
+      expect(pageInfo2?.hasNextPage).toEqual(true);
+      expect(pageInfo?.endCursor).not.toEqual(pageInfo2?.startCursor);
+      expect(entries2.map(entry => entry.id).includes(pageInfo?.endCursor)).toEqual(false);
+
+      const request3 = messages.entry.ListEntriesRequest.encode({
+        payload: {
+          creatorId: '123',
+          first: 4,
+          after: pageInfo2?.endCursor,
+        },
+        context: {
+          principal: {
+            type: messages.entry.Principal.Type.USER,
+            id: '123'
+          }
+        }
+      }).finish();
+      const message3 = await nc.request('list.entry', TIMEOUT, request3);
+      const { payload: entries3, pageInfo: pageInfo3 } = messages.entry.ListEntriesResponse.decode(message3.data);
+      expect(entries3.length).toEqual(2);
+      expect(pageInfo3?.hasNextPage).toEqual(false);
+    } finally {
+      nc.close();
+    }
   });
 });
 
