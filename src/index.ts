@@ -180,6 +180,13 @@ async function bootstrap() {
     try {
       const { id } = await createEntry(db, { text: text || '', creatorId, createdAt, updatedAt });
 
+      const entryCreatedMessage = messages.entry.InfoEntryCreated.encode({
+        payload: {
+          id,
+        }
+      }).finish();
+      nc.publish('info.entry.created', entryCreatedMessage);
+
       if (message.reply) {
         const response = messages.entry.CreateEntryResponse.encode({
           payload: { id },
@@ -227,6 +234,17 @@ async function bootstrap() {
 
     try {
       const entry = await updateEntry(db, { id, text });
+
+      const infoEntryUpdatedMessage = messages.entry.InfoEntryUpdated.encode({
+        payload: {
+          id: entry?.id,
+          text: entry?.text,
+          creatorId: entry?.creatorId,
+          createdAt: entry?.createdAt,
+          updatedAt: entry?.updatedAt,
+        }
+      }).finish();
+      nc.publish('info.entry.updatede', infoEntryUpdatedMessage);
 
       if (message.reply) {
         if (!entry) {
@@ -369,6 +387,13 @@ async function bootstrap() {
 
     try {
       await deleteEntry(db, { id });
+
+      const infoEntryDeletedMessage = messages.entry.InfoEntryDeleted.encode({
+        payload: {
+          id,
+        }
+      }).finish();
+      nc.publish('info.entry.deleted', infoEntryDeletedMessage);
 
       if (message.reply) {
         const response = messages.entry.DeleteEntryResponse.encode({}).finish();

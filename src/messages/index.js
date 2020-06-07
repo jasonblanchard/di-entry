@@ -302,7 +302,7 @@ $root.messages = (function() {
              * @memberof messages.entry.Principal
              * @instance
              */
-            Principal.prototype.type = 1;
+            Principal.prototype.type = 0;
 
             /**
              * Principal id.
@@ -419,7 +419,7 @@ $root.messages = (function() {
                     switch (message.type) {
                     default:
                         return "type: enum value expected";
-                    case 1:
+                    case 0:
                         break;
                     }
                 if (message.id != null && message.hasOwnProperty("id"))
@@ -442,8 +442,8 @@ $root.messages = (function() {
                 var message = new $root.messages.entry.Principal();
                 switch (object.type) {
                 case "USER":
-                case 1:
-                    message.type = 1;
+                case 0:
+                    message.type = 0;
                     break;
                 }
                 if (object.id != null)
@@ -465,7 +465,7 @@ $root.messages = (function() {
                     options = {};
                 var object = {};
                 if (options.defaults) {
-                    object.type = options.enums === String ? "USER" : 1;
+                    object.type = options.enums === String ? "USER" : 0;
                     object.id = "";
                 }
                 if (message.type != null && message.hasOwnProperty("type"))
@@ -490,11 +490,11 @@ $root.messages = (function() {
              * Type enum.
              * @name messages.entry.Principal.Type
              * @enum {string}
-             * @property {number} USER=1 USER value
+             * @property {number} USER=0 USER value
              */
             Principal.Type = (function() {
                 var valuesById = {}, values = Object.create(valuesById);
-                values[valuesById[1] = "USER"] = 1;
+                values[valuesById[0] = "USER"] = 0;
                 return values;
             })();
 
@@ -5422,25 +5422,24 @@ $root.messages = (function() {
             return DeleteEntryResponse;
         })();
 
-        entry.InfoEntry = (function() {
+        entry.InfoEntryCreated = (function() {
 
             /**
-             * Properties of an InfoEntry.
+             * Properties of an InfoEntryCreated.
              * @memberof messages.entry
-             * @interface IInfoEntry
-             * @property {messages.entry.InfoEntry.IPayload|null} [payload] InfoEntry payload
-             * @property {string|null} [traceId] InfoEntry traceId
+             * @interface IInfoEntryCreated
+             * @property {messages.entry.InfoEntryCreated.IPayload|null} [payload] InfoEntryCreated payload
              */
 
             /**
-             * Constructs a new InfoEntry.
+             * Constructs a new InfoEntryCreated.
              * @memberof messages.entry
-             * @classdesc Represents an InfoEntry.
-             * @implements IInfoEntry
+             * @classdesc Represents an InfoEntryCreated.
+             * @implements IInfoEntryCreated
              * @constructor
-             * @param {messages.entry.IInfoEntry=} [properties] Properties to set
+             * @param {messages.entry.IInfoEntryCreated=} [properties] Properties to set
              */
-            function InfoEntry(properties) {
+            function InfoEntryCreated(properties) {
                 if (properties)
                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                         if (properties[keys[i]] != null)
@@ -5448,88 +5447,75 @@ $root.messages = (function() {
             }
 
             /**
-             * InfoEntry payload.
-             * @member {messages.entry.InfoEntry.IPayload|null|undefined} payload
-             * @memberof messages.entry.InfoEntry
+             * InfoEntryCreated payload.
+             * @member {messages.entry.InfoEntryCreated.IPayload|null|undefined} payload
+             * @memberof messages.entry.InfoEntryCreated
              * @instance
              */
-            InfoEntry.prototype.payload = null;
+            InfoEntryCreated.prototype.payload = null;
 
             /**
-             * InfoEntry traceId.
-             * @member {string} traceId
-             * @memberof messages.entry.InfoEntry
-             * @instance
-             */
-            InfoEntry.prototype.traceId = "";
-
-            /**
-             * Creates a new InfoEntry instance using the specified properties.
+             * Creates a new InfoEntryCreated instance using the specified properties.
              * @function create
-             * @memberof messages.entry.InfoEntry
+             * @memberof messages.entry.InfoEntryCreated
              * @static
-             * @param {messages.entry.IInfoEntry=} [properties] Properties to set
-             * @returns {messages.entry.InfoEntry} InfoEntry instance
+             * @param {messages.entry.IInfoEntryCreated=} [properties] Properties to set
+             * @returns {messages.entry.InfoEntryCreated} InfoEntryCreated instance
              */
-            InfoEntry.create = function create(properties) {
-                return new InfoEntry(properties);
+            InfoEntryCreated.create = function create(properties) {
+                return new InfoEntryCreated(properties);
             };
 
             /**
-             * Encodes the specified InfoEntry message. Does not implicitly {@link messages.entry.InfoEntry.verify|verify} messages.
+             * Encodes the specified InfoEntryCreated message. Does not implicitly {@link messages.entry.InfoEntryCreated.verify|verify} messages.
              * @function encode
-             * @memberof messages.entry.InfoEntry
+             * @memberof messages.entry.InfoEntryCreated
              * @static
-             * @param {messages.entry.IInfoEntry} message InfoEntry message or plain object to encode
+             * @param {messages.entry.IInfoEntryCreated} message InfoEntryCreated message or plain object to encode
              * @param {$protobuf.Writer} [writer] Writer to encode to
              * @returns {$protobuf.Writer} Writer
              */
-            InfoEntry.encode = function encode(message, writer) {
+            InfoEntryCreated.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
                 if (message.payload != null && message.hasOwnProperty("payload"))
-                    $root.messages.entry.InfoEntry.Payload.encode(message.payload, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                if (message.traceId != null && message.hasOwnProperty("traceId"))
-                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.traceId);
+                    $root.messages.entry.InfoEntryCreated.Payload.encode(message.payload, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                 return writer;
             };
 
             /**
-             * Encodes the specified InfoEntry message, length delimited. Does not implicitly {@link messages.entry.InfoEntry.verify|verify} messages.
+             * Encodes the specified InfoEntryCreated message, length delimited. Does not implicitly {@link messages.entry.InfoEntryCreated.verify|verify} messages.
              * @function encodeDelimited
-             * @memberof messages.entry.InfoEntry
+             * @memberof messages.entry.InfoEntryCreated
              * @static
-             * @param {messages.entry.IInfoEntry} message InfoEntry message or plain object to encode
+             * @param {messages.entry.IInfoEntryCreated} message InfoEntryCreated message or plain object to encode
              * @param {$protobuf.Writer} [writer] Writer to encode to
              * @returns {$protobuf.Writer} Writer
              */
-            InfoEntry.encodeDelimited = function encodeDelimited(message, writer) {
+            InfoEntryCreated.encodeDelimited = function encodeDelimited(message, writer) {
                 return this.encode(message, writer).ldelim();
             };
 
             /**
-             * Decodes an InfoEntry message from the specified reader or buffer.
+             * Decodes an InfoEntryCreated message from the specified reader or buffer.
              * @function decode
-             * @memberof messages.entry.InfoEntry
+             * @memberof messages.entry.InfoEntryCreated
              * @static
              * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
              * @param {number} [length] Message length if known beforehand
-             * @returns {messages.entry.InfoEntry} InfoEntry
+             * @returns {messages.entry.InfoEntryCreated} InfoEntryCreated
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            InfoEntry.decode = function decode(reader, length) {
+            InfoEntryCreated.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
-                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.messages.entry.InfoEntry();
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.messages.entry.InfoEntryCreated();
                 while (reader.pos < end) {
                     var tag = reader.uint32();
                     switch (tag >>> 3) {
                     case 1:
-                        message.payload = $root.messages.entry.InfoEntry.Payload.decode(reader, reader.uint32());
-                        break;
-                    case 3:
-                        message.traceId = reader.string();
+                        message.payload = $root.messages.entry.InfoEntryCreated.Payload.decode(reader, reader.uint32());
                         break;
                     default:
                         reader.skipType(tag & 7);
@@ -5540,117 +5526,107 @@ $root.messages = (function() {
             };
 
             /**
-             * Decodes an InfoEntry message from the specified reader or buffer, length delimited.
+             * Decodes an InfoEntryCreated message from the specified reader or buffer, length delimited.
              * @function decodeDelimited
-             * @memberof messages.entry.InfoEntry
+             * @memberof messages.entry.InfoEntryCreated
              * @static
              * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {messages.entry.InfoEntry} InfoEntry
+             * @returns {messages.entry.InfoEntryCreated} InfoEntryCreated
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            InfoEntry.decodeDelimited = function decodeDelimited(reader) {
+            InfoEntryCreated.decodeDelimited = function decodeDelimited(reader) {
                 if (!(reader instanceof $Reader))
                     reader = new $Reader(reader);
                 return this.decode(reader, reader.uint32());
             };
 
             /**
-             * Verifies an InfoEntry message.
+             * Verifies an InfoEntryCreated message.
              * @function verify
-             * @memberof messages.entry.InfoEntry
+             * @memberof messages.entry.InfoEntryCreated
              * @static
              * @param {Object.<string,*>} message Plain object to verify
              * @returns {string|null} `null` if valid, otherwise the reason why it is not
              */
-            InfoEntry.verify = function verify(message) {
+            InfoEntryCreated.verify = function verify(message) {
                 if (typeof message !== "object" || message === null)
                     return "object expected";
                 if (message.payload != null && message.hasOwnProperty("payload")) {
-                    var error = $root.messages.entry.InfoEntry.Payload.verify(message.payload);
+                    var error = $root.messages.entry.InfoEntryCreated.Payload.verify(message.payload);
                     if (error)
                         return "payload." + error;
                 }
-                if (message.traceId != null && message.hasOwnProperty("traceId"))
-                    if (!$util.isString(message.traceId))
-                        return "traceId: string expected";
                 return null;
             };
 
             /**
-             * Creates an InfoEntry message from a plain object. Also converts values to their respective internal types.
+             * Creates an InfoEntryCreated message from a plain object. Also converts values to their respective internal types.
              * @function fromObject
-             * @memberof messages.entry.InfoEntry
+             * @memberof messages.entry.InfoEntryCreated
              * @static
              * @param {Object.<string,*>} object Plain object
-             * @returns {messages.entry.InfoEntry} InfoEntry
+             * @returns {messages.entry.InfoEntryCreated} InfoEntryCreated
              */
-            InfoEntry.fromObject = function fromObject(object) {
-                if (object instanceof $root.messages.entry.InfoEntry)
+            InfoEntryCreated.fromObject = function fromObject(object) {
+                if (object instanceof $root.messages.entry.InfoEntryCreated)
                     return object;
-                var message = new $root.messages.entry.InfoEntry();
+                var message = new $root.messages.entry.InfoEntryCreated();
                 if (object.payload != null) {
                     if (typeof object.payload !== "object")
-                        throw TypeError(".messages.entry.InfoEntry.payload: object expected");
-                    message.payload = $root.messages.entry.InfoEntry.Payload.fromObject(object.payload);
+                        throw TypeError(".messages.entry.InfoEntryCreated.payload: object expected");
+                    message.payload = $root.messages.entry.InfoEntryCreated.Payload.fromObject(object.payload);
                 }
-                if (object.traceId != null)
-                    message.traceId = String(object.traceId);
                 return message;
             };
 
             /**
-             * Creates a plain object from an InfoEntry message. Also converts values to other types if specified.
+             * Creates a plain object from an InfoEntryCreated message. Also converts values to other types if specified.
              * @function toObject
-             * @memberof messages.entry.InfoEntry
+             * @memberof messages.entry.InfoEntryCreated
              * @static
-             * @param {messages.entry.InfoEntry} message InfoEntry
+             * @param {messages.entry.InfoEntryCreated} message InfoEntryCreated
              * @param {$protobuf.IConversionOptions} [options] Conversion options
              * @returns {Object.<string,*>} Plain object
              */
-            InfoEntry.toObject = function toObject(message, options) {
+            InfoEntryCreated.toObject = function toObject(message, options) {
                 if (!options)
                     options = {};
                 var object = {};
-                if (options.defaults) {
+                if (options.defaults)
                     object.payload = null;
-                    object.traceId = "";
-                }
                 if (message.payload != null && message.hasOwnProperty("payload"))
-                    object.payload = $root.messages.entry.InfoEntry.Payload.toObject(message.payload, options);
-                if (message.traceId != null && message.hasOwnProperty("traceId"))
-                    object.traceId = message.traceId;
+                    object.payload = $root.messages.entry.InfoEntryCreated.Payload.toObject(message.payload, options);
                 return object;
             };
 
             /**
-             * Converts this InfoEntry to JSON.
+             * Converts this InfoEntryCreated to JSON.
              * @function toJSON
-             * @memberof messages.entry.InfoEntry
+             * @memberof messages.entry.InfoEntryCreated
              * @instance
              * @returns {Object.<string,*>} JSON object
              */
-            InfoEntry.prototype.toJSON = function toJSON() {
+            InfoEntryCreated.prototype.toJSON = function toJSON() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
 
-            InfoEntry.Payload = (function() {
+            InfoEntryCreated.Payload = (function() {
 
                 /**
                  * Properties of a Payload.
-                 * @memberof messages.entry.InfoEntry
+                 * @memberof messages.entry.InfoEntryCreated
                  * @interface IPayload
                  * @property {string|null} [id] Payload id
-                 * @property {string|null} [text] Payload text
                  */
 
                 /**
                  * Constructs a new Payload.
-                 * @memberof messages.entry.InfoEntry
+                 * @memberof messages.entry.InfoEntryCreated
                  * @classdesc Represents a Payload.
                  * @implements IPayload
                  * @constructor
-                 * @param {messages.entry.InfoEntry.IPayload=} [properties] Properties to set
+                 * @param {messages.entry.InfoEntryCreated.IPayload=} [properties] Properties to set
                  */
                 function Payload(properties) {
                     if (properties)
@@ -5662,37 +5638,29 @@ $root.messages = (function() {
                 /**
                  * Payload id.
                  * @member {string} id
-                 * @memberof messages.entry.InfoEntry.Payload
+                 * @memberof messages.entry.InfoEntryCreated.Payload
                  * @instance
                  */
                 Payload.prototype.id = "";
 
                 /**
-                 * Payload text.
-                 * @member {string} text
-                 * @memberof messages.entry.InfoEntry.Payload
-                 * @instance
-                 */
-                Payload.prototype.text = "";
-
-                /**
                  * Creates a new Payload instance using the specified properties.
                  * @function create
-                 * @memberof messages.entry.InfoEntry.Payload
+                 * @memberof messages.entry.InfoEntryCreated.Payload
                  * @static
-                 * @param {messages.entry.InfoEntry.IPayload=} [properties] Properties to set
-                 * @returns {messages.entry.InfoEntry.Payload} Payload instance
+                 * @param {messages.entry.InfoEntryCreated.IPayload=} [properties] Properties to set
+                 * @returns {messages.entry.InfoEntryCreated.Payload} Payload instance
                  */
                 Payload.create = function create(properties) {
                     return new Payload(properties);
                 };
 
                 /**
-                 * Encodes the specified Payload message. Does not implicitly {@link messages.entry.InfoEntry.Payload.verify|verify} messages.
+                 * Encodes the specified Payload message. Does not implicitly {@link messages.entry.InfoEntryCreated.Payload.verify|verify} messages.
                  * @function encode
-                 * @memberof messages.entry.InfoEntry.Payload
+                 * @memberof messages.entry.InfoEntryCreated.Payload
                  * @static
-                 * @param {messages.entry.InfoEntry.IPayload} message Payload message or plain object to encode
+                 * @param {messages.entry.InfoEntryCreated.IPayload} message Payload message or plain object to encode
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
@@ -5701,17 +5669,15 @@ $root.messages = (function() {
                         writer = $Writer.create();
                     if (message.id != null && message.hasOwnProperty("id"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.id);
-                    if (message.text != null && message.hasOwnProperty("text"))
-                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.text);
                     return writer;
                 };
 
                 /**
-                 * Encodes the specified Payload message, length delimited. Does not implicitly {@link messages.entry.InfoEntry.Payload.verify|verify} messages.
+                 * Encodes the specified Payload message, length delimited. Does not implicitly {@link messages.entry.InfoEntryCreated.Payload.verify|verify} messages.
                  * @function encodeDelimited
-                 * @memberof messages.entry.InfoEntry.Payload
+                 * @memberof messages.entry.InfoEntryCreated.Payload
                  * @static
-                 * @param {messages.entry.InfoEntry.IPayload} message Payload message or plain object to encode
+                 * @param {messages.entry.InfoEntryCreated.IPayload} message Payload message or plain object to encode
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
@@ -5722,26 +5688,23 @@ $root.messages = (function() {
                 /**
                  * Decodes a Payload message from the specified reader or buffer.
                  * @function decode
-                 * @memberof messages.entry.InfoEntry.Payload
+                 * @memberof messages.entry.InfoEntryCreated.Payload
                  * @static
                  * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
                  * @param {number} [length] Message length if known beforehand
-                 * @returns {messages.entry.InfoEntry.Payload} Payload
+                 * @returns {messages.entry.InfoEntryCreated.Payload} Payload
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
                 Payload.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.messages.entry.InfoEntry.Payload();
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.messages.entry.InfoEntryCreated.Payload();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
                             message.id = reader.string();
-                            break;
-                        case 2:
-                            message.text = reader.string();
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -5754,10 +5717,10 @@ $root.messages = (function() {
                 /**
                  * Decodes a Payload message from the specified reader or buffer, length delimited.
                  * @function decodeDelimited
-                 * @memberof messages.entry.InfoEntry.Payload
+                 * @memberof messages.entry.InfoEntryCreated.Payload
                  * @static
                  * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {messages.entry.InfoEntry.Payload} Payload
+                 * @returns {messages.entry.InfoEntryCreated.Payload} Payload
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
@@ -5770,7 +5733,442 @@ $root.messages = (function() {
                 /**
                  * Verifies a Payload message.
                  * @function verify
-                 * @memberof messages.entry.InfoEntry.Payload
+                 * @memberof messages.entry.InfoEntryCreated.Payload
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Payload.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.id != null && message.hasOwnProperty("id"))
+                        if (!$util.isString(message.id))
+                            return "id: string expected";
+                    return null;
+                };
+
+                /**
+                 * Creates a Payload message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof messages.entry.InfoEntryCreated.Payload
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {messages.entry.InfoEntryCreated.Payload} Payload
+                 */
+                Payload.fromObject = function fromObject(object) {
+                    if (object instanceof $root.messages.entry.InfoEntryCreated.Payload)
+                        return object;
+                    var message = new $root.messages.entry.InfoEntryCreated.Payload();
+                    if (object.id != null)
+                        message.id = String(object.id);
+                    return message;
+                };
+
+                /**
+                 * Creates a plain object from a Payload message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof messages.entry.InfoEntryCreated.Payload
+                 * @static
+                 * @param {messages.entry.InfoEntryCreated.Payload} message Payload
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Payload.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults)
+                        object.id = "";
+                    if (message.id != null && message.hasOwnProperty("id"))
+                        object.id = message.id;
+                    return object;
+                };
+
+                /**
+                 * Converts this Payload to JSON.
+                 * @function toJSON
+                 * @memberof messages.entry.InfoEntryCreated.Payload
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Payload.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+
+                return Payload;
+            })();
+
+            return InfoEntryCreated;
+        })();
+
+        entry.InfoEntryUpdated = (function() {
+
+            /**
+             * Properties of an InfoEntryUpdated.
+             * @memberof messages.entry
+             * @interface IInfoEntryUpdated
+             * @property {messages.entry.InfoEntryUpdated.IPayload|null} [payload] InfoEntryUpdated payload
+             */
+
+            /**
+             * Constructs a new InfoEntryUpdated.
+             * @memberof messages.entry
+             * @classdesc Represents an InfoEntryUpdated.
+             * @implements IInfoEntryUpdated
+             * @constructor
+             * @param {messages.entry.IInfoEntryUpdated=} [properties] Properties to set
+             */
+            function InfoEntryUpdated(properties) {
+                if (properties)
+                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+
+            /**
+             * InfoEntryUpdated payload.
+             * @member {messages.entry.InfoEntryUpdated.IPayload|null|undefined} payload
+             * @memberof messages.entry.InfoEntryUpdated
+             * @instance
+             */
+            InfoEntryUpdated.prototype.payload = null;
+
+            /**
+             * Creates a new InfoEntryUpdated instance using the specified properties.
+             * @function create
+             * @memberof messages.entry.InfoEntryUpdated
+             * @static
+             * @param {messages.entry.IInfoEntryUpdated=} [properties] Properties to set
+             * @returns {messages.entry.InfoEntryUpdated} InfoEntryUpdated instance
+             */
+            InfoEntryUpdated.create = function create(properties) {
+                return new InfoEntryUpdated(properties);
+            };
+
+            /**
+             * Encodes the specified InfoEntryUpdated message. Does not implicitly {@link messages.entry.InfoEntryUpdated.verify|verify} messages.
+             * @function encode
+             * @memberof messages.entry.InfoEntryUpdated
+             * @static
+             * @param {messages.entry.IInfoEntryUpdated} message InfoEntryUpdated message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            InfoEntryUpdated.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.payload != null && message.hasOwnProperty("payload"))
+                    $root.messages.entry.InfoEntryUpdated.Payload.encode(message.payload, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                return writer;
+            };
+
+            /**
+             * Encodes the specified InfoEntryUpdated message, length delimited. Does not implicitly {@link messages.entry.InfoEntryUpdated.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof messages.entry.InfoEntryUpdated
+             * @static
+             * @param {messages.entry.IInfoEntryUpdated} message InfoEntryUpdated message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            InfoEntryUpdated.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
+             * Decodes an InfoEntryUpdated message from the specified reader or buffer.
+             * @function decode
+             * @memberof messages.entry.InfoEntryUpdated
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {messages.entry.InfoEntryUpdated} InfoEntryUpdated
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            InfoEntryUpdated.decode = function decode(reader, length) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.messages.entry.InfoEntryUpdated();
+                while (reader.pos < end) {
+                    var tag = reader.uint32();
+                    switch (tag >>> 3) {
+                    case 1:
+                        message.payload = $root.messages.entry.InfoEntryUpdated.Payload.decode(reader, reader.uint32());
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+
+            /**
+             * Decodes an InfoEntryUpdated message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof messages.entry.InfoEntryUpdated
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {messages.entry.InfoEntryUpdated} InfoEntryUpdated
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            InfoEntryUpdated.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies an InfoEntryUpdated message.
+             * @function verify
+             * @memberof messages.entry.InfoEntryUpdated
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            InfoEntryUpdated.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.payload != null && message.hasOwnProperty("payload")) {
+                    var error = $root.messages.entry.InfoEntryUpdated.Payload.verify(message.payload);
+                    if (error)
+                        return "payload." + error;
+                }
+                return null;
+            };
+
+            /**
+             * Creates an InfoEntryUpdated message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof messages.entry.InfoEntryUpdated
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {messages.entry.InfoEntryUpdated} InfoEntryUpdated
+             */
+            InfoEntryUpdated.fromObject = function fromObject(object) {
+                if (object instanceof $root.messages.entry.InfoEntryUpdated)
+                    return object;
+                var message = new $root.messages.entry.InfoEntryUpdated();
+                if (object.payload != null) {
+                    if (typeof object.payload !== "object")
+                        throw TypeError(".messages.entry.InfoEntryUpdated.payload: object expected");
+                    message.payload = $root.messages.entry.InfoEntryUpdated.Payload.fromObject(object.payload);
+                }
+                return message;
+            };
+
+            /**
+             * Creates a plain object from an InfoEntryUpdated message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof messages.entry.InfoEntryUpdated
+             * @static
+             * @param {messages.entry.InfoEntryUpdated} message InfoEntryUpdated
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            InfoEntryUpdated.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                var object = {};
+                if (options.defaults)
+                    object.payload = null;
+                if (message.payload != null && message.hasOwnProperty("payload"))
+                    object.payload = $root.messages.entry.InfoEntryUpdated.Payload.toObject(message.payload, options);
+                return object;
+            };
+
+            /**
+             * Converts this InfoEntryUpdated to JSON.
+             * @function toJSON
+             * @memberof messages.entry.InfoEntryUpdated
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            InfoEntryUpdated.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            InfoEntryUpdated.Payload = (function() {
+
+                /**
+                 * Properties of a Payload.
+                 * @memberof messages.entry.InfoEntryUpdated
+                 * @interface IPayload
+                 * @property {string|null} [id] Payload id
+                 * @property {string|null} [text] Payload text
+                 * @property {string|null} [creatorId] Payload creatorId
+                 * @property {google.protobuf.ITimestamp|null} [createdAt] Payload createdAt
+                 * @property {google.protobuf.ITimestamp|null} [updatedAt] Payload updatedAt
+                 */
+
+                /**
+                 * Constructs a new Payload.
+                 * @memberof messages.entry.InfoEntryUpdated
+                 * @classdesc Represents a Payload.
+                 * @implements IPayload
+                 * @constructor
+                 * @param {messages.entry.InfoEntryUpdated.IPayload=} [properties] Properties to set
+                 */
+                function Payload(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+
+                /**
+                 * Payload id.
+                 * @member {string} id
+                 * @memberof messages.entry.InfoEntryUpdated.Payload
+                 * @instance
+                 */
+                Payload.prototype.id = "";
+
+                /**
+                 * Payload text.
+                 * @member {string} text
+                 * @memberof messages.entry.InfoEntryUpdated.Payload
+                 * @instance
+                 */
+                Payload.prototype.text = "";
+
+                /**
+                 * Payload creatorId.
+                 * @member {string} creatorId
+                 * @memberof messages.entry.InfoEntryUpdated.Payload
+                 * @instance
+                 */
+                Payload.prototype.creatorId = "";
+
+                /**
+                 * Payload createdAt.
+                 * @member {google.protobuf.ITimestamp|null|undefined} createdAt
+                 * @memberof messages.entry.InfoEntryUpdated.Payload
+                 * @instance
+                 */
+                Payload.prototype.createdAt = null;
+
+                /**
+                 * Payload updatedAt.
+                 * @member {google.protobuf.ITimestamp|null|undefined} updatedAt
+                 * @memberof messages.entry.InfoEntryUpdated.Payload
+                 * @instance
+                 */
+                Payload.prototype.updatedAt = null;
+
+                /**
+                 * Creates a new Payload instance using the specified properties.
+                 * @function create
+                 * @memberof messages.entry.InfoEntryUpdated.Payload
+                 * @static
+                 * @param {messages.entry.InfoEntryUpdated.IPayload=} [properties] Properties to set
+                 * @returns {messages.entry.InfoEntryUpdated.Payload} Payload instance
+                 */
+                Payload.create = function create(properties) {
+                    return new Payload(properties);
+                };
+
+                /**
+                 * Encodes the specified Payload message. Does not implicitly {@link messages.entry.InfoEntryUpdated.Payload.verify|verify} messages.
+                 * @function encode
+                 * @memberof messages.entry.InfoEntryUpdated.Payload
+                 * @static
+                 * @param {messages.entry.InfoEntryUpdated.IPayload} message Payload message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Payload.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.id != null && message.hasOwnProperty("id"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.id);
+                    if (message.text != null && message.hasOwnProperty("text"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.text);
+                    if (message.creatorId != null && message.hasOwnProperty("creatorId"))
+                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.creatorId);
+                    if (message.createdAt != null && message.hasOwnProperty("createdAt"))
+                        $root.google.protobuf.Timestamp.encode(message.createdAt, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                    if (message.updatedAt != null && message.hasOwnProperty("updatedAt"))
+                        $root.google.protobuf.Timestamp.encode(message.updatedAt, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                    return writer;
+                };
+
+                /**
+                 * Encodes the specified Payload message, length delimited. Does not implicitly {@link messages.entry.InfoEntryUpdated.Payload.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof messages.entry.InfoEntryUpdated.Payload
+                 * @static
+                 * @param {messages.entry.InfoEntryUpdated.IPayload} message Payload message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Payload.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+
+                /**
+                 * Decodes a Payload message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof messages.entry.InfoEntryUpdated.Payload
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {messages.entry.InfoEntryUpdated.Payload} Payload
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Payload.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.messages.entry.InfoEntryUpdated.Payload();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.id = reader.string();
+                            break;
+                        case 2:
+                            message.text = reader.string();
+                            break;
+                        case 3:
+                            message.creatorId = reader.string();
+                            break;
+                        case 4:
+                            message.createdAt = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                            break;
+                        case 5:
+                            message.updatedAt = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+
+                /**
+                 * Decodes a Payload message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof messages.entry.InfoEntryUpdated.Payload
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {messages.entry.InfoEntryUpdated.Payload} Payload
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Payload.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+
+                /**
+                 * Verifies a Payload message.
+                 * @function verify
+                 * @memberof messages.entry.InfoEntryUpdated.Payload
                  * @static
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
@@ -5784,34 +6182,59 @@ $root.messages = (function() {
                     if (message.text != null && message.hasOwnProperty("text"))
                         if (!$util.isString(message.text))
                             return "text: string expected";
+                    if (message.creatorId != null && message.hasOwnProperty("creatorId"))
+                        if (!$util.isString(message.creatorId))
+                            return "creatorId: string expected";
+                    if (message.createdAt != null && message.hasOwnProperty("createdAt")) {
+                        var error = $root.google.protobuf.Timestamp.verify(message.createdAt);
+                        if (error)
+                            return "createdAt." + error;
+                    }
+                    if (message.updatedAt != null && message.hasOwnProperty("updatedAt")) {
+                        var error = $root.google.protobuf.Timestamp.verify(message.updatedAt);
+                        if (error)
+                            return "updatedAt." + error;
+                    }
                     return null;
                 };
 
                 /**
                  * Creates a Payload message from a plain object. Also converts values to their respective internal types.
                  * @function fromObject
-                 * @memberof messages.entry.InfoEntry.Payload
+                 * @memberof messages.entry.InfoEntryUpdated.Payload
                  * @static
                  * @param {Object.<string,*>} object Plain object
-                 * @returns {messages.entry.InfoEntry.Payload} Payload
+                 * @returns {messages.entry.InfoEntryUpdated.Payload} Payload
                  */
                 Payload.fromObject = function fromObject(object) {
-                    if (object instanceof $root.messages.entry.InfoEntry.Payload)
+                    if (object instanceof $root.messages.entry.InfoEntryUpdated.Payload)
                         return object;
-                    var message = new $root.messages.entry.InfoEntry.Payload();
+                    var message = new $root.messages.entry.InfoEntryUpdated.Payload();
                     if (object.id != null)
                         message.id = String(object.id);
                     if (object.text != null)
                         message.text = String(object.text);
+                    if (object.creatorId != null)
+                        message.creatorId = String(object.creatorId);
+                    if (object.createdAt != null) {
+                        if (typeof object.createdAt !== "object")
+                            throw TypeError(".messages.entry.InfoEntryUpdated.Payload.createdAt: object expected");
+                        message.createdAt = $root.google.protobuf.Timestamp.fromObject(object.createdAt);
+                    }
+                    if (object.updatedAt != null) {
+                        if (typeof object.updatedAt !== "object")
+                            throw TypeError(".messages.entry.InfoEntryUpdated.Payload.updatedAt: object expected");
+                        message.updatedAt = $root.google.protobuf.Timestamp.fromObject(object.updatedAt);
+                    }
                     return message;
                 };
 
                 /**
                  * Creates a plain object from a Payload message. Also converts values to other types if specified.
                  * @function toObject
-                 * @memberof messages.entry.InfoEntry.Payload
+                 * @memberof messages.entry.InfoEntryUpdated.Payload
                  * @static
-                 * @param {messages.entry.InfoEntry.Payload} message Payload
+                 * @param {messages.entry.InfoEntryUpdated.Payload} message Payload
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
@@ -5822,18 +6245,27 @@ $root.messages = (function() {
                     if (options.defaults) {
                         object.id = "";
                         object.text = "";
+                        object.creatorId = "";
+                        object.createdAt = null;
+                        object.updatedAt = null;
                     }
                     if (message.id != null && message.hasOwnProperty("id"))
                         object.id = message.id;
                     if (message.text != null && message.hasOwnProperty("text"))
                         object.text = message.text;
+                    if (message.creatorId != null && message.hasOwnProperty("creatorId"))
+                        object.creatorId = message.creatorId;
+                    if (message.createdAt != null && message.hasOwnProperty("createdAt"))
+                        object.createdAt = $root.google.protobuf.Timestamp.toObject(message.createdAt, options);
+                    if (message.updatedAt != null && message.hasOwnProperty("updatedAt"))
+                        object.updatedAt = $root.google.protobuf.Timestamp.toObject(message.updatedAt, options);
                     return object;
                 };
 
                 /**
                  * Converts this Payload to JSON.
                  * @function toJSON
-                 * @memberof messages.entry.InfoEntry.Payload
+                 * @memberof messages.entry.InfoEntryUpdated.Payload
                  * @instance
                  * @returns {Object.<string,*>} JSON object
                  */
@@ -5844,7 +6276,386 @@ $root.messages = (function() {
                 return Payload;
             })();
 
-            return InfoEntry;
+            return InfoEntryUpdated;
+        })();
+
+        entry.InfoEntryDeleted = (function() {
+
+            /**
+             * Properties of an InfoEntryDeleted.
+             * @memberof messages.entry
+             * @interface IInfoEntryDeleted
+             * @property {messages.entry.InfoEntryDeleted.IPayload|null} [payload] InfoEntryDeleted payload
+             */
+
+            /**
+             * Constructs a new InfoEntryDeleted.
+             * @memberof messages.entry
+             * @classdesc Represents an InfoEntryDeleted.
+             * @implements IInfoEntryDeleted
+             * @constructor
+             * @param {messages.entry.IInfoEntryDeleted=} [properties] Properties to set
+             */
+            function InfoEntryDeleted(properties) {
+                if (properties)
+                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+
+            /**
+             * InfoEntryDeleted payload.
+             * @member {messages.entry.InfoEntryDeleted.IPayload|null|undefined} payload
+             * @memberof messages.entry.InfoEntryDeleted
+             * @instance
+             */
+            InfoEntryDeleted.prototype.payload = null;
+
+            /**
+             * Creates a new InfoEntryDeleted instance using the specified properties.
+             * @function create
+             * @memberof messages.entry.InfoEntryDeleted
+             * @static
+             * @param {messages.entry.IInfoEntryDeleted=} [properties] Properties to set
+             * @returns {messages.entry.InfoEntryDeleted} InfoEntryDeleted instance
+             */
+            InfoEntryDeleted.create = function create(properties) {
+                return new InfoEntryDeleted(properties);
+            };
+
+            /**
+             * Encodes the specified InfoEntryDeleted message. Does not implicitly {@link messages.entry.InfoEntryDeleted.verify|verify} messages.
+             * @function encode
+             * @memberof messages.entry.InfoEntryDeleted
+             * @static
+             * @param {messages.entry.IInfoEntryDeleted} message InfoEntryDeleted message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            InfoEntryDeleted.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.payload != null && message.hasOwnProperty("payload"))
+                    $root.messages.entry.InfoEntryDeleted.Payload.encode(message.payload, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                return writer;
+            };
+
+            /**
+             * Encodes the specified InfoEntryDeleted message, length delimited. Does not implicitly {@link messages.entry.InfoEntryDeleted.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof messages.entry.InfoEntryDeleted
+             * @static
+             * @param {messages.entry.IInfoEntryDeleted} message InfoEntryDeleted message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            InfoEntryDeleted.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
+             * Decodes an InfoEntryDeleted message from the specified reader or buffer.
+             * @function decode
+             * @memberof messages.entry.InfoEntryDeleted
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {messages.entry.InfoEntryDeleted} InfoEntryDeleted
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            InfoEntryDeleted.decode = function decode(reader, length) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.messages.entry.InfoEntryDeleted();
+                while (reader.pos < end) {
+                    var tag = reader.uint32();
+                    switch (tag >>> 3) {
+                    case 1:
+                        message.payload = $root.messages.entry.InfoEntryDeleted.Payload.decode(reader, reader.uint32());
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+
+            /**
+             * Decodes an InfoEntryDeleted message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof messages.entry.InfoEntryDeleted
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {messages.entry.InfoEntryDeleted} InfoEntryDeleted
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            InfoEntryDeleted.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies an InfoEntryDeleted message.
+             * @function verify
+             * @memberof messages.entry.InfoEntryDeleted
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            InfoEntryDeleted.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.payload != null && message.hasOwnProperty("payload")) {
+                    var error = $root.messages.entry.InfoEntryDeleted.Payload.verify(message.payload);
+                    if (error)
+                        return "payload." + error;
+                }
+                return null;
+            };
+
+            /**
+             * Creates an InfoEntryDeleted message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof messages.entry.InfoEntryDeleted
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {messages.entry.InfoEntryDeleted} InfoEntryDeleted
+             */
+            InfoEntryDeleted.fromObject = function fromObject(object) {
+                if (object instanceof $root.messages.entry.InfoEntryDeleted)
+                    return object;
+                var message = new $root.messages.entry.InfoEntryDeleted();
+                if (object.payload != null) {
+                    if (typeof object.payload !== "object")
+                        throw TypeError(".messages.entry.InfoEntryDeleted.payload: object expected");
+                    message.payload = $root.messages.entry.InfoEntryDeleted.Payload.fromObject(object.payload);
+                }
+                return message;
+            };
+
+            /**
+             * Creates a plain object from an InfoEntryDeleted message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof messages.entry.InfoEntryDeleted
+             * @static
+             * @param {messages.entry.InfoEntryDeleted} message InfoEntryDeleted
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            InfoEntryDeleted.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                var object = {};
+                if (options.defaults)
+                    object.payload = null;
+                if (message.payload != null && message.hasOwnProperty("payload"))
+                    object.payload = $root.messages.entry.InfoEntryDeleted.Payload.toObject(message.payload, options);
+                return object;
+            };
+
+            /**
+             * Converts this InfoEntryDeleted to JSON.
+             * @function toJSON
+             * @memberof messages.entry.InfoEntryDeleted
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            InfoEntryDeleted.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            InfoEntryDeleted.Payload = (function() {
+
+                /**
+                 * Properties of a Payload.
+                 * @memberof messages.entry.InfoEntryDeleted
+                 * @interface IPayload
+                 * @property {string|null} [id] Payload id
+                 */
+
+                /**
+                 * Constructs a new Payload.
+                 * @memberof messages.entry.InfoEntryDeleted
+                 * @classdesc Represents a Payload.
+                 * @implements IPayload
+                 * @constructor
+                 * @param {messages.entry.InfoEntryDeleted.IPayload=} [properties] Properties to set
+                 */
+                function Payload(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+
+                /**
+                 * Payload id.
+                 * @member {string} id
+                 * @memberof messages.entry.InfoEntryDeleted.Payload
+                 * @instance
+                 */
+                Payload.prototype.id = "";
+
+                /**
+                 * Creates a new Payload instance using the specified properties.
+                 * @function create
+                 * @memberof messages.entry.InfoEntryDeleted.Payload
+                 * @static
+                 * @param {messages.entry.InfoEntryDeleted.IPayload=} [properties] Properties to set
+                 * @returns {messages.entry.InfoEntryDeleted.Payload} Payload instance
+                 */
+                Payload.create = function create(properties) {
+                    return new Payload(properties);
+                };
+
+                /**
+                 * Encodes the specified Payload message. Does not implicitly {@link messages.entry.InfoEntryDeleted.Payload.verify|verify} messages.
+                 * @function encode
+                 * @memberof messages.entry.InfoEntryDeleted.Payload
+                 * @static
+                 * @param {messages.entry.InfoEntryDeleted.IPayload} message Payload message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Payload.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.id != null && message.hasOwnProperty("id"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.id);
+                    return writer;
+                };
+
+                /**
+                 * Encodes the specified Payload message, length delimited. Does not implicitly {@link messages.entry.InfoEntryDeleted.Payload.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof messages.entry.InfoEntryDeleted.Payload
+                 * @static
+                 * @param {messages.entry.InfoEntryDeleted.IPayload} message Payload message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Payload.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+
+                /**
+                 * Decodes a Payload message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof messages.entry.InfoEntryDeleted.Payload
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {messages.entry.InfoEntryDeleted.Payload} Payload
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Payload.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.messages.entry.InfoEntryDeleted.Payload();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.id = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+
+                /**
+                 * Decodes a Payload message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof messages.entry.InfoEntryDeleted.Payload
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {messages.entry.InfoEntryDeleted.Payload} Payload
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Payload.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+
+                /**
+                 * Verifies a Payload message.
+                 * @function verify
+                 * @memberof messages.entry.InfoEntryDeleted.Payload
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Payload.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.id != null && message.hasOwnProperty("id"))
+                        if (!$util.isString(message.id))
+                            return "id: string expected";
+                    return null;
+                };
+
+                /**
+                 * Creates a Payload message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof messages.entry.InfoEntryDeleted.Payload
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {messages.entry.InfoEntryDeleted.Payload} Payload
+                 */
+                Payload.fromObject = function fromObject(object) {
+                    if (object instanceof $root.messages.entry.InfoEntryDeleted.Payload)
+                        return object;
+                    var message = new $root.messages.entry.InfoEntryDeleted.Payload();
+                    if (object.id != null)
+                        message.id = String(object.id);
+                    return message;
+                };
+
+                /**
+                 * Creates a plain object from a Payload message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof messages.entry.InfoEntryDeleted.Payload
+                 * @static
+                 * @param {messages.entry.InfoEntryDeleted.Payload} message Payload
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Payload.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults)
+                        object.id = "";
+                    if (message.id != null && message.hasOwnProperty("id"))
+                        object.id = message.id;
+                    return object;
+                };
+
+                /**
+                 * Converts this Payload to JSON.
+                 * @function toJSON
+                 * @memberof messages.entry.InfoEntryDeleted.Payload
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Payload.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+
+                return Payload;
+            })();
+
+            return InfoEntryDeleted;
         })();
 
         return entry;
