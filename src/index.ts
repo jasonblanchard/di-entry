@@ -244,7 +244,7 @@ async function bootstrap() {
           updatedAt: entry?.updatedAt,
         }
       }).finish();
-      nc.publish('info.entry.updatede', infoEntryUpdatedMessage);
+      nc.publish('info.entry.updated', infoEntryUpdatedMessage);
 
       if (message.reply) {
         if (!entry) {
