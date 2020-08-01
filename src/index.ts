@@ -240,8 +240,8 @@ async function bootstrap() {
           id: entry?.id,
           text: entry?.text,
           creatorId: entry?.creatorId,
-          createdAt: entry?.createdAt,
-          updatedAt: entry?.updatedAt,
+          createdAt: dateToProtobufTimestamp(entry?.createdAt),
+          updatedAt: dateToProtobufTimestamp(entry?.updatedAt),
         }
       }).finish();
       nc.publish('info.entry.updated', infoEntryUpdatedMessage);

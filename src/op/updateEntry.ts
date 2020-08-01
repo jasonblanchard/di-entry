@@ -5,7 +5,15 @@ interface UpdateEntryInput {
   text: string | null | undefined;
 }
 
-export default async function updateEntry(db: DbConnection, { id, text = '' }: UpdateEntryInput) {
+interface UpdatEntryOutput {
+  id: string,
+  text: string,
+  creatorId: string,
+  createdAt: Date,
+  updatedAt: Date,
+}
+
+export default async function updateEntry(db: DbConnection, { id, text = '' }: UpdateEntryInput): Promise<UpdatEntryOutput | null> {
   const updatedAt = new Date();
   const result = await db.query(`
     UPDATE entries
