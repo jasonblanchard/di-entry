@@ -4,6 +4,9 @@ resources:
 - db.yaml
 bases:
 - ../base
+nameSuffix: -production
+commonLabels:
+  environment: production
 configMapGenerator:
 - name: entry-config
   namespace: di
@@ -14,6 +17,3 @@ configMapGenerator:
   - DB_HOST=di-entry-psql
   - DB_PORT=5432
   - DB_DATABASE=di_entry
-images:
-- name: jasonblanchard/di-entry
-  newTag: "latest" # {"$ref":"#/definitions/io.k8s.cli.setters.tag"}

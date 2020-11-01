@@ -1,19 +1,11 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  labels:
-    app: entry
   name: entry
-  namespace: di
 spec:
   replicas: 1
-  selector:
-    matchLabels:
-      app: entry
   template:
     metadata:
-      labels:
-        app: entry
       annotations:
         vault.security.banzaicloud.io/vault-addr: https://vault.vault:8200
         vault.security.banzaicloud.io/vault-role: di-entry
