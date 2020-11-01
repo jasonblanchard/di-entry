@@ -14,6 +14,6 @@ configMapGenerator:
   literals:
   - DB_USER=postgres
   - DB_PASSWORD=vault:secret/data/di-entry/production/app#DB_PASSWORD
-  - DB_HOST=di-entry-psql
+  - DB_HOST=di-entry-psql-production
   - DB_PORT=5432
   - DB_DATABASE=di_entry
