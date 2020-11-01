@@ -9,7 +9,6 @@ commonLabels:
   environment: production
 configMapGenerator:
 - name: entry-config
-  namespace: di
   behavior: merge
   literals:
   - DB_USER=postgres
